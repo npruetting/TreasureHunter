@@ -55,7 +55,7 @@ public class UI {
 	public boolean canDrawTradeText;
 	private boolean isTrading;
 	// UI Images
-	private BufferedImage boyRight1, boyRight2, chest, oldManDown1, oldManDown2, shield, coin, dungeonCoin, tinyLantern;
+	private BufferedImage boyRight1, boyRight2, chest, oldManDown1, oldManDown2, shield, coin, dungeonCoin, tinyLantern, arrow;
 
 	/**
 	 * Constructor that sets the elements to be displayed on the screen.
@@ -131,6 +131,12 @@ public class UI {
 			e.printStackTrace();
 		}
 		tinyLantern = uTool.scaleImage(tinyLantern, gp.tileSize * 3, gp.tileSize * 3);
+		try {
+			arrow = ImageIO.read(getClass().getResourceAsStream("/objects/arrow.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		arrow = uTool.scaleImage(arrow, gp.tileSize, gp.tileSize);
 	}
 
 	/**
@@ -592,6 +598,13 @@ public class UI {
 		if (gp.player.currentWeapon != null) {
 			image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
 			g2.drawImage(image, gp.tileSize * 5 - 32, gp.tileSize + 484, null);
+
+			if (gp.player.currentWeapon.type == gp.player.type_bow) {
+				g2.drawImage(arrow, gp.tileSize * 4 - 32, gp.tileSize + 484, null);
+				g2.setColor(new Color(255, 200, 255));
+				g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 24F));
+				g2.drawString(gp.player.arrowAmount + "", gp.tileSize * 4 + 8, gp.tileSize + 504);
+			}
 		}
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream("/objects/" + gp.player.currentShield.name + ".png"));
@@ -647,8 +660,10 @@ public class UI {
 		int slotX = slotXstart;
 		int slotY = slotYstart;
 		// Draw player's items
-		g2.setColor(new Color(240, 20, 240, 150));
-		g2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
+		if (entity == gp.player) {
+			g2.setColor(new Color(240, 20, 240, 150));
+			g2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
+		}
 		for (int i = 0; i < entity.inventory.size(); i++) {
 			// Draw currently equipped items
 			if (entity.inventory.get(i) == entity.currentWeapon || entity.inventory.get(i) == entity.currentShield) {
@@ -980,19 +995,18 @@ public class UI {
 							gp.player.coin -= price;
 							gp.player.inventory.set(0, new OBJ_Lantern_Big(gp));
 							npc.inventory.remove(npc.inventory.get(itemIndex));
-							gp.eManager.setup(600);
+							gp.eManager.setup(580);
 							gp.eManager.bigLanternEquipped = true;
-							System.out.println("Big lantern bought");
+						} else if (npc.inventory.get(itemIndex).name == "arrow") {
+							tradeTimer = 0;
+							gp.playSE(1);
+							gp.player.coin -= price;
+							gp.player.arrowAmount += 5;
 						} else {
 							tradeTimer = 0;
 							gp.playSE(1);
 							gp.player.coin -= price;
 							gp.player.inventory.add(npc.inventory.get(itemIndex));
-							// Trader keeps these items for good
-							String name = npc.inventory.get(itemIndex).name;
-							if (!(name == "axe" || name == "shield_blue")) {
-								npc.inventory.remove(npc.inventory.get(itemIndex));
-							}
 						}
 					}
 				} else {

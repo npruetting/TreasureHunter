@@ -43,6 +43,7 @@ public class KeyHandler implements KeyListener {
 		if (code == KeyEvent.VK_C) {
 			gp.player.coin++;
 			gp.player.dungeonCoin++;
+			gp.player.arrowAmount++;
 		}
 		// TODO temporary way to debug draw time
 		if (code == KeyEvent.VK_SHIFT) {
@@ -161,6 +162,11 @@ public class KeyHandler implements KeyListener {
 					break;
 				case KeyEvent.VK_ENTER:
 					if (gp.player.currentWeapon != null) {
+						if (gp.player.currentWeapon.type == gp.player.type_bow) {
+							if (gp.player.projectile.alive) {
+								break;
+							}
+						} 
 						gp.player.attacking = true;
 					}
 					break;

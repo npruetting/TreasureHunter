@@ -57,6 +57,8 @@ public class Entity {
 	public int dungeonCoin;
 	public Entity currentWeapon;
 	public Entity currentShield;
+	public Projectile projectile;
+	public int arrowAmount;
 	// Item attributes
 	public ArrayList<Entity> inventory = new ArrayList<Entity>();
 	public final int maxInventorySize = 20;
@@ -65,6 +67,7 @@ public class Entity {
 	public String description = "";
 	public int price;
 	public boolean forSale;
+	public boolean isDungeonObject;
 	// Type
 	public int type;
 	public final int type_player = 0;
@@ -74,6 +77,7 @@ public class Entity {
 	public final int type_axe = 4;
 	public final int type_shield = 5;
 	public final int type_item = 6;
+	public final int type_bow = 7;
 
 	// Imaging
 	private BufferedImage image;
@@ -88,6 +92,7 @@ public class Entity {
 	public int invincibleCounter;
 	public int deathCounter;
 	public int damagedCounter;
+	public int shotAvailableCounter;
 
 	/**
 	 * Constructs an entity.
@@ -164,6 +169,9 @@ public class Entity {
 	}
 
 	public void checkDrop() {
+	}
+	
+	public void attacking() {
 	}
 
 	public void dropItem(Entity droppedItem) {
@@ -249,17 +257,14 @@ public class Entity {
 		gp.cChecker.checkEntity(this, gp.monster);
 		boolean contactPlayer = gp.cChecker.checkPlayer(this);
 
+		// If entity is attacking
+		if (attacking) {
+			attacking();
+		}
+
 		// If monster interacts with player
 		if (this.type == type_monster && contactPlayer) {
-			if (!gp.player.invincible) {
-				int damage = attack - gp.player.defense;
-				if (damage < 0) {
-					damage = 0;
-				}
-				gp.player.health -= damage;
-				gp.playSE(6);
-				gp.player.invincible = true;
-			}
+			damagePlayer(attack);
 		}
 		// If collision is false, the entity can move
 		if (!collisionOn) {
@@ -299,6 +304,22 @@ public class Entity {
 					invincibleCounter = 0;
 				}
 			}
+		}
+		
+		if (shotAvailableCounter < 30) {
+			shotAvailableCounter++;
+		}
+	}
+	
+	public void damagePlayer(int attack) {
+		if (!gp.player.invincible) {
+			int damage = attack - gp.player.defense;
+			if (damage < 0) {
+				damage = 0;
+			}
+			gp.player.health -= damage;
+			gp.playSE(6);
+			gp.player.invincible = true;
 		}
 	}
 
@@ -374,6 +395,14 @@ public class Entity {
 			g2.drawImage(image, screenX, screenY, null);
 			// Reset opacity
 			uTool.changeAlpha(g2, 1f);
+			
+			// DEBUG HITBOX
+			if (gp.keyH.toggleDebug) {
+			    g2.setColor(new Color(255, 0, 0, 128));
+			    int hitboxScreenX = screenX + solidArea.x;
+			    int hitboxScreenY = screenY + solidArea.y;
+			    g2.drawRect(hitboxScreenX, hitboxScreenY, solidArea.width, solidArea.height);
+			}
 		}
 	}
 

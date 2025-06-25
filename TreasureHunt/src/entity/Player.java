@@ -1,16 +1,21 @@
 package entity;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
+import object.OBJ_Bow;
+import object.OBJ_Dungeon_Key;
 import object.OBJ_Key;
 import object.OBJ_Lantern_Tiny;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
+import object.PROJ_Arrow;
 
 /**
  * Class that houses methods for the player's animation and object interaction.
@@ -26,10 +31,12 @@ public class Player extends Entity {
 	public int counter = 0;
 	public int mapChangeTimer;
 	public int alphaValue;
-	private boolean playSwordSound;
+	private boolean playAttackSound;
 	public int npcIndex;
 	public int doorIndex;
 	private boolean axeEquipped;
+	private boolean bowEquipped;
+	public boolean arrowShot;
 
 	/**
 	 * Constructor that initializes the player in the game, including its hit box
@@ -44,7 +51,7 @@ public class Player extends Entity {
 		screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
 		screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
 
-		solidArea = new Rectangle(12, 20, 40, 40);
+		solidArea = new Rectangle(14, 22, 36, 36);
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
 
@@ -73,9 +80,12 @@ public class Player extends Entity {
 		exp = 0;
 		nextLevelExp = 10;
 		coin = 0;
+		arrowAmount = 10;
 		// No starting weapon
 		currentShield = new OBJ_Shield_Wood(gp);
 		defense = getDefense();
+
+		projectile = new PROJ_Arrow(gp);
 	}
 
 	/**
@@ -86,6 +96,9 @@ public class Player extends Entity {
 		inventory.add(currentShield);
 		// TODO temp items
 		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Dungeon_Key(gp));
+		inventory.add(new OBJ_Sword_Normal(gp));
+		inventory.add(new OBJ_Bow(gp));
 	}
 
 	/**
@@ -120,6 +133,15 @@ public class Player extends Entity {
 		left2 = setup("/player/boy_left_2");
 		right1 = setup("/player/boy_right_1");
 		right2 = setup("/player/boy_right_2");
+
+//		up1 = setup("/monster/skeleton_up_1");
+//		up2 = setup("/monster/skeleton_up_2");
+//		down1 = setup("/monster/skeleton_down_1");
+//		down2 = setup("/monster/skeleton_down_2");
+//		left1 = setup("/monster/skeleton_left_1");
+//		left2 = setup("/monster/skeleton_left_2");
+//		right1 = setup("/monster/skeleton_right_1");
+//		right2 = setup("/monster/skeleton_right_2");
 	}
 
 	/**
@@ -147,6 +169,15 @@ public class Player extends Entity {
 				attackLeft2 = setup("/player/boy_axe_left_2", gp.tileSize * 2, gp.tileSize);
 				attackRight1 = setup("/player/boy_axe_right_1", gp.tileSize * 2, gp.tileSize);
 				attackRight2 = setup("/player/boy_axe_right_2", gp.tileSize * 2, gp.tileSize);
+			} else if (currentWeapon.type == type_bow) {
+				attackUp1 = setup("/player/boy_bow_up", gp.tileSize, gp.tileSize);
+				attackUp2 = setup("/player/boy_bow_up", gp.tileSize, gp.tileSize);
+				attackDown1 = setup("/player/boy_bow_down", gp.tileSize, gp.tileSize);
+				attackDown2 = setup("/player/boy_bow_down", gp.tileSize, gp.tileSize);
+				attackLeft1 = setup("/player/boy_bow_left", gp.tileSize, gp.tileSize);
+				attackLeft2 = setup("/player/boy_bow_left", gp.tileSize, gp.tileSize);
+				attackRight1 = setup("/player/boy_bow_right", gp.tileSize, gp.tileSize);
+				attackRight2 = setup("/player/boy_bow_right", gp.tileSize, gp.tileSize);
 			}
 		}
 	}
@@ -183,6 +214,21 @@ public class Player extends Entity {
 
 		// Check if the player levels up
 		checkLevelUp();
+
+		if (arrowShot && !projectile.alive && shotAvailableCounter == 40) {
+			// Set default coordinates, direction, and user
+			projectile.set(worldX, worldY, direction, true, this);
+			// Add it to the list
+			gp.projectileList.add(projectile);
+
+			shotAvailableCounter = 0;
+
+			arrowShot = false;
+		}
+
+		if (shotAvailableCounter < 40) {
+			shotAvailableCounter++;
+		}
 
 		// If player is attacking
 		if (attacking) {
@@ -259,26 +305,64 @@ public class Player extends Entity {
 	 * Called if the player is attacking.
 	 */
 	public void attacking() {
-		int objIndex = gp.cChecker.checkObject(this, true);
-		// Animation
-		if (!playSwordSound) {
-			playSwordSound = true;
-			gp.playSE(12);
+		// Bow attack
+		if (bowEquipped) {
+
+			if (arrowAmount == 0) {
+				if (!gp.ui.messages.contains("Out of arrows!")) {
+					gp.ui.addMessage("Out of arrows!");
+				}
+				attacking = false;
+			} else {
+				if (!playAttackSound) {
+					playAttackSound = true;
+					if (!projectile.alive) {
+						gp.playSE(12);
+					}
+				}
+				spriteCounter++;
+				if (spriteCounter <= 5) {
+					spriteNum = 1;
+				} else if (spriteCounter > 5 && spriteCounter <= 25) {
+					spriteNum = 2;
+				} else if (spriteCounter > 25) {
+					if (arrowAmount > 0) {
+						arrowAmount--;
+					}
+					spriteNum = 1;
+					spriteCounter = 0;
+					playAttackSound = false;
+					attacking = false;
+				}
+
+				if (!projectile.alive && shotAvailableCounter == 40) {
+					arrowShot = true;
+				}
+			}
 		}
-		spriteCounter++;
-		if (spriteCounter <= 5) {
-			spriteNum = 1;
-		} else if (spriteCounter > 5 && spriteCounter <= 25) {
-			spriteNum = 2;
-			hitDetection(objIndex);
-		} else if (spriteCounter > 25) {
-			spriteNum = 1;
-			spriteCounter = 0;
-			attacking = false;
-			playSwordSound = false;
-			// Tree hit animation
-			if (objIndex != -1) {
-				gp.obj[objIndex].treeHit = false;
+		// Other weapon attack
+		else {
+			int objIndex = gp.cChecker.checkObject(this, true);
+			// Animation
+			if (!playAttackSound) {
+				playAttackSound = true;
+				gp.playSE(12);
+			}
+			spriteCounter++;
+			if (spriteCounter <= 5) {
+				spriteNum = 1;
+			} else if (spriteCounter > 5 && spriteCounter <= 25) {
+				spriteNum = 2;
+				hitDetection(objIndex);
+			} else if (spriteCounter > 25) {
+				spriteNum = 1;
+				spriteCounter = 0;
+				attacking = false;
+				playAttackSound = false;
+				// Tree hit animation
+				if (objIndex != -1) {
+					gp.obj[objIndex].treeHit = false;
+				}
 			}
 		}
 	}
@@ -314,7 +398,7 @@ public class Player extends Entity {
 		solidArea.height = attackArea.height;
 		// Check monster collision with updated worldX, worldY, solidArea
 		int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-		damageMonster(monsterIndex);
+		damageMonster(monsterIndex, attack);
 		// Check if a fragile tree is being attacked
 		hitFragileTree(objIndex);
 		// Reset position
@@ -354,9 +438,12 @@ public class Player extends Entity {
 			case "chest":
 				if (gp.obj[i].health == 0) {
 					gp.playSE(1);
-					gp.player.coin += 10;
+					Random rng = new Random();
+					int coinAmount = rng.nextInt(10, 21);
+					gp.player.coin += coinAmount;
 					gp.dialogueState = true;
-					gp.ui.currentDialogue = "You found treasure! +10 coins!";
+					gp.ui.currentDialogue = "You found treasure!\n+ " + coinAmount + " coins!";
+					gp.ui.addMessage("+ " + coinAmount + " coins!");
 					gp.obj[i].down1 = setup("/objects/chest_opened", gp.tileSize, gp.tileSize);
 					gp.obj[i].health = 1;
 				}
@@ -367,7 +454,7 @@ public class Player extends Entity {
 				gp.playSE(5);
 				gp.obj[i] = null;
 				gp.tileM.loadMap("/maps/world02.txt");
-				
+
 				// Clears all assets on map when it is loaded
 				for (int x = 0; x < gp.monster.length; x++) {
 //					System.out.println(counter);
@@ -376,9 +463,12 @@ public class Player extends Entity {
 					gp.monster[x].direction = "stable";
 					gp.monster[x].worldX -= gp.tileSize * 100;
 				}
-				gp.aSetter.setAssetsMap2();
+				gp.aSetter.setAssetsDungeon();
 				worldX = 47 * gp.tileSize;
 				worldY = 38 * gp.tileSize;
+				break;
+			case "dungeon_portal":
+				transitionDungeon();
 				break;
 			case "sword_normal":
 				if (inventory.size() < maxInventorySize) {
@@ -412,6 +502,34 @@ public class Player extends Entity {
 				break;
 			}
 		}
+	}
+
+	/**
+	 * Called when player transitions to or from the dungeon
+	 */
+	private void transitionDungeon() {
+		mapChangeTimer = 90;
+		alphaValue = 255;
+		gp.playSE(5);
+		gp.tileM.loadMap("/maps/world02.txt");
+
+		// Clears all assets on map when it is loaded
+//		for (int x = 0; x < gp.obj.length; x++) {
+//			System.out.println(x);
+//			gp.obj[x].worldX -= gp.tileSize * 100;
+//		}
+		for (int x = 0; x < gp.npc.length; x++) {
+			gp.npc[x].direction = "stable";
+			gp.npc[x].worldX -= gp.tileSize * 100;
+		}
+		for (int x = 0; x < gp.monster.length; x++) {
+			gp.monster[x].direction = "stable";
+			gp.monster[x].worldX -= gp.tileSize * 100;
+		}
+
+		gp.aSetter.setAssetsDungeon();
+		worldX = 47 * gp.tileSize;
+		worldY = 38 * gp.tileSize;
 	}
 
 	/**
@@ -452,7 +570,7 @@ public class Player extends Entity {
 	 * 
 	 * @param i - index of monster in its array
 	 */
-	public void damageMonster(int i) {
+	public void damageMonster(int i, int attack) {
 		if (i != -1) {
 			if (!gp.monster[i].invincible && !gp.monster[i].dying) {
 				// Give damage to monster
@@ -543,6 +661,7 @@ public class Player extends Entity {
 				gp.ui.equippedMessage = true;
 				gp.ui.equippedTimer = 0;
 				axeEquipped = false;
+				bowEquipped = false;
 			}
 			if (selectedItem.type == type_axe && selectedItem != currentWeapon) {
 				gp.playSE(16);
@@ -552,6 +671,16 @@ public class Player extends Entity {
 				gp.ui.equippedMessage = true;
 				gp.ui.equippedTimer = 0;
 				axeEquipped = true;
+				bowEquipped = false;
+			}
+			if (selectedItem.type == type_bow && selectedItem != currentWeapon) {
+				gp.playSE(16);
+				currentWeapon = selectedItem;
+				getPlayerAttackImage();
+				gp.ui.equippedMessage = true;
+				gp.ui.equippedTimer = 0;
+				axeEquipped = false;
+				bowEquipped = true;
 			}
 			if (selectedItem.type == type_shield && selectedItem != currentShield) {
 				gp.playSE(16);
@@ -579,7 +708,9 @@ public class Player extends Entity {
 		switch (direction) {
 		case "up":
 			if (attacking) {
-				tempScreenY -= gp.tileSize;
+				if (currentWeapon != null && currentWeapon.type != type_bow) {
+					tempScreenY -= gp.tileSize;
+				}
 				if (spriteNum == 1) {
 					image = attackUp1;
 				} else {
@@ -610,7 +741,9 @@ public class Player extends Entity {
 			break;
 		case "left":
 			if (attacking) {
-				tempScreenX -= gp.tileSize;
+				if (currentWeapon != null && currentWeapon.type != type_bow) {
+					tempScreenX -= gp.tileSize;
+				}
 				if (spriteNum == 1) {
 					image = attackLeft1;
 				} else {
@@ -650,5 +783,12 @@ public class Player extends Entity {
 		g2.drawImage(image, tempScreenX, tempScreenY, null);
 		// Reset opacity
 		uTool.changeAlpha(g2, 1f);
+		// DEBUG HITBOX
+		if (gp.keyH.toggleDebug) {
+			g2.setColor(new Color(255, 0, 0, 128));
+			int hitboxScreenX = screenX + solidArea.x;
+			int hitboxScreenY = screenY + solidArea.y;
+			g2.drawRect(hitboxScreenX, hitboxScreenY, solidArea.width, solidArea.height);
+		}
 	}
 }

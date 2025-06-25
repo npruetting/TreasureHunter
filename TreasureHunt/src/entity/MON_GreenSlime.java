@@ -11,7 +11,6 @@ public class MON_GreenSlime extends Entity {
 
 	public MON_GreenSlime(GamePanel gp) {
 		super(gp);
-
 		name = "Green Slime";
 		type = type_monster;
 		direction = "down";
@@ -23,9 +22,9 @@ public class MON_GreenSlime extends Entity {
 		exp = 2;
 
 		solidArea.x = 4;
-		solidArea.y = 30;
-		solidArea.width = 60;
-		solidArea.height = 34;
+		solidArea.y = 22;
+		solidArea.width = 56;
+		solidArea.height = 38;
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
 

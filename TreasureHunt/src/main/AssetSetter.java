@@ -10,6 +10,7 @@ import object.OBJ_Coin;
 import object.OBJ_Door;
 import object.OBJ_Dungeon_Coin;
 import object.OBJ_Dungeon_Door;
+import object.OBJ_Dungeon_Portal;
 import object.OBJ_Key;
 import object.OBJ_Portal;
 import object.OBJ_Potion_Red;
@@ -77,6 +78,8 @@ public class AssetSetter {
 		setAsset("Chest", 36, 80, 36);
 		setAsset("Chest", 37, 61, 20);
 		setAsset("Chest", 38, 90, 45, 32, 32);
+		setAsset("Chest", 39, 41, 7);
+		setAsset("Dungeon Portal", 40, 43, 16);
 		// NPCs
 		setAsset("Old_Man", 0, 36, 36);
 		setAsset("Merchant", 1, 17, 37);
@@ -164,9 +167,9 @@ public class AssetSetter {
 	}
 
 	/**
-	 * Sets all objects, NPCs, and monsters for map 2.
+	 * Sets all objects, NPCs, and monsters for dungeon.
 	 */
-	public void setAssetsMap2() {
+	public void setAssetsDungeon() {
 		setAsset("Key", 0, 23, 10);
 	}
 
@@ -247,6 +250,11 @@ public class AssetSetter {
 			break;
 		case "Dungeon Coin":
 			gp.obj[arrIndex] = new OBJ_Dungeon_Coin(gp);
+			gp.obj[arrIndex].worldX = xPos * gp.tileSize;
+			gp.obj[arrIndex].worldY = yPos * gp.tileSize;
+			break;
+		case "Dungeon Portal":
+			gp.obj[arrIndex] = new OBJ_Dungeon_Portal(gp);
 			gp.obj[arrIndex].worldX = xPos * gp.tileSize;
 			gp.obj[arrIndex].worldY = yPos * gp.tileSize;
 			break;

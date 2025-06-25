@@ -19,9 +19,6 @@ public class Lighting {
 		// Get the center x and y of the light circle
 		int centerX = gp.player.screenX + (gp.tileSize) / 2;
 		int centerY = gp.player.screenY + (gp.tileSize) / 2;
-		
-//		int centerX = gp.obj[0].worldX + (gp.tileSize) / 2;
-//		int centerY = gp.obj[0].worldY + (gp.tileSize) / 2;
 
 		// Create a gradation effect
 		Color color[] = new Color[12];

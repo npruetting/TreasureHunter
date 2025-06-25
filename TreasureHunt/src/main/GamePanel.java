@@ -58,9 +58,10 @@ public class GamePanel extends JPanel implements Runnable {
 
 	// Entity and object
 	public Player player = new Player(this, keyH);
-	public Entity obj[] = new Entity[50];
-	public Entity npc[] = new Entity[10];
+	public Entity obj[] = new Entity[41];
+	public Entity npc[] = new Entity[2];
 	public Entity monster[] = new Entity[74];
+	public ArrayList<Entity> projectileList = new ArrayList<Entity>();
 	public ArrayList<Entity> particleList = new ArrayList<Entity>();
 
 	// Game state
@@ -179,7 +180,18 @@ public class GamePanel extends JPanel implements Runnable {
 				}
 			}
 		}
-		
+
+		for (int i = 0; i < projectileList.size(); i++) {
+			if (projectileList.get(i) != null) {
+				if (projectileList.get(i).alive) {
+					projectileList.get(i).update();
+				}
+				if (!projectileList.get(i).alive) {
+					projectileList.remove(i);
+				}
+			}
+		}
+
 		for (int i = 0; i < particleList.size(); i++) {
 			if (particleList.get(i) != null) {
 				if (particleList.get(i).alive) {
@@ -208,7 +220,7 @@ public class GamePanel extends JPanel implements Runnable {
 		// Tile
 		if (isDark && !eManager.bigLanternEquipped) {
 			tileM.draw(g2, 3);
-		} else if (eManager.bigLanternEquipped){
+		} else if (eManager.bigLanternEquipped) {
 			tileM.draw(g2, 4);
 		} else {
 			tileM.draw(g2);
@@ -232,6 +244,12 @@ public class GamePanel extends JPanel implements Runnable {
 				monster[i].draw(g2);
 			}
 		}
+		// Projectile
+		for (int i = 0; i < projectileList.size(); i++) {
+			if (projectileList.get(i) != null) {
+				projectileList.get(i).draw(g2);
+			}
+		}
 		// Particle
 		for (int i = 0; i < particleList.size(); i++) {
 			if (particleList.get(i) != null) {
@@ -240,7 +258,7 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 		// Player
 		player.draw(g2);
-		
+
 		// Environment
 		if (isDark) {
 			eManager.draw(g2);
