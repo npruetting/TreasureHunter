@@ -11,8 +11,8 @@ public class OBJ_Potion_Red extends Entity {
 		name = "potion_red";
 		direction = "down";
 		down1 = setup("/objects/" + name, gp.tileSize, gp.tileSize);
-		description = "[Red Potion]\nGives player one heart.";
-		price = 10;
+		description = "[Red Potion]\nGives player 5 hearts.";
+		price = 20;
 		forSale = true;
 	}
 
@@ -24,8 +24,8 @@ public class OBJ_Potion_Red extends Entity {
 	public void use(int itemIndex) {
 		gp.dialogueState = true;
 		gp.isViewingStatus = false;
-		gp.ui.currentDialogue = "You drink the Red Potion!\nYou have been healed one heart.";
-		gp.player.health += 2;
+		gp.ui.currentDialogue = "You drink the Red Potion!\nYou have been healed 5 hearts.";
+		gp.player.health += 10;
 		if (gp.player.health > gp.player.maxHealth) {
 			gp.player.health = gp.player.maxHealth;
 		}

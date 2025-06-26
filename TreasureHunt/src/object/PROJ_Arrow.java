@@ -5,7 +5,7 @@ import main.GamePanel;
 
 public class PROJ_Arrow extends Projectile{
 	
-	public PROJ_Arrow(GamePanel gp) {
+	public PROJ_Arrow(GamePanel gp, int attack) {
 		super(gp);
 		solidArea.x = 26;
 		solidArea.y = 26;
@@ -14,12 +14,10 @@ public class PROJ_Arrow extends Projectile{
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
 		
-		speed = 20;
-		//speed = 2;
-		maxHealth = 30;
-		//maxHealth = 3000;
+		speed = 12;
+		maxHealth = 35;
 		health = maxHealth;
-		attack = 2;
+		this.attack = attack;
 		alive = false;
 		getImage();
 	}

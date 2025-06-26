@@ -45,6 +45,7 @@ public class Entity {
 	public boolean canDamage = true;
 	public boolean damaged;
 	public boolean treeHit;
+	public boolean skeletonAttacking;
 	// Attributes for character status
 	public int level;
 	public int strength;
@@ -93,6 +94,7 @@ public class Entity {
 	public int deathCounter;
 	public int damagedCounter;
 	public int shotAvailableCounter;
+	public int skeletonAttackCounter;
 
 	/**
 	 * Constructs an entity.
@@ -170,7 +172,7 @@ public class Entity {
 
 	public void checkDrop() {
 	}
-	
+
 	public void attacking() {
 	}
 
@@ -286,9 +288,15 @@ public class Entity {
 			}
 		}
 		// Used to animate the entities movement
+		int spriteCounterInt;
+		if (name == "Skeleton") {
+			spriteCounterInt = 10;
+		} else {
+			spriteCounterInt = 30;
+		}
 		if (direction != "stable") {
 			spriteCounter++;
-			if (spriteCounter > 30) {
+			if (spriteCounter > spriteCounterInt) {
 				if (spriteNum == 1) {
 					spriteNum = 2;
 				} else if (spriteNum == 2) {
@@ -305,12 +313,12 @@ public class Entity {
 				}
 			}
 		}
-		
+
 		if (shotAvailableCounter < 30) {
 			shotAvailableCounter++;
 		}
 	}
-	
+
 	public void damagePlayer(int attack) {
 		if (!gp.player.invincible) {
 			int damage = attack - gp.player.defense;
@@ -368,16 +376,48 @@ public class Entity {
 			default:
 				image = down1;
 			}
+
+			// Skeleton attack
+			if (skeletonAttacking) {
+				speed = 0;
+				switch (direction) {
+				case "up":
+					image = attackUp1;
+					break;
+				case "down":
+					image = attackDown1;
+					break;
+				case "left":
+					image = attackLeft1;
+					break;
+				case "right":
+					image = attackRight1;
+					break;
+				}
+				skeletonAttackCounter++;
+				System.out.println(skeletonAttackCounter);
+			}
+			if (skeletonAttackCounter > 20) {
+				skeletonAttacking = false;
+				skeletonAttackCounter = 0;
+				speed = 2;
+			}
+
+			int yValue = screenY;
 			// Health bar
 			if (type == type_monster && damaged) {
 				damagedCounter++;
+				if (name == "Skeleton") {
+					yValue = screenY - 24;
+				}
 				double oneScale = (double) gp.tileSize / maxHealth;
 				double hpBarValue = oneScale * health;
 				g2.setColor(new Color(35, 35, 35));
-				g2.fillRect(screenX - 2, screenY - 2, gp.tileSize + 4, 14);
+				g2.fillRect(screenX - 2, yValue - 2, gp.tileSize + 4, 14);
 
 				g2.setColor(new Color(255, 0, 30));
-				g2.fillRect(screenX, screenY, (int) hpBarValue, 10);
+				g2.fillRect(screenX, yValue, (int) hpBarValue, 10);
+
 				if (damagedCounter > 120) {
 					damaged = false;
 					damagedCounter = 0;
@@ -389,19 +429,19 @@ public class Entity {
 			}
 			// Death animation
 			if (dying) {
-				deathMessage(g2, screenX, screenY);
+				deathMessage(g2, screenX, yValue);
 				deathAnimation(g2, 5);
 			}
 			g2.drawImage(image, screenX, screenY, null);
 			// Reset opacity
 			uTool.changeAlpha(g2, 1f);
-			
+
 			// DEBUG HITBOX
 			if (gp.keyH.toggleDebug) {
-			    g2.setColor(new Color(255, 0, 0, 128));
-			    int hitboxScreenX = screenX + solidArea.x;
-			    int hitboxScreenY = screenY + solidArea.y;
-			    g2.drawRect(hitboxScreenX, hitboxScreenY, solidArea.width, solidArea.height);
+				g2.setColor(new Color(255, 0, 0, 128));
+				int hitboxScreenX = screenX + solidArea.x;
+				int hitboxScreenY = screenY + solidArea.y;
+				g2.drawRect(hitboxScreenX, hitboxScreenY, solidArea.width, solidArea.height);
 			}
 		}
 	}

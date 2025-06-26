@@ -41,9 +41,9 @@ public class NPC_OldMan extends Entity {
 	 */
 	public void setDialogue() {
 		dialogues[0] = "Haha! You found me! I almost got lost here\nmyself, and I've been here for ages! Remember\nhow I was telling you about how dark it is\nout here? Hah, no joke, am I right!";
-		dialogues[1] = "Looks like you've made some progress in the\ndarkness. Maybe out there somewhere, there's\na way to make this world not so dang dark. . .\nWho knows!";
-		dialogues[2] = "I'll tell you boy, I heard a key can be bought\nusing a special currency to enter the depths\nof this land. . . Ah forget it, the key is\nprobably a myth anyways. . .";
-		dialogues[3] = "I'm pretty tired I'll probably try and catch\nsome sleep soon. Wouldn't want to fall asleep\ntoo close to any monsters though. . .\nthey're quite scary.";
+		dialogues[1] = "Looks like you've made some progress in the\ndarkness. I'ts so dark, I tripped and dropped\nmy sword on a trail on the upper right quadrant\nof this land! Could be useful. . .";
+		dialogues[2] = "I'ts alright though, I'll try and find the merchant\nwho lives around these parts. If I remember\ncorrectly, his lair is within the bottom left\nquadrant, guarded by monsters. . .";
+		dialogues[3] = "Good luck again lad, I'm going to keep\nwandering around to look for that merchant.\nHe should have everything you need to find that\nultimate treasure, so go get it lad!";
 	}
 
 	/**

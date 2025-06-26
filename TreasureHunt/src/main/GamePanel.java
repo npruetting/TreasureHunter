@@ -2,6 +2,7 @@ package main;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -98,7 +99,7 @@ public class GamePanel extends JPanel implements Runnable {
 	 */
 	public void setUpGame() {
 		aSetter.setAssetsMap1();
-		eManager.setup(380);
+		eManager.setup(440);
 		isDark = true;
 	}
 
@@ -272,7 +273,9 @@ public class GamePanel extends JPanel implements Runnable {
 			long drawEnd = System.nanoTime();
 			long passed = drawEnd - drawStart;
 			g2.setColor(Color.white);
+			g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40F));
 			g2.drawString("Draw Time: " + passed, 10, 400);
+			g2.drawString("Player Health: " + player.health, 10, 500);
 		}
 
 		g2.dispose();

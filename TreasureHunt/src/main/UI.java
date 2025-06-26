@@ -995,7 +995,7 @@ public class UI {
 							gp.player.coin -= price;
 							gp.player.inventory.set(0, new OBJ_Lantern_Big(gp));
 							npc.inventory.remove(npc.inventory.get(itemIndex));
-							gp.eManager.setup(580);
+							gp.eManager.setup(585);
 							gp.eManager.bigLanternEquipped = true;
 						} else if (npc.inventory.get(itemIndex).name == "arrow") {
 							tradeTimer = 0;

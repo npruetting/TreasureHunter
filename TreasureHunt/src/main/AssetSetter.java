@@ -2,6 +2,7 @@ package main;
 
 import entity.NPC_OldMan;
 import entity.MON_GreenSlime;
+import entity.MON_Skeleton;
 import entity.NPC_Merchant;
 import object.OBJ_Axe;
 import object.OBJ_Boots;
@@ -60,7 +61,7 @@ public class AssetSetter {
 		setAsset("Dungeon Door", 18, 46, 16);
 		setAsset("Dungeon Coin", 19, 82, 20, 32, 32);
 		setAsset("Dungeon Coin", 20, 57, 6, 32, 32);
-		setAsset("Dungeon Coin", 21, 37, 6);
+		setAsset("Dungeon Coin", 21, 37, 6, 32, 32);
 		setAsset("Dungeon Coin", 22, 47, 16, 32, 0);
 		setAsset("Dungeon Coin", 23, 90, 28, 32, 32);
 		setAsset("Dungeon Coin", 24, 71, 74, 32, 32);
@@ -96,7 +97,7 @@ public class AssetSetter {
 		setAsset("Green_Slime", 9, 40, 25);
 		setAsset("Green_Slime", 10, 41, 24);
 		setAsset("Green_Slime", 11, 41, 25);
-		setAsset("Green_Slime", 12, 77, 11);
+		setAsset("Skeleton", 12, 77, 11);
 		setAsset("Green_Slime", 13, 77, 12);
 		setAsset("Green_Slime", 14, 55, 8);
 		setAsset("Green_Slime", 15, 55, 9);
@@ -115,16 +116,16 @@ public class AssetSetter {
 		setAsset("Green_Slime", 28, 63, 56);
 		setAsset("Green_Slime", 29, 75, 27);
 		setAsset("Green_Slime", 30, 76, 27);
-		setAsset("Green_Slime", 31, 87, 27);
+		setAsset("Skeleton", 31, 87, 27);
 		setAsset("Green_Slime", 32, 46, 70);
 		setAsset("Green_Slime", 33, 54, 79);
 		setAsset("Green_Slime", 34, 55, 80);
-		setAsset("Green_Slime", 35, 72, 62);
+		setAsset("Skeleton", 35, 72, 62);
 		setAsset("Green_Slime", 36, 72, 63);
-		setAsset("Green_Slime", 37, 73, 62);
+		setAsset("Skeleton", 37, 73, 62);
 		setAsset("Green_Slime", 38, 73, 63);
-		setAsset("Green_Slime", 39, 87, 64);
-		setAsset("Green_Slime", 40, 88, 63);
+		setAsset("Skeleton", 39, 87, 64);
+		setAsset("Skeleton", 40, 88, 63);
 		setAsset("Green_Slime", 41, 63, 73);
 		setAsset("Green_Slime", 42, 86, 53);
 		setAsset("Green_Slime", 43, 73, 48);
@@ -135,20 +136,20 @@ public class AssetSetter {
 		setAsset("Green_Slime", 48, 35, 72);
 		setAsset("Green_Slime", 49, 40, 7);
 		// Big battles/clumps of monsters
-		setAsset("Green_Slime", 50, 74, 37);
+		setAsset("Skeleton", 50, 74, 37);
 		setAsset("Green_Slime", 51, 75, 36);
-		setAsset("Green_Slime", 52, 74, 38);
-		setAsset("Green_Slime", 53, 74, 39);
+		setAsset("Skeleton", 52, 74, 38);
+		setAsset("Skeleton", 53, 74, 39);
 		setAsset("Green_Slime", 54, 76, 40);
 		
 		setAsset("Green_Slime", 55, 81, 38);
 		setAsset("Green_Slime", 56, 81, 39);
-		setAsset("Green_Slime", 57, 82, 38);
-		setAsset("Green_Slime", 58, 82, 39);
-		setAsset("Green_Slime", 59, 80, 38);
-		setAsset("Green_Slime", 60, 80, 39);
+		setAsset("Skeleton", 57, 82, 38);
+		setAsset("Skeleton", 58, 82, 39);
+		setAsset("Skeleton", 59, 80, 38);
+		setAsset("Skeleton", 60, 80, 39);
 		
-		setAsset("Green_Slime", 61, 81, 15);
+		setAsset("Skeleton", 61, 81, 15);
 		setAsset("Green_Slime", 62, 82, 16);
 		
 		setAsset("Green_Slime", 63, 30, 82);
@@ -162,8 +163,10 @@ public class AssetSetter {
 		setAsset("Green_Slime", 70, 20, 66);
 		setAsset("Green_Slime", 71, 19, 67);
 		
-		setAsset("Green_Slime", 72, 22, 38);
+		setAsset("Skeleton", 72, 22, 38);
 		setAsset("Green_Slime", 73, 19, 52);
+		// TODO temp
+		setAsset("Skeleton", 73, 48, 41);
 	}
 
 	/**
@@ -270,6 +273,11 @@ public class AssetSetter {
 			break;
 		case "Green_Slime":
 			gp.monster[arrIndex] = new MON_GreenSlime(gp);
+			gp.monster[arrIndex].worldX = xPos * gp.tileSize;
+			gp.monster[arrIndex].worldY = yPos * gp.tileSize;
+			break;
+		case "Skeleton":
+			gp.monster[arrIndex] = new MON_Skeleton(gp);
 			gp.monster[arrIndex].worldX = xPos * gp.tileSize;
 			gp.monster[arrIndex].worldY = yPos * gp.tileSize;
 			break;

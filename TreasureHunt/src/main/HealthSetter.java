@@ -316,13 +316,16 @@ public class HealthSetter {
 	 * @param g2 - graphics
 	 */
 	public void setHealth10(Graphics2D g2) {
-
 		heartSlot1 = fullHeart;
 		heartSlot2 = fullHeart;
 		heartSlot3 = fullHeart;
 		heartSlot4 = fullHeart;
 		heartSlot5 = fullHeart;
 		heartSlot6 = null;
+		heartSlot7 = null;
+		heartSlot8 = null;
+		heartSlot9 = null;
+		heartSlot10 = null;
 		if (extraHeartsDisplayed == 0) {
 			drawHealthBar(g2);
 		} else {
@@ -341,6 +344,11 @@ public class HealthSetter {
 		heartSlot3 = fullHeart;
 		heartSlot4 = fullHeart;
 		heartSlot5 = halfHeart;
+		heartSlot6 = null;
+		heartSlot7 = null;
+		heartSlot8 = null;
+		heartSlot9 = null;
+		heartSlot10 = null;
 		if (extraHeartsDisplayed == 0) {
 			drawHealthBar(g2);
 		} else {
@@ -359,6 +367,11 @@ public class HealthSetter {
 		heartSlot3 = fullHeart;
 		heartSlot4 = fullHeart;
 		heartSlot5 = emptyHeart;
+		heartSlot6 = null;
+		heartSlot7 = null;
+		heartSlot8 = null;
+		heartSlot9 = null;
+		heartSlot10 = null;
 		if (extraHeartsDisplayed == 0) {
 			drawHealthBar(g2);
 		} else {
@@ -377,6 +390,11 @@ public class HealthSetter {
 		heartSlot3 = fullHeart;
 		heartSlot4 = halfHeart;
 		heartSlot5 = emptyHeart;
+		heartSlot6 = null;
+		heartSlot7 = null;
+		heartSlot8 = null;
+		heartSlot9 = null;
+		heartSlot10 = null;
 		if (extraHeartsDisplayed == 0) {
 			drawHealthBar(g2);
 		} else {
@@ -395,6 +413,11 @@ public class HealthSetter {
 		heartSlot3 = fullHeart;
 		heartSlot4 = emptyHeart;
 		heartSlot5 = emptyHeart;
+		heartSlot6 = null;
+		heartSlot7 = null;
+		heartSlot8 = null;
+		heartSlot9 = null;
+		heartSlot10 = null;
 		if (extraHeartsDisplayed == 0) {
 			drawHealthBar(g2);
 		} else {
@@ -413,6 +436,11 @@ public class HealthSetter {
 		heartSlot3 = halfHeart;
 		heartSlot4 = emptyHeart;
 		heartSlot5 = emptyHeart;
+		heartSlot6 = null;
+		heartSlot7 = null;
+		heartSlot8 = null;
+		heartSlot9 = null;
+		heartSlot10 = null;
 		if (extraHeartsDisplayed == 0) {
 			drawHealthBar(g2);
 		} else {
@@ -431,6 +459,11 @@ public class HealthSetter {
 		heartSlot3 = emptyHeart;
 		heartSlot4 = emptyHeart;
 		heartSlot5 = emptyHeart;
+		heartSlot6 = null;
+		heartSlot7 = null;
+		heartSlot8 = null;
+		heartSlot9 = null;
+		heartSlot10 = null;
 		if (extraHeartsDisplayed == 0) {
 			drawHealthBar(g2);
 		} else {
@@ -449,6 +482,11 @@ public class HealthSetter {
 		heartSlot3 = emptyHeart;
 		heartSlot4 = emptyHeart;
 		heartSlot5 = emptyHeart;
+		heartSlot6 = null;
+		heartSlot7 = null;
+		heartSlot8 = null;
+		heartSlot9 = null;
+		heartSlot10 = null;
 		if (extraHeartsDisplayed == 0) {
 			drawHealthBar(g2);
 		} else {
@@ -467,6 +505,11 @@ public class HealthSetter {
 		heartSlot3 = emptyHeart;
 		heartSlot4 = emptyHeart;
 		heartSlot5 = emptyHeart;
+		heartSlot6 = null;
+		heartSlot7 = null;
+		heartSlot8 = null;
+		heartSlot9 = null;
+		heartSlot10 = null;
 		if (extraHeartsDisplayed == 0) {
 			drawHealthBar(g2);
 		} else {
@@ -485,6 +528,11 @@ public class HealthSetter {
 		heartSlot3 = emptyHeart;
 		heartSlot4 = emptyHeart;
 		heartSlot5 = emptyHeart;
+		heartSlot6 = null;
+		heartSlot7 = null;
+		heartSlot8 = null;
+		heartSlot9 = null;
+		heartSlot10 = null;
 		if (extraHeartsDisplayed == 0) {
 			drawHealthBar(g2);
 		} else {

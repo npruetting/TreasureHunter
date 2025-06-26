@@ -102,7 +102,7 @@ public class MON_GreenSlime extends Entity {
 		int rng = new Random().nextInt(100) + 1;
 		if (rng < 50) {
 			dropItem(new OBJ_Coin(gp));
-		} else if (rng > 90) {
+		} else if (rng > 92) {
 			dropItem(new OBJ_Dungeon_Coin(gp));
 		}
 	}

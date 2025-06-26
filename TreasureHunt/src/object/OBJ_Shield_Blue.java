@@ -12,7 +12,7 @@ public class OBJ_Shield_Blue extends Entity{
 		direction = "down";
 		down1 = setup("/objects/" + name, gp.tileSize, gp.tileSize);
 		defenseValue = 2;
-		description = "[Blue Shield]\nA shiny blue shield.";
+		description = "[Blue Shield]\nA shiny blue shield.\nAbsorbs more damage.";
 		price = 20;
 		forSale = true;
 	}

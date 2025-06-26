@@ -37,6 +37,7 @@ public class Player extends Entity {
 	private boolean axeEquipped;
 	private boolean bowEquipped;
 	public boolean arrowShot;
+	private int arrowDamageAmount;
 
 	/**
 	 * Constructor that initializes the player in the game, including its hit box
@@ -81,11 +82,11 @@ public class Player extends Entity {
 		nextLevelExp = 10;
 		coin = 0;
 		arrowAmount = 10;
+		arrowDamageAmount = 1;
+		projectile = new PROJ_Arrow(gp, arrowDamageAmount);
 		// No starting weapon
 		currentShield = new OBJ_Shield_Wood(gp);
 		defense = getDefense();
-
-		projectile = new PROJ_Arrow(gp);
 	}
 
 	/**
@@ -133,15 +134,6 @@ public class Player extends Entity {
 		left2 = setup("/player/boy_left_2");
 		right1 = setup("/player/boy_right_1");
 		right2 = setup("/player/boy_right_2");
-
-//		up1 = setup("/monster/skeleton_up_1");
-//		up2 = setup("/monster/skeleton_up_2");
-//		down1 = setup("/monster/skeleton_down_1");
-//		down2 = setup("/monster/skeleton_down_2");
-//		left1 = setup("/monster/skeleton_left_1");
-//		left2 = setup("/monster/skeleton_left_2");
-//		right1 = setup("/monster/skeleton_right_1");
-//		right2 = setup("/monster/skeleton_right_2");
 	}
 
 	/**
@@ -170,14 +162,14 @@ public class Player extends Entity {
 				attackRight1 = setup("/player/boy_axe_right_1", gp.tileSize * 2, gp.tileSize);
 				attackRight2 = setup("/player/boy_axe_right_2", gp.tileSize * 2, gp.tileSize);
 			} else if (currentWeapon.type == type_bow) {
-				attackUp1 = setup("/player/boy_bow_up", gp.tileSize, gp.tileSize);
-				attackUp2 = setup("/player/boy_bow_up", gp.tileSize, gp.tileSize);
-				attackDown1 = setup("/player/boy_bow_down", gp.tileSize, gp.tileSize);
-				attackDown2 = setup("/player/boy_bow_down", gp.tileSize, gp.tileSize);
-				attackLeft1 = setup("/player/boy_bow_left", gp.tileSize, gp.tileSize);
-				attackLeft2 = setup("/player/boy_bow_left", gp.tileSize, gp.tileSize);
-				attackRight1 = setup("/player/boy_bow_right", gp.tileSize, gp.tileSize);
-				attackRight2 = setup("/player/boy_bow_right", gp.tileSize, gp.tileSize);
+				attackUp1 = setup("/player/boy_bow_up");
+				attackUp2 = setup("/player/boy_bow_up");
+				attackDown1 = setup("/player/boy_bow_down");
+				attackDown2 = setup("/player/boy_bow_down");
+				attackLeft1 = setup("/player/boy_bow_left");
+				attackLeft2 = setup("/player/boy_bow_left");
+				attackRight1 = setup("/player/boy_bow_right");
+				attackRight2 = setup("/player/boy_bow_right");
 			}
 		}
 	}
@@ -206,7 +198,8 @@ public class Player extends Entity {
 		if (isFast) {
 			counter++;
 			if (counter > 1800) {
-				speed = 4;
+				gp.ui.addMessage("Speed boost deactivated.");
+				speed -= 2;
 				counter = 0;
 				isFast = false;
 			}
@@ -500,6 +493,12 @@ public class Player extends Entity {
 					gp.ui.addMessage("Needs dungeon key. . .");
 				}
 				break;
+			case "arrow":
+				gp.playSE(1);
+				gp.obj[i] = null;
+				gp.ui.addMessage("+1 arrow");
+				arrowAmount++;
+				break;
 			}
 		}
 	}
@@ -560,6 +559,7 @@ public class Player extends Entity {
 				health -= damage;
 				gp.playSE(6);
 				gp.monster[i].hitPlayerReaction();
+				gp.ui.addMessage("Damaged!");
 				invincible = true;
 			}
 		}
@@ -637,10 +637,13 @@ public class Player extends Entity {
 			nextLevelExp *= 3;
 			maxHealth += 2;
 			health = maxHealth;
+			System.out.println("MaxHealth: " + maxHealth + " Health: " + health);
 			strength++;
 			dexterity++;
 			attack = getAttack();
 			defense = getAttack();
+			arrowDamageAmount++;
+			projectile = new PROJ_Arrow(gp, arrowDamageAmount);
 			gp.playSE(14);
 			gp.levelUpState = true;
 		}

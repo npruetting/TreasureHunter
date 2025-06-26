@@ -31,6 +31,7 @@ public class Projectile extends Entity{
 			boolean contactPlayer = gp.cChecker.checkPlayer(this);
 			if (!gp.player.invincible && contactPlayer) {
 				damagePlayer(attack);
+				gp.ui.addMessage("Damaged from arrow!");
 				alive = false;
 			}
 		}
