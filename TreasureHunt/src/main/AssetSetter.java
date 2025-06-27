@@ -181,6 +181,9 @@ public class AssetSetter {
 		setAsset("Tree_Fragile", 125, 57, 19);
 		setAsset("Tree_Fragile", 126, 58, 19);
 		setAsset("Tree_Fragile", 127, 59, 19);
+		
+		setAsset("Tree_Fragile", 128, 55, 65);
+		setAsset("Tree_Fragile", 129, 56, 65);
 		// NPCs
 		setAsset("Old_Man", 0, 36, 36);
 		setAsset("Merchant", 1, 17, 37);
@@ -190,7 +193,7 @@ public class AssetSetter {
 		setAsset("Green_Slime", 2, 22, 15);
 		setAsset("Green_Slime", 3, 22, 16);
 		setAsset("Green_Slime", 4, 14, 24);
-		setAsset("Green_Slime", 5, 14, 25);
+		setAsset("Skeleton", 5, 14, 25);
 		setAsset("Green_Slime", 6, 15, 24);
 		setAsset("Green_Slime", 7, 15, 25);
 		setAsset("Green_Slime", 8, 40, 24);
@@ -206,12 +209,12 @@ public class AssetSetter {
 		setAsset("Green_Slime", 18, 33, 14);
 		setAsset("Green_Slime", 19, 35, 43);
 		setAsset("Green_Slime", 20, 36, 44);
-		setAsset("Green_Slime", 21, 65, 28);
+		setAsset("Skeleton", 21, 65, 28);
 		setAsset("Green_Slime", 22, 58, 42);
 		setAsset("Green_Slime", 23, 59, 41);
 		setAsset("Green_Slime", 24, 56, 25);
 		setAsset("Green_Slime", 25, 56, 55);
-		setAsset("Green_Slime", 26, 41, 62);
+		setAsset("Skeleton", 26, 41, 62);
 		setAsset("Green_Slime", 27, 63, 55);
 		setAsset("Green_Slime", 28, 63, 56);
 		setAsset("Green_Slime", 29, 75, 27);
@@ -231,7 +234,7 @@ public class AssetSetter {
 		setAsset("Green_Slime", 43, 73, 48);
 		setAsset("Green_Slime", 44, 74, 49);
 		setAsset("Green_Slime", 45, 27, 59);
-		setAsset("Green_Slime", 46, 11, 78);
+		setAsset("Skeleton", 46, 11, 78);
 		setAsset("Green_Slime", 47, 35, 71);
 		setAsset("Green_Slime", 48, 35, 72);
 		setAsset("Green_Slime", 49, 40, 7);
@@ -253,7 +256,7 @@ public class AssetSetter {
 		setAsset("Green_Slime", 62, 82, 16);
 		
 		setAsset("Green_Slime", 63, 30, 82);
-		setAsset("Green_Slime", 64, 19, 82);
+		setAsset("Skeleton", 64, 19, 82);
 		
 		setAsset("Green_Slime", 65, 18, 65);
 		setAsset("Green_Slime", 66, 19, 65);

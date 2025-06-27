@@ -6,6 +6,7 @@ import java.util.Random;
 import main.GamePanel;
 import object.OBJ_Coin;
 import object.OBJ_Dungeon_Coin;
+import object.OBJ_Heart;
 
 public class MON_GreenSlime extends Entity {
 
@@ -100,9 +101,11 @@ public class MON_GreenSlime extends Entity {
 
 	public void checkDrop() {
 		int rng = new Random().nextInt(100) + 1;
-		if (rng < 50) {
+		if (rng < 40) {
 			dropItem(new OBJ_Coin(gp));
-		} else if (rng > 92) {
+		} else if (rng >= 40 && rng < 80) {
+			dropItem(new OBJ_Heart(gp));
+		}else if (rng > 92) {
 			dropItem(new OBJ_Dungeon_Coin(gp));
 		}
 	}

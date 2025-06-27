@@ -1033,7 +1033,22 @@ public class UI {
 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
 		// Draw player inventory
 		drawInventory(gp.player, true);
+		// NPC word frame
+		int frameX = gp.tileSize + 18;
+		int frameY = gp.tileSize;
+		int frameWidth = gp.tileSize * 5 - 24;
+		int frameHeight = gp.tileSize * 8 - 40;
+		drawSubWindow(frameX, frameY, frameWidth, frameHeight, g2);
+		g2.setColor(new Color(255, 255, 125));
+		String text = "Here, you can sell your\nitems for half of their\noriginal price! Some items\ncan't be sold by default,\nand you can't sell a\ncurrently equipped\nweapon or shield. Feel\nfree to make some coins,\nbut I would focus on those\npurple coins, I heard\nthey lead to a dungeon. . .";
+		int xPos = frameX + 20;
+		int yPos = frameY + 42;
+		for (String line : text.split("\n")) {
+			g2.drawString(line, xPos, yPos);
+			yPos += 40;
+		}
 		// Hint window
+		g2.setColor(Color.white);
 		int x = gp.tileSize * 6 - 3;
 		int y = gp.tileSize;
 		int width = gp.tileSize * 4;

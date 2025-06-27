@@ -435,7 +435,7 @@ public class Player extends Entity {
 					gp.playSE(1);
 					Random rng = new Random();
 					int coinAmount = rng.nextInt(10, 21);
-					gp.player.coin += coinAmount;
+					coin += coinAmount;
 					gp.dialogueState = true;
 					gp.ui.currentDialogue = "You found treasure!\n+ " + coinAmount + " coins!";
 					gp.ui.addMessage("+ " + coinAmount + " coins!");
@@ -496,10 +496,19 @@ public class Player extends Entity {
 				}
 				break;
 			case "arrow":
-				gp.playSE(1);
+				gp.playSE(25);
 				gp.obj[i] = null;
 				gp.ui.addMessage("+1 arrow");
 				arrowAmount++;
+				break;
+			case "heart":
+				gp.playSE(1);
+				gp.obj[i] = null;
+				gp.ui.addMessage("+1 heart");
+				health += 2;
+				if (health > maxHealth) {
+					health = maxHealth;
+				}
 				break;
 			}
 		}

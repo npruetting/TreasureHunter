@@ -6,6 +6,7 @@ import java.util.Random;
 import main.GamePanel;
 import object.OBJ_Arrow;
 import object.OBJ_Coin;
+import object.OBJ_Heart;
 import object.PROJ_Arrow;
 
 public class MON_Skeleton extends Entity {
@@ -141,9 +142,11 @@ public class MON_Skeleton extends Entity {
 
 	public void checkDrop() {
 		int rng = new Random().nextInt(100) + 1;
-		if (rng < 50) {
+		if (rng < 40) {
 			dropItem(new OBJ_Coin(gp));
-		} else if (rng > 65) {
+		} else if (rng >= 40 && rng < 60) {
+			dropItem(new OBJ_Heart(gp));
+		}else if (rng > 75) {
 			dropItem(new OBJ_Arrow(gp));
 		}
 	}
