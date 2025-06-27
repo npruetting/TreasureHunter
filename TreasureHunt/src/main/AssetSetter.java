@@ -15,7 +15,6 @@ import object.OBJ_Dungeon_Portal;
 import object.OBJ_Key;
 import object.OBJ_Portal;
 import object.OBJ_Potion_Red;
-import object.OBJ_Shield_Blue;
 import object.OBJ_Sword_Normal;
 import object.OBJ_Table;
 import object.OBJ_Tree_Fragile;
@@ -58,17 +57,17 @@ public class AssetSetter {
 		setAsset("Key", 15, 83, 9, 32, 32);
 		setAsset("Table", 16, 17, 38);
 		setAsset("Sword_Normal", 17, 33, 24, 32, 32);
-		setAsset("Dungeon Door", 18, 46, 16);
-		setAsset("Dungeon Coin", 19, 82, 20, 32, 32);
-		setAsset("Dungeon Coin", 20, 57, 6, 32, 32);
-		setAsset("Dungeon Coin", 21, 37, 6, 32, 32);
-		setAsset("Dungeon Coin", 22, 47, 16, 32, 0);
-		setAsset("Dungeon Coin", 23, 90, 28, 32, 32);
-		setAsset("Dungeon Coin", 24, 71, 74, 32, 32);
-		setAsset("Dungeon Coin", 25, 26, 51, 32, 32);
-		setAsset("Dungeon Coin", 26, 28, 26, 32, 32);
-		setAsset("Dungeon Coin", 27, 44, 31, 32, 32);
-		setAsset("Dungeon Coin", 28, 54, 37, 32, 32);
+		setAsset("Dungeon_Door", 18, 46, 16);
+		setAsset("Dungeon_Coin", 19, 82, 20, 32, 32);
+		setAsset("Dungeon_Coin", 20, 57, 6, 32, 32);
+		setAsset("Dungeon_Coin", 21, 37, 6, 32, 32);
+		setAsset("Dungeon_Coin", 22, 47, 16, 32, 0);
+		setAsset("Dungeon_Coin", 23, 90, 28, 32, 32);
+		setAsset("Dungeon_Coin", 24, 71, 74, 32, 32);
+		setAsset("Dungeon_Coin", 25, 26, 51, 32, 32);
+		setAsset("Dungeon_Coin", 26, 28, 26, 32, 32);
+		setAsset("Dungeon_Coin", 27, 44, 31, 32, 32);
+		setAsset("Dungeon_Coin", 28, 54, 37, 32, 32);
 		setAsset("Door", 29, 29, 8);
 		setAsset("Portal", 30, 47, 49, 32, 32);
 		setAsset("Chest", 31, 85, 13, 32, 32);
@@ -80,7 +79,108 @@ public class AssetSetter {
 		setAsset("Chest", 37, 61, 20);
 		setAsset("Chest", 38, 90, 45, 32, 32);
 		setAsset("Chest", 39, 41, 7);
-		setAsset("Dungeon Portal", 40, 43, 16);
+		setAsset("Dungeon_Portal", 40, 43, 16);
+		// Fragile Trees
+		setAsset("Tree_Fragile", 41, 53, 40);
+		setAsset("Tree_Fragile", 42, 53, 39);
+		setAsset("Tree_Fragile", 43, 54, 39);
+		
+		setAsset("Tree_Fragile", 44, 42, 29);
+		setAsset("Tree_Fragile", 45, 42, 30);
+		setAsset("Tree_Fragile", 46, 43, 30);
+		setAsset("Tree_Fragile", 47, 44, 30);
+		
+		setAsset("Tree_Fragile", 48, 36, 29);
+		setAsset("Tree_Fragile", 49, 36, 28);
+		setAsset("Tree_Fragile", 50, 35, 28);
+		setAsset("Tree_Fragile", 51, 34, 28);
+		setAsset("Tree_Fragile", 52, 33, 28);
+		setAsset("Tree_Fragile", 53, 32, 28);
+		setAsset("Tree_Fragile", 54, 31, 28);
+		setAsset("Tree_Fragile", 55, 31, 27);
+		setAsset("Tree_Fragile", 56, 30, 27);
+		
+		setAsset("Tree_Fragile", 57, 23, 10);
+		setAsset("Tree_Fragile", 58, 24, 10);
+		setAsset("Tree_Fragile", 59, 27, 10);
+		setAsset("Tree_Fragile", 60, 29, 9);
+		
+		setAsset("Tree_Fragile", 61, 28, 44);
+		setAsset("Tree_Fragile", 62, 33, 44);
+		
+		setAsset("Tree_Fragile", 63, 42, 52);
+		setAsset("Tree_Fragile", 64, 42, 51);
+		setAsset("Tree_Fragile", 65, 43, 51);
+		setAsset("Tree_Fragile", 66, 44, 51);
+		setAsset("Tree_Fragile", 67, 44, 50);
+		setAsset("Tree_Fragile", 68, 45, 50);
+		setAsset("Tree_Fragile", 69, 46, 50);
+		
+		setAsset("Tree_Fragile", 70, 15, 42);
+		setAsset("Tree_Fragile", 71, 14, 42);
+		setAsset("Tree_Fragile", 72, 13, 42);
+		setAsset("Tree_Fragile", 73, 13, 41);
+		setAsset("Tree_Fragile", 74, 13, 40);
+		setAsset("Tree_Fragile", 75, 13, 39);
+		setAsset("Tree_Fragile", 76, 13, 38);
+		setAsset("Tree_Fragile", 77, 13, 37);
+		setAsset("Tree_Fragile", 78, 13, 36);
+		setAsset("Tree_Fragile", 79, 13, 35);
+		
+		setAsset("Tree_Fragile", 80, 21, 52);
+		setAsset("Tree_Fragile", 81, 22, 52);
+		setAsset("Tree_Fragile", 82, 23, 52);
+		setAsset("Tree_Fragile", 83, 24, 52);
+		setAsset("Tree_Fragile", 84, 25, 52);
+		
+		setAsset("Tree_Fragile", 85, 17, 83);
+		setAsset("Tree_Fragile", 86, 16, 83);
+		setAsset("Tree_Fragile", 87, 15, 83);
+		setAsset("Tree_Fragile", 88, 15, 84);
+		setAsset("Tree_Fragile", 89, 15, 85);
+		setAsset("Tree_Fragile", 90, 15, 86);
+		setAsset("Tree_Fragile", 91, 15, 87);
+		
+		setAsset("Tree_Fragile", 92, 84, 53);
+		setAsset("Tree_Fragile", 93, 87, 49);
+		setAsset("Tree_Fragile", 94, 88, 49);
+		setAsset("Tree_Fragile", 95, 89, 49);
+		setAsset("Tree_Fragile", 96, 89, 49);
+		setAsset("Tree_Fragile", 97, 89, 48);
+		setAsset("Tree_Fragile", 98, 90, 48);
+		setAsset("Tree_Fragile", 99, 91, 48);
+		setAsset("Tree_Fragile", 100, 91, 47);
+		
+		setAsset("Tree_Fragile", 101, 91, 31);
+		setAsset("Tree_Fragile", 102, 91, 32);
+		setAsset("Tree_Fragile", 103, 91, 33);
+		setAsset("Tree_Fragile", 104, 91, 34);
+		setAsset("Tree_Fragile", 105, 91, 35);
+		
+		setAsset("Tree_Fragile", 106, 83, 17);
+		setAsset("Tree_Fragile", 107, 84, 17);
+		setAsset("Tree_Fragile", 108, 85, 17);
+		
+		setAsset("Tree_Fragile", 109, 79, 17);
+		setAsset("Tree_Fragile", 110, 79, 18);
+		setAsset("Tree_Fragile", 111, 79, 19);
+		setAsset("Tree_Fragile", 112, 79, 20);
+		setAsset("Tree_Fragile", 113, 80, 20);
+		setAsset("Tree_Fragile", 114, 81, 20);
+		
+		setAsset("Tree_Fragile", 115, 53, 21);
+		setAsset("Tree_Fragile", 116, 54, 21);
+		setAsset("Tree_Fragile", 117, 54, 20);
+		setAsset("Tree_Fragile", 118, 54, 19);
+		setAsset("Tree_Fragile", 119, 54, 18);
+		setAsset("Tree_Fragile", 120, 54, 17);
+		setAsset("Tree_Fragile", 121, 54, 16);
+		setAsset("Tree_Fragile", 122, 53, 16);
+		setAsset("Tree_Fragile", 123, 55, 19);
+		setAsset("Tree_Fragile", 124, 56, 19);
+		setAsset("Tree_Fragile", 125, 57, 19);
+		setAsset("Tree_Fragile", 126, 58, 19);
+		setAsset("Tree_Fragile", 127, 59, 19);
 		// NPCs
 		setAsset("Old_Man", 0, 36, 36);
 		setAsset("Merchant", 1, 17, 37);
@@ -157,16 +257,14 @@ public class AssetSetter {
 		
 		setAsset("Green_Slime", 65, 18, 65);
 		setAsset("Green_Slime", 66, 19, 65);
-		setAsset("Green_Slime", 67, 20, 65);
+		setAsset("Skeleton", 67, 20, 65);
 		setAsset("Green_Slime", 68, 18, 66);
-		setAsset("Green_Slime", 69, 19, 66);
+		setAsset("Skeleton", 69, 19, 66);
 		setAsset("Green_Slime", 70, 20, 66);
 		setAsset("Green_Slime", 71, 19, 67);
 		
 		setAsset("Skeleton", 72, 22, 38);
 		setAsset("Green_Slime", 73, 19, 52);
-		// TODO temp
-		setAsset("Skeleton", 73, 48, 41);
 	}
 
 	/**
@@ -221,11 +319,6 @@ public class AssetSetter {
 			gp.obj[arrIndex].worldX = xPos * gp.tileSize;
 			gp.obj[arrIndex].worldY = yPos * gp.tileSize;
 			break;
-		case "Blue_Shield":
-			gp.obj[arrIndex] = new OBJ_Shield_Blue(gp);
-			gp.obj[arrIndex].worldX = xPos * gp.tileSize;
-			gp.obj[arrIndex].worldY = yPos * gp.tileSize;
-			break;
 		case "Red_Potion":
 			gp.obj[arrIndex] = new OBJ_Potion_Red(gp);
 			gp.obj[arrIndex].worldX = xPos * gp.tileSize;
@@ -246,17 +339,17 @@ public class AssetSetter {
 			gp.obj[arrIndex].worldX = xPos * gp.tileSize;
 			gp.obj[arrIndex].worldY = yPos * gp.tileSize;
 			break;
-		case "Dungeon Door":
+		case "Dungeon_Door":
 			gp.obj[arrIndex] = new OBJ_Dungeon_Door(gp);
 			gp.obj[arrIndex].worldX = xPos * gp.tileSize;
 			gp.obj[arrIndex].worldY = yPos * gp.tileSize;
 			break;
-		case "Dungeon Coin":
+		case "Dungeon_Coin":
 			gp.obj[arrIndex] = new OBJ_Dungeon_Coin(gp);
 			gp.obj[arrIndex].worldX = xPos * gp.tileSize;
 			gp.obj[arrIndex].worldY = yPos * gp.tileSize;
 			break;
-		case "Dungeon Portal":
+		case "Dungeon_Portal":
 			gp.obj[arrIndex] = new OBJ_Dungeon_Portal(gp);
 			gp.obj[arrIndex].worldX = xPos * gp.tileSize;
 			gp.obj[arrIndex].worldY = yPos * gp.tileSize;
@@ -333,11 +426,6 @@ public class AssetSetter {
 			gp.obj[arrIndex].worldX = xPos * gp.tileSize + xOffset;
 			gp.obj[arrIndex].worldY = yPos * gp.tileSize + yOffset;
 			break;
-		case "Blue_Shield":
-			gp.obj[arrIndex] = new OBJ_Shield_Blue(gp);
-			gp.obj[arrIndex].worldX = xPos * gp.tileSize + xOffset;
-			gp.obj[arrIndex].worldY = yPos * gp.tileSize + yOffset;
-			break;
 		case "Red_Potion":
 			gp.obj[arrIndex] = new OBJ_Potion_Red(gp);
 			gp.obj[arrIndex].worldX = xPos * gp.tileSize + xOffset;
@@ -358,12 +446,12 @@ public class AssetSetter {
 			gp.obj[arrIndex].worldX = xPos * gp.tileSize + xOffset;
 			gp.obj[arrIndex].worldY = yPos * gp.tileSize + yOffset;
 			break;
-		case "Dungeon Door":
+		case "Dungeon_Door":
 			gp.obj[arrIndex] = new OBJ_Dungeon_Door(gp);
 			gp.obj[arrIndex].worldX = xPos * gp.tileSize + xOffset;
 			gp.obj[arrIndex].worldY = yPos * gp.tileSize + yOffset;
 			break;
-		case "Dungeon Coin":
+		case "Dungeon_Coin":
 			gp.obj[arrIndex] = new OBJ_Dungeon_Coin(gp);
 			gp.obj[arrIndex].worldX = xPos * gp.tileSize + xOffset;
 			gp.obj[arrIndex].worldY = yPos * gp.tileSize + yOffset;

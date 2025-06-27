@@ -395,7 +395,6 @@ public class Entity {
 					break;
 				}
 				skeletonAttackCounter++;
-				System.out.println(skeletonAttackCounter);
 			}
 			if (skeletonAttackCounter > 20) {
 				skeletonAttacking = false;

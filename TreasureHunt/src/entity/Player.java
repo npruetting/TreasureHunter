@@ -9,6 +9,7 @@ import java.util.Random;
 import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
+import object.OBJ_Axe;
 import object.OBJ_Bow;
 import object.OBJ_Dungeon_Key;
 import object.OBJ_Key;
@@ -100,6 +101,7 @@ public class Player extends Entity {
 		inventory.add(new OBJ_Dungeon_Key(gp));
 		inventory.add(new OBJ_Sword_Normal(gp));
 		inventory.add(new OBJ_Bow(gp));
+		inventory.add(new OBJ_Axe(gp));
 	}
 
 	/**

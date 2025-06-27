@@ -45,8 +45,15 @@ public class CollisionChecker {
 			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
 			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
 				entity.collisionOn = true;
+				// Messed around with collision tiles, turning trees into tree stubs on contact
+//				if (entity == gp.player) {
+//					if (gp.tileM.tile[tileNum1].name.equals("tree") || gp.tileM.tile[tileNum2].name.equals("tree")) {
+//						gp.tileM.mapTileNum[entityLeftCol][entityTopRow] = 17;
+//					}
+//				}
 			}
 			break;
+
 		case "down":
 			entityBottomRow = (entityBottomWorldY + entity.speed) / gp.tileSize;
 			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
@@ -55,6 +62,7 @@ public class CollisionChecker {
 				entity.collisionOn = true;
 			}
 			break;
+
 		case "left":
 			entityLeftCol = (entityLeftWorldX - entity.speed) / gp.tileSize;
 			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
@@ -63,6 +71,7 @@ public class CollisionChecker {
 				entity.collisionOn = true;
 			}
 			break;
+
 		case "right":
 			entityRightCol = (entityRightWorldX + entity.speed) / gp.tileSize;
 			tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
