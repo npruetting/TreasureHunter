@@ -14,7 +14,7 @@ public class OBJ_Sword_Normal extends Entity{
 		attackValue = 1;
 		attackArea.width = 44;
 		attackArea.height = 44;
-		description = "[Normal Sword]\nAn old sword.";
+		description = "[Normal Sword]\nAn old sword\ndropped by the\nold man.";
 		price = 40;
 		forSale = true;
 	}

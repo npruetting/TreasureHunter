@@ -12,7 +12,7 @@ public class OBJ_Potion_Red extends Entity {
 		direction = "down";
 		down1 = setup("/objects/" + name, gp.tileSize, gp.tileSize);
 		description = "[Red Potion]\nGives player 5 hearts.";
-		price = 20;
+		price = 10;
 		forSale = true;
 	}
 

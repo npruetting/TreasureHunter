@@ -31,54 +31,70 @@ public class TileManager {
 		tile = new Tile[50];
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
-		setTileImage();
 		loadMap("/maps/world01.txt");
 	}
 
 	/**
 	 * Sets each array element to a tile image.
+	 * 
+	 * @param mapToLoad - the map to load
 	 */
-	public void setTileImage() {
-		// Grass and shrubbery
-		setup(0, "grass", false);
-		setup(1, "grass_red_flower", false);
-		setup(2, "grass_yellow_flower", false);
-		// Trail
-		setup(3, "trail_0", false);
-		setup(4, "trail_1", false);
-		setup(5, "trail_10", false);
-		setup(6, "trail_11", false);
-		setup(7, "trail_12", false);
-		setup(8, "trail_2", false);
-		setup(9, "trail_3", false);
-		setup(10, "trail_4", false);
-		setup(11, "trail_5", false);
-		setup(12, "trail_6", false);
-		setup(13, "trail_7", false);
-		setup(14, "trail_8", false);
-		setup(15, "trail_9", false);
-		// Tree
-		setup(16, "tree", true);
-		setup(17, "tree_stub", false);
-		// Wall
-		setup(18, "wall_0", true);
-		// Water
-		setup(19, "water_0", true);
-		setup(20, "water_1", true);
-		setup(21, "water_10", true);
-		setup(22, "water_11", true);
-		setup(23, "water_12", true);
-		setup(24, "water_13", true);
-		setup(25, "water_2", true);
-		setup(26, "water_3", true);
-		setup(27, "water_4", true);
-		setup(28, "water_5", true);
-		setup(29, "water_6", true);
-		setup(30, "water_7", true);
-		setup(31, "water_8", true);
-		setup(32, "water_9", true);
-		// Extras
-		setup(33, "wooden_floor", false);
+	public void setTileImage(String mapToLoad) {
+		if (mapToLoad.equals("/maps/world01.txt")) {
+			// Grass and shrubbery
+			setup(0, "grass", false, true);
+			setup(1, "grass_red_flower", false, true);
+			setup(2, "grass_yellow_flower", false, true);
+			// Trail
+			setup(3, "trail_0", false, true);
+			setup(4, "trail_1", false, true);
+			setup(5, "trail_10", false, true);
+			setup(6, "trail_11", false, true);
+			setup(7, "trail_12", false, true);
+			setup(8, "trail_2", false, true);
+			setup(9, "trail_3", false, true);
+			setup(10, "trail_4", false, true);
+			setup(11, "trail_5", false, true);
+			setup(12, "trail_6", false, true);
+			setup(13, "trail_7", false, true);
+			setup(14, "trail_8", false, true);
+			setup(15, "trail_9", false, true);
+			// Tree
+			setup(16, "tree", true, false);
+			setup(17, "tree_stub", false, true);
+			// Wall
+			setup(18, "wall_0", true, false);
+			// Water (projectile can pass through)
+			setup(19, "water_0", true, true);
+			setup(20, "water_1", true, true);
+			setup(21, "water_10", true, true);
+			setup(22, "water_11", true, true);
+			setup(23, "water_12", true, true);
+			setup(24, "water_13", true, true);
+			setup(25, "water_2", true, true);
+			setup(26, "water_3", true, true);
+			setup(27, "water_4", true, true);
+			setup(28, "water_5", true, true);
+			setup(29, "water_6", true, true);
+			setup(30, "water_7", true, true);
+			setup(31, "water_8", true, true);
+			setup(32, "water_9", true, true);
+			// Extras
+			setup(33, "wooden_floor", false, true);
+		} else if (mapToLoad.equals("/maps/dungeon.txt")) {
+			setupDungeon(0, "dungeon_floor_0", false, true);
+			setupDungeon(1, "dungeon_floor_1", false, true);
+			setupDungeon(2, "dungeon_floor_2", false, true);
+			setupDungeon(3, "dungeon_floor_3", false, true);
+			setupDungeon(4, "dungeon_floor_4", false, true);
+			setupDungeon(5, "dungeon_floor_5", false, true);
+			setupDungeon(6, "dungeon_floor_6", false, true);
+			setupDungeon(7, "dungeon_floor_7", false, true);
+			setupDungeon(8, "dungeon_floor_8", false, true);
+			setupDungeon(9, "dungeon_floor_9", false, true);
+			setupDungeon(10, "void", false, true);
+			setupDungeon(11, "wall_0", true, false);
+		}
 	}
 
 	/**
@@ -88,15 +104,38 @@ public class TileManager {
 	 * @param index     - index in tile array
 	 * @param imageName - name of the image
 	 * @param collision - true if this is a collision tile
+	 * @param projectileCanPassThrough - true if a projectile can pass through
 	 */
-	public void setup(int index, String imageName, boolean collision) {
+	public void setup(int index, String imageName, boolean collision, boolean projectileCanPassThrough) {
 		UtilityTool uTool = new UtilityTool();
 		try {
 			tile[index] = new Tile();
 			tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tiles/" + imageName + ".png"));
 			tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
 			tile[index].collision = collision;
-			tile[index].name = imageName;
+			tile[index].projectileCanPassThrough = projectileCanPassThrough;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Sets up the tiles in the tile array by assigning an image as an index in the
+	 * array and another parameter to decipher if the given tile has collisions.
+	 * 
+	 * @param index     - index in tile array
+	 * @param imageName - name of the image
+	 * @param collision - true if this is a collision tile
+	 * @param projectileCanPassThrough - true if a projectile can pass through
+	 */
+	public void setupDungeon(int index, String imageName, boolean collision, boolean projectileCanPassThrough) {
+		UtilityTool uTool = new UtilityTool();
+		try {
+			tile[index] = new Tile();
+			tile[index].image = ImageIO.read(getClass().getResourceAsStream("/dungeonTiles/" + imageName + ".png"));
+			tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
+			tile[index].collision = collision;
+			tile[index].projectileCanPassThrough = projectileCanPassThrough;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -108,6 +147,7 @@ public class TileManager {
 	 * @param filePath - given file input
 	 */
 	public void loadMap(String filePath) {
+		setTileImage(filePath);
 		try {
 			InputStream is = getClass().getResourceAsStream(filePath);
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));

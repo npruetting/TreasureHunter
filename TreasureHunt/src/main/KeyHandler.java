@@ -39,23 +39,17 @@ public class KeyHandler implements KeyListener {
 		if (code == KeyEvent.VK_Y) {
 			gp.isDark = !gp.isDark;
 		}
-		// TODO temporary way to give player coin
-		if (code == KeyEvent.VK_C) {
-			gp.player.coin++;
-			gp.player.dungeonCoin++;
-			gp.player.arrowAmount++;
+		// TODO temporary way to give player many buffs for developing purposes
+		if (code == KeyEvent.VK_G) {
+			gp.player.coin += 100;
+			gp.player.dungeonCoin += 100;
+			gp.player.arrowAmount += 100;
+			gp.player.health += 100;
+			gp.player.speed += 4;
 		}
 		// TODO temporary way to debug draw time
 		if (code == KeyEvent.VK_SHIFT) {
 			toggleDebug = !toggleDebug;
-		}
-		// TODO temporary way to decrease player health
-		if (code == KeyEvent.VK_H) {
-			gp.player.health--;
-		}
-		// TODO temporary way to increase player health
-		if (code == KeyEvent.VK_J) {
-			gp.player.health++;
 		}
 		// TODO temporary way to increase player exp
 		if (code == KeyEvent.VK_L) {
@@ -166,7 +160,7 @@ public class KeyHandler implements KeyListener {
 							if (gp.player.projectile.alive) {
 								break;
 							}
-						} 
+						}
 						gp.player.attacking = true;
 					}
 					break;

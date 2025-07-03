@@ -44,13 +44,13 @@ public class CollisionChecker {
 			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
 			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
 			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
-				entity.collisionOn = true;
-				// Messed around with collision tiles, turning trees into tree stubs on contact
-//				if (entity == gp.player) {
-//					if (gp.tileM.tile[tileNum1].name.equals("tree") || gp.tileM.tile[tileNum2].name.equals("tree")) {
-//						gp.tileM.mapTileNum[entityLeftCol][entityTopRow] = 17;
-//					}
-//				}
+				// Projectiles can fly over water
+				if ((gp.tileM.tile[tileNum1].projectileCanPassThrough
+						|| gp.tileM.tile[tileNum2].projectileCanPassThrough) && entity.name.equals("projectile")) {
+					break;
+				} else {
+					entity.collisionOn = true;
+				}
 			}
 			break;
 
@@ -59,7 +59,12 @@ public class CollisionChecker {
 			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
 			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
 			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
-				entity.collisionOn = true;
+				if ((gp.tileM.tile[tileNum1].projectileCanPassThrough
+						|| gp.tileM.tile[tileNum2].projectileCanPassThrough) && entity.name.equals("projectile")) {
+					break;
+				} else {
+					entity.collisionOn = true;
+				}
 			}
 			break;
 
@@ -68,7 +73,12 @@ public class CollisionChecker {
 			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
 			tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
 			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
-				entity.collisionOn = true;
+				if ((gp.tileM.tile[tileNum1].projectileCanPassThrough
+						|| gp.tileM.tile[tileNum2].projectileCanPassThrough) && entity.name.equals("projectile")) {
+					break;
+				} else {
+					entity.collisionOn = true;
+				}
 			}
 			break;
 
@@ -77,7 +87,12 @@ public class CollisionChecker {
 			tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
 			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
 			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
-				entity.collisionOn = true;
+				if ((gp.tileM.tile[tileNum1].projectileCanPassThrough
+						|| gp.tileM.tile[tileNum2].projectileCanPassThrough) && entity.name.equals("projectile")) {
+					break;
+				} else {
+					entity.collisionOn = true;
+				}
 			}
 			break;
 		}

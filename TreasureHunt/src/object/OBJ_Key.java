@@ -20,7 +20,7 @@ public class OBJ_Key extends Entity{
 		direction = "default";
 		down1 = setup("/objects/" + name, gp.tileSize, gp.tileSize);
 		description = "[Key]\nUsed to open doors.";
-		price = 30;
+		price = 20;
 		forSale = true;
 	}
 	

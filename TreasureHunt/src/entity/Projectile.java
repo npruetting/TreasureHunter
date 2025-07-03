@@ -8,6 +8,7 @@ public class Projectile extends Entity{
 	
 	public Projectile(GamePanel gp) {
 		super(gp);
+		name = "projectile";
 	}
 	
 	public void set(int worldX, int worldY, String direction, boolean alive, Entity user) {
@@ -38,6 +39,7 @@ public class Projectile extends Entity{
 		// Tile collision
 		collisionOn = false;
 		gp.cChecker.checkTile(this);
+		gp.cChecker.checkObject(this, false);
 		if (collisionOn) {
 			alive = false;
 		}

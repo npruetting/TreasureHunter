@@ -32,7 +32,7 @@ public class Entity {
 	public boolean collision;
 
 	// Entity attributes
-	public String name;
+	public String name = "";
 	public int speed;
 	public int worldX, worldY;
 	public String direction;

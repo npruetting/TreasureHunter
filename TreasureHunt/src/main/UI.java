@@ -945,7 +945,7 @@ public class UI {
 		x += gp.tileSize * 2;
 		y += gp.tileSize - 20;
 		g2.setColor(Color.yellow);
-		g2.drawString(gp.player.coin + "", x, y);
+		g2.drawString(gp.player.coin + "", x - 10, y);
 		if (gp.player.dungeonCoin > 0) {
 			g2.drawString(gp.player.dungeonCoin + "", x + gp.tileSize, y);
 		}
@@ -1015,7 +1015,7 @@ public class UI {
 					} else {
 						tradeTimer = 0;
 						gp.playSE(1);
-						gp.player.dungeonCoin = 0;
+						gp.player.dungeonCoin -= 10;
 						gp.player.inventory.add(npc.inventory.get(itemIndex));
 						npc.inventory.remove(npc.inventory.get(itemIndex));
 					}

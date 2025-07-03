@@ -71,7 +71,7 @@ public class Player extends Entity {
 	public void setDefaultValues() {
 		worldX = 47 * gp.tileSize;
 		worldY = 38 * gp.tileSize;
-		speed = 8;
+		speed = 6;
 		direction = "down";
 		// Player status
 		level = 0;
@@ -82,7 +82,7 @@ public class Player extends Entity {
 		exp = 0;
 		nextLevelExp = 10;
 		coin = 0;
-		arrowAmount = 10;
+		//arrowAmount = 10;
 		arrowDamageAmount = 1;
 		projectile = new PROJ_Arrow(gp, arrowDamageAmount);
 		// No starting weapon
@@ -97,11 +97,11 @@ public class Player extends Entity {
 		inventory.add(new OBJ_Lantern_Tiny(gp));
 		inventory.add(currentShield);
 		// TODO temp items
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Dungeon_Key(gp));
-		inventory.add(new OBJ_Sword_Normal(gp));
-		inventory.add(new OBJ_Bow(gp));
-		inventory.add(new OBJ_Axe(gp));
+//		inventory.add(new OBJ_Key(gp));
+//		inventory.add(new OBJ_Dungeon_Key(gp));
+//		inventory.add(new OBJ_Sword_Normal(gp));
+//		inventory.add(new OBJ_Bow(gp));
+//		inventory.add(new OBJ_Axe(gp));
 	}
 
 	/**
@@ -645,16 +645,18 @@ public class Player extends Entity {
 			gp.hSetter.extraHeartsDisplayed++;
 			// Character status
 			level++;
-			nextLevelExp *= 3;
-			maxHealth += 2;
+			nextLevelExp *= 2;
+			if (maxHealth < 20) {
+				maxHealth += 2;
+			}
 			health = maxHealth;
-			System.out.println("MaxHealth: " + maxHealth + " Health: " + health);
 			strength++;
 			dexterity++;
 			attack = getAttack();
-			defense = getAttack();
+			defense = getDefense();
 			arrowDamageAmount++;
 			projectile = new PROJ_Arrow(gp, arrowDamageAmount);
+			
 			gp.playSE(14);
 			gp.levelUpState = true;
 		}
