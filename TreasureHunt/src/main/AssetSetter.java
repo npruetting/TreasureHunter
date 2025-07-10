@@ -1,14 +1,17 @@
 package main;
 
 import entity.NPC_OldMan;
+import object.OBJ_Sign;
 import entity.MON_GreenSlime;
 import entity.MON_Skeleton;
+import entity.NPC_Dungeon_Merchant;
 import entity.NPC_Merchant;
 import object.OBJ_Axe;
 import object.OBJ_Boots;
 import object.OBJ_Chest;
 import object.OBJ_Coin;
 import object.OBJ_Door;
+import object.OBJ_Dungeon_Chest;
 import object.OBJ_Dungeon_Coin;
 import object.OBJ_Dungeon_Door;
 import object.OBJ_Dungeon_Portal;
@@ -185,10 +188,15 @@ public class AssetSetter {
 		setAsset("Tree_Fragile", 128, 55, 65);
 		setAsset("Tree_Fragile", 129, 56, 65);
 		// NPCs
-		setAsset("Old_Man", 0, 36, 36);
+		setAsset("Old_Man", 0, 21, 15);
 		setAsset("Merchant", 1, 17, 37);
+		setAsset("Sign", 2, 48, 39, 48, 24);
+		
+		// TODO temp
+		setAsset("Dungeon_Merchant", 3, 48, 40);
+		
 		// Monsters
-		setAsset("Green_Slime", 0, 21, 15);
+		setAsset("Green_Slime", 0, 21, 13);
 		setAsset("Green_Slime", 1, 21, 16);
 		setAsset("Green_Slime", 2, 22, 15);
 		setAsset("Green_Slime", 3, 22, 16);
@@ -357,6 +365,11 @@ public class AssetSetter {
 			gp.obj[arrIndex].worldX = xPos * gp.tileSize;
 			gp.obj[arrIndex].worldY = yPos * gp.tileSize;
 			break;
+		case "Dungeon_Chest":
+			gp.obj[arrIndex] = new OBJ_Dungeon_Chest(gp);
+			gp.obj[arrIndex].worldX = xPos * gp.tileSize;
+			gp.obj[arrIndex].worldY = yPos * gp.tileSize;
+			break;
 		case "Old_Man":
 			gp.npc[arrIndex] = new NPC_OldMan(gp);
 			gp.npc[arrIndex].worldX = xPos * gp.tileSize;
@@ -364,6 +377,16 @@ public class AssetSetter {
 			break;
 		case "Merchant":
 			gp.npc[arrIndex] = new NPC_Merchant(gp);
+			gp.npc[arrIndex].worldX = xPos * gp.tileSize;
+			gp.npc[arrIndex].worldY = yPos * gp.tileSize;
+			break;
+		case "Dungeon_Merchant":
+			gp.npc[arrIndex] = new NPC_Dungeon_Merchant(gp);
+			gp.npc[arrIndex].worldX = xPos * gp.tileSize;
+			gp.npc[arrIndex].worldY = yPos * gp.tileSize;
+			break;
+		case "Sign":
+			gp.npc[arrIndex] = new OBJ_Sign(gp);
 			gp.npc[arrIndex].worldX = xPos * gp.tileSize;
 			gp.npc[arrIndex].worldY = yPos * gp.tileSize;
 			break;
@@ -461,6 +484,11 @@ public class AssetSetter {
 			break;
 		case "Old_Man":
 			gp.npc[arrIndex] = new NPC_OldMan(gp);
+			gp.npc[arrIndex].worldX = xPos * gp.tileSize + xOffset;
+			gp.npc[arrIndex].worldY = yPos * gp.tileSize + yOffset;
+			break;
+		case "Sign":
+			gp.npc[arrIndex] = new OBJ_Sign(gp);
 			gp.npc[arrIndex].worldX = xPos * gp.tileSize + xOffset;
 			gp.npc[arrIndex].worldY = yPos * gp.tileSize + yOffset;
 			break;

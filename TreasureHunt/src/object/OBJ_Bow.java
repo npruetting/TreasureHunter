@@ -12,7 +12,7 @@ public class OBJ_Bow extends Entity{
 		direction = "default";
 		down1 = setup("/objects/" + name, gp.tileSize, gp.tileSize);
 		description = "[Bow]\nShoots arrows, good\nchoice for fighting\nskeletons.";
-		price = 30;
+		price = 20;
 		forSale = true;
 	}
 

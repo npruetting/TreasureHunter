@@ -97,11 +97,11 @@ public class Player extends Entity {
 		inventory.add(new OBJ_Lantern_Tiny(gp));
 		inventory.add(currentShield);
 		// TODO temp items
-//		inventory.add(new OBJ_Key(gp));
-//		inventory.add(new OBJ_Dungeon_Key(gp));
-//		inventory.add(new OBJ_Sword_Normal(gp));
-//		inventory.add(new OBJ_Bow(gp));
-//		inventory.add(new OBJ_Axe(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Dungeon_Key(gp));
+		inventory.add(new OBJ_Sword_Normal(gp));
+		inventory.add(new OBJ_Bow(gp));
+		inventory.add(new OBJ_Axe(gp));
 	}
 
 	/**
@@ -443,6 +443,19 @@ public class Player extends Entity {
 					gp.obj[i].health = 1;
 				}
 				break;
+			case "dungeon_chest":
+				if (gp.obj[i].health == 0) {
+					gp.playSE(1);
+					Random rng = new Random();
+					int coinAmount = rng.nextInt(4, 9);
+					dungeonCoin += coinAmount;
+					gp.dialogueState = true;
+					gp.ui.currentDialogue = "You found treasure!\n+ " + coinAmount + " dungeon coins!";
+					gp.ui.addMessage("+ " + coinAmount + " dungeon coins!");
+					gp.obj[i].down1 = setup("/objects/dungeon_chest_opened", gp.tileSize, gp.tileSize);
+					gp.obj[i].health = 1;
+				}
+				break;
 			case "portal":
 				mapChangeTimer = 90;
 				alphaValue = 255;
@@ -645,7 +658,7 @@ public class Player extends Entity {
 			gp.hSetter.extraHeartsDisplayed++;
 			// Character status
 			level++;
-			nextLevelExp *= 2;
+			nextLevelExp *= 2 + 10;
 			if (maxHealth < 20) {
 				maxHealth += 2;
 			}

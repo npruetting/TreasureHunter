@@ -15,7 +15,7 @@ public class OBJ_Axe extends Entity{
 		attackArea.height = 22;
 		attackValue = 2;
 		description = "[Woodcutter's Axe]\nUseful for cutting\ntrees. Much shorter\nattack range.";
-		price = 30;
+		price = 20;
 		forSale = true;
 	}
 }

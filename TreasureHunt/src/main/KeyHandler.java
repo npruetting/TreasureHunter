@@ -35,6 +35,10 @@ public class KeyHandler implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		int code = e.getKeyCode();
 
+		// TODO temporary way to decrease player speed
+		if (code == KeyEvent.VK_J) {
+			gp.player.speed--;
+		}
 		// TODO temporary way to turn on and off lighting
 		if (code == KeyEvent.VK_Y) {
 			gp.isDark = !gp.isDark;

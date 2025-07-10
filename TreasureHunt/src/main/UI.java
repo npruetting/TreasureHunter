@@ -55,7 +55,8 @@ public class UI {
 	public boolean canDrawTradeText;
 	private boolean isTrading;
 	// UI Images
-	private BufferedImage boyRight1, boyRight2, chest, oldManDown1, oldManDown2, shield, coin, dungeonCoin, tinyLantern, arrow;
+	private BufferedImage boyRight1, boyRight2, chest, oldManDown1, oldManDown2, shield, coin, dungeonCoin, tinyLantern,
+			arrow;
 
 	/**
 	 * Constructor that sets the elements to be displayed on the screen.
@@ -995,7 +996,8 @@ public class UI {
 							gp.player.coin -= price;
 							gp.player.inventory.set(0, new OBJ_Lantern_Big(gp));
 							npc.inventory.remove(npc.inventory.get(itemIndex));
-							gp.eManager.setup(585);
+//							gp.eManager.setup(585);
+							gp.eManager.setup(700);
 							gp.eManager.bigLanternEquipped = true;
 						} else if (npc.inventory.get(itemIndex).name == "arrow") {
 							tradeTimer = 0;
@@ -1040,7 +1042,12 @@ public class UI {
 		int frameHeight = gp.tileSize * 8 - 40;
 		drawSubWindow(frameX, frameY, frameWidth, frameHeight, g2);
 		g2.setColor(new Color(255, 255, 125));
-		String text = "Here, you can sell your\nitems for half of their\noriginal price! Some items\ncan't be sold by default,\nand you can't sell a\ncurrently equipped\nweapon or shield. Feel\nfree to make some coins,\nbut I would focus on those\npurple coins, I heard\nthey lead to a dungeon. . .";
+		String text = "";
+		if (npc.name.equals("merchant")) {
+			text = "Here, you can sell your\nitems for half of their\noriginal price! Some items\ncan't be sold by default,\nand you can't sell a\ncurrently equipped\nweapon or shield. Feel\nfree to make some coins,\nbut I would focus on those\npurple coins, I heard\nthey lead to a dungeon. . .";
+		} else if (npc.name.equals("dungeon_merchant")) {
+			text = "You know the drill. . .";
+		}
 		int xPos = frameX + 20;
 		int yPos = frameY + 42;
 		for (String line : text.split("\n")) {

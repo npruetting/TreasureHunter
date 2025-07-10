@@ -41,9 +41,9 @@ public class NPC_OldMan extends Entity {
 	 */
 	public void setDialogue() {
 		dialogues[0] = "Haha! You found me! I almost got lost here\nmyself, and I've been here for ages! Remember\nhow I was telling you about how dark it is\nout here? Hah, no joke, am I right!";
-		dialogues[1] = "Looks like you've made some progress in the\ndarkness. I'ts so dark, I tripped and dropped\nmy sword on a trail on the upper right quadrant\nof this land! Could be useful. . .";
+		dialogues[1] = "Looks like you've made some progress in the\ndarkness. I'ts so dark, I tripped and dropped\nmy sword on this trail, but I'm up to letting you\nfind and use it! Could be useful. . .";
 		dialogues[2] = "I'ts alright though, I'll try and find the merchant\nwho lives around these parts. If I remember\ncorrectly, his lair is within the bottom left\nquadrant, guarded by monsters. . .";
-		dialogues[3] = "Good luck again lad, I'm going to keep\nwandering around to look for that merchant.\nThe most powerful tool of his is that axe\nused to cut down trees, I'd consider buying it!";
+		dialogues[3] = "Good luck again lad, I'm going to continue\nwandering around to look for that merchant.\nA very powerful tool of his is that axe used\nto chop trees, I'd consider buying!";
 	}
 
 	/**
