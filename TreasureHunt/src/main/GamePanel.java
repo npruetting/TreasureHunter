@@ -47,7 +47,6 @@ public class GamePanel extends JPanel implements Runnable {
 	// System
 	public TileManager tileM = new TileManager(this);
 	public KeyHandler keyH = new KeyHandler(this);
-	public MouseHandler mouseH = new MouseHandler(this);
 	private Sound music = new Sound();
 	public Sound se = new Sound();
 	public CollisionChecker cChecker = new CollisionChecker(this);
@@ -81,6 +80,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public boolean introBreak;
 	public boolean tradeState;
 	public boolean isDark;
+	public int transitionState;
 
 	/**
 	 * Constructs this game panel.
@@ -90,7 +90,6 @@ public class GamePanel extends JPanel implements Runnable {
 		this.setBackground(Color.black);
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
-		this.addMouseListener(mouseH);
 		this.setFocusable(true);
 	}
 
@@ -99,9 +98,8 @@ public class GamePanel extends JPanel implements Runnable {
 	 */
 	public void setUpGame() {
 		aSetter.setAssetsMap1();
-//		eManager.setup(440);
-		eManager.setup(550);
-
+//		eManager.setup(550, false);
+		eManager.setup(590, false);
 		isDark = true;
 	}
 

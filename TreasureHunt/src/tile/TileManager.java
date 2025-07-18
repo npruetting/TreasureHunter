@@ -40,7 +40,7 @@ public class TileManager {
 	 * @param mapToLoad - the map to load
 	 */
 	public void setTileImage(String mapToLoad) {
-		if (mapToLoad.equals("/maps/world01.txt")) {
+		if (mapToLoad.equals("/maps/world01.txt") || mapToLoad.equals("/maps/final_world.txt")) {
 			// Grass and shrubbery
 			setup(0, "grass", false, true);
 			setup(1, "grass_red_flower", false, true);
@@ -94,6 +94,19 @@ public class TileManager {
 			setupDungeon(9, "dungeon_floor_9", false, true);
 			setupDungeon(10, "void", false, true);
 			setupDungeon(11, "wall_0", true, false);
+			setupDungeon(12, "zWall_1", true, false);
+			setupDungeon(13, "zWall_2", true, false);
+			setupDungeon(14, "zWall_3", true, false);
+			setupDungeon(15, "zWall_4", true, false);
+			setupDungeon(16, "zWall_5", true, false);
+			setupDungeon(17, "zWall_6", true, false);
+			setupDungeon(18, "zWall_7", true, false);
+			setupDungeon(19, "zWall_8", true, false);
+			setupDungeon(20, "zWall_9", true, false);
+			setupDungeon(21, "zzWall_10", true, false);
+			setupDungeon(22, "zzWall_11", true, false);
+			setupDungeon(23, "zzWall_12", true, false);
+			setupDungeon(24, "zzWall_13", true, false);
 		}
 	}
 

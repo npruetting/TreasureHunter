@@ -19,7 +19,7 @@ public class OBJ_Dungeon_Key extends Entity{
 		name = "dungeon_key";
 		direction = "default";
 		down1 = setup("/objects/" + name, gp.tileSize, gp.tileSize);
-		description = "[Dungeon Key]\nUsed to open the door\nto the dungeon.";
+		description = "[Dungeon Key]\nUsed to open dungeon\ndoors.";
 		price = -1;
 		forSale = false;
 	}
@@ -36,7 +36,7 @@ public class OBJ_Dungeon_Key extends Entity{
 			gp.ui.messages.remove("Needs dungeon key. . .");
 			gp.dialogueState = true;
 			gp.isViewingStatus = false;
-			gp.ui.currentDialogue = "Door to the dungeon unlocked!";
+			gp.ui.currentDialogue = "Dungeon door unlocked!";
 			gp.player.inventory.remove(itemIndex);
 		}
 	}

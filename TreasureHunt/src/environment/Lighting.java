@@ -11,7 +11,7 @@ public class Lighting {
 
 	public BufferedImage darknessFilter;
 
-	public Lighting(GamePanel gp, int circleSize) {
+	public Lighting(GamePanel gp, int circleSize, boolean isInDungeon) {
 		// Create a buffered image
 		darknessFilter = new BufferedImage(gp.screenWidth, gp.screenHeight, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = (Graphics2D) darknessFilter.getGraphics();
@@ -24,18 +24,33 @@ public class Lighting {
 		Color color[] = new Color[12];
 		float fraction[] = new float[12];
 
-		color[0] = new Color(0, 0, 0.01f, 0.3f);
-		color[1] = new Color(0, 0, 0.01f, 0.45f);
-		color[2] = new Color(0, 0, 0.01f, 0.55f);
-		color[3] = new Color(0, 0, 0.01f, 0.63f);
-		color[4] = new Color(0, 0, 0.01f, 0.7f);
-		color[5] = new Color(0, 0, 0.01f, 0.76f);
-		color[6] = new Color(0, 0, 0.01f, 0.82f);
-		color[7] = new Color(0, 0, 0.01f, 0.87f);
-		color[8] = new Color(0, 0, 0.02f, 0.91f);
-		color[9] = new Color(0, 0, 0.03f, 0.94f);
-		color[10] = new Color(0, 0, 0.04f, 0.96f);
-		color[11] = new Color(0, 0, 0, 1f);
+		if (!isInDungeon) {
+			color[0] = new Color(0, 0, 0.01f, 0.3f);
+			color[1] = new Color(0, 0, 0.01f, 0.45f);
+			color[2] = new Color(0, 0, 0.01f, 0.55f);
+			color[3] = new Color(0, 0, 0.01f, 0.63f);
+			color[4] = new Color(0, 0, 0.01f, 0.7f);
+			color[5] = new Color(0, 0, 0.01f, 0.76f);
+			color[6] = new Color(0, 0, 0.01f, 0.82f);
+			color[7] = new Color(0, 0, 0.01f, 0.87f);
+			color[8] = new Color(0, 0, 0.02f, 0.91f);
+			color[9] = new Color(0, 0, 0.03f, 0.94f);
+			color[10] = new Color(0, 0, 0.04f, 0.96f);
+			color[11] = new Color(0, 0, 0, 1f);
+		} else {
+			color[0] = new Color(0, 0, 0.01f, 0.5f);
+			color[1] = new Color(0, 0, 0.01f, 0.58f);
+			color[2] = new Color(0, 0, 0.01f, 0.66f);
+			color[3] = new Color(0, 0, 0.01f, 0.72f);
+			color[4] = new Color(0, 0, 0.01f, 0.78f);
+			color[5] = new Color(0, 0, 0.01f, 0.84f);
+			color[6] = new Color(0, 0, 0.01f, 0.89f);
+			color[7] = new Color(0, 0, 0.02f, 0.92f);
+			color[8] = new Color(0, 0, 0.03f, 0.95f);
+			color[9] = new Color(0, 0, 0.04f, 0.97f);
+			color[10] = new Color(0, 0, 0, 0.98f);
+			color[11] = new Color(0, 0, 0, 1f);
+		}
 
 		fraction[0] = 0.2f;
 		fraction[1] = 0.4f;

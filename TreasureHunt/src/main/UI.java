@@ -46,6 +46,7 @@ public class UI {
 	public int menuFadeTimer;
 	public int tradeTimer;
 	public int tradeTimer2;
+	public int tradeScrollTimer;
 	public boolean introTransitionPhase;
 	private boolean canPlaySE = true;
 	public Entity npc;
@@ -56,7 +57,7 @@ public class UI {
 	private boolean isTrading;
 	// UI Images
 	private BufferedImage boyRight1, boyRight2, chest, oldManDown1, oldManDown2, shield, coin, dungeonCoin, tinyLantern,
-			arrow;
+			arrow, ironScrap, diamond;
 
 	/**
 	 * Constructor that sets the elements to be displayed on the screen.
@@ -119,13 +120,13 @@ public class UI {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		coin = uTool.scaleImage(coin, gp.tileSize, gp.tileSize);
+		coin = uTool.scaleImage(coin, gp.tileSize - 16, gp.tileSize - 16);
 		try {
 			dungeonCoin = ImageIO.read(getClass().getResourceAsStream("/objects/dungeon_coin.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		dungeonCoin = uTool.scaleImage(dungeonCoin, gp.tileSize, gp.tileSize);
+		dungeonCoin = uTool.scaleImage(dungeonCoin, gp.tileSize - 16, gp.tileSize - 16);
 		try {
 			tinyLantern = ImageIO.read(getClass().getResourceAsStream("/objects/lantern_tiny.png"));
 		} catch (IOException e) {
@@ -138,6 +139,18 @@ public class UI {
 			e.printStackTrace();
 		}
 		arrow = uTool.scaleImage(arrow, gp.tileSize, gp.tileSize);
+		try {
+			ironScrap = ImageIO.read(getClass().getResourceAsStream("/objects/iron_scrap.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		ironScrap = uTool.scaleImage(ironScrap, gp.tileSize - 16, gp.tileSize - 16);
+		try {
+			diamond = ImageIO.read(getClass().getResourceAsStream("/objects/diamond.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		diamond = uTool.scaleImage(diamond, gp.tileSize - 16, gp.tileSize - 16);
 	}
 
 	/**
@@ -201,7 +214,7 @@ public class UI {
 		}
 		// If world 2 is loaded
 		if (gp.player.mapChangeTimer > 0) {
-			drawWorld2Cutscene();
+			drawCutscene();
 		}
 		// Dialogue state
 		if (gp.dialogueState) {
@@ -569,7 +582,7 @@ public class UI {
 		g2.drawString("Defense", gp.tileSize - 12, gp.tileSize * 2 + 250);
 		g2.drawString("Exp", gp.tileSize - 12, gp.tileSize * 2 + 300);
 		g2.drawString("Next Level", gp.tileSize - 12, gp.tileSize * 2 + 350);
-		g2.drawString("Coin", gp.tileSize - 12, gp.tileSize * 2 + 400);
+		g2.drawString("Currency", gp.tileSize - 12, gp.tileSize * 2 + 400);
 		g2.drawString("Weapon", gp.tileSize - 12, gp.tileSize * 2 + 468);
 		g2.drawString("Shield", gp.tileSize - 12, gp.tileSize * 2 + 536);
 		// Stat values
@@ -582,12 +595,20 @@ public class UI {
 		g2.drawString(gp.player.defense + "", gp.tileSize * 5, gp.tileSize * 2 + 250);
 		g2.drawString(gp.player.exp + "", gp.tileSize * 5, gp.tileSize * 2 + 300);
 		g2.drawString(gp.player.nextLevelExp + "", gp.tileSize * 5, gp.tileSize * 2 + 350);
-		g2.drawImage(coin, gp.tileSize * 5 - 32, gp.tileSize + 480 - gp.tileSize, null);
-		g2.drawString(gp.player.coin + "", gp.tileSize * 5 + 6, gp.tileSize * 2 + 412);
+		// Currency
+		g2.drawImage(coin, gp.tileSize * 5, gp.tileSize + 484 - gp.tileSize, null);
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 30F));
+		g2.setColor(new Color(255, 200, 255));
+		g2.drawString(gp.player.coin + "", gp.tileSize * 5 + 20, gp.tileSize * 2 + 416);
 		if (gp.player.dungeonCoin > 0) {
-			g2.drawImage(dungeonCoin, gp.tileSize * 4 - 32, gp.tileSize + 480 - gp.tileSize, null);
-			g2.drawString(gp.player.dungeonCoin + "", gp.tileSize * 4 + 6, gp.tileSize * 2 + 412);
+			g2.drawImage(dungeonCoin, gp.tileSize * 4 + 12, gp.tileSize + 484 - gp.tileSize, null);
+			g2.drawString(gp.player.dungeonCoin + "", gp.tileSize * 4 + 32, gp.tileSize * 2 + 416);
 		}
+		if (gp.player.ironScrapAmount > 0) {
+			g2.drawImage(ironScrap, gp.tileSize * 4 - 40, gp.tileSize + 484 - gp.tileSize, null);
+			g2.drawString(gp.player.ironScrapAmount + "", gp.tileSize * 4 - 6, gp.tileSize * 2 + 416);
+		}
+		// Weapon / shield
 		try {
 			if (gp.player.currentWeapon != null) {
 				image = ImageIO
@@ -756,9 +777,9 @@ public class UI {
 	}
 
 	/**
-	 * Draws the world 2 cutscene when called in the draw method.
+	 * Draws cutscenes when called in the draw method.
 	 */
-	public void drawWorld2Cutscene() {
+	public void drawCutscene() {
 		if (gp.isPaused) {
 			gp.isPaused = false;
 		}
@@ -769,9 +790,29 @@ public class UI {
 		g2.setColor(new Color(colorSet, colorSet, colorSet, gp.player.alphaValue));
 		g2.fillRect(0, 0, gp.tileSize * 16, gp.tileSize * 12);
 		g2.setColor(Color.WHITE);
-		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40F));
-		g2.setColor(new Color(255, 255, 255, gp.player.alphaValue));
-		g2.drawString("World 2: ____", gp.tileSize * 6 + 24, gp.tileSize * 6 + 12);
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 60F));
+		if (gp.player.alphaValue > 0) {
+			g2.setColor(new Color(255, 255, 255, gp.player.alphaValue));
+		} else {
+			g2.setColor(new Color(255, 255, 255, 0));
+		}
+		switch (gp.transitionState) {
+		case 1:
+			g2.drawString("? ? ?", gp.tileSize * 7, gp.tileSize * 6 + 12);
+			break;
+		case 2:
+			g2.drawString("Leaving the Secret Island", gp.tileSize * 3 + 32, gp.tileSize * 6 + 12);
+			break;
+		case 3:
+			g2.drawString("Entering the Dungeon", gp.tileSize * 4 + 30, gp.tileSize * 6 + 12);
+			break;
+		case 4:
+			g2.drawString("Entering Battle", gp.tileSize * 5 + 6, gp.tileSize * 6 + 12);
+			break;
+		case 5:
+			g2.drawString("Leaving Battle", gp.tileSize * 5 + 6, gp.tileSize * 6 + 12);
+			break;
+		}
 	}
 
 	/**
@@ -853,10 +894,16 @@ public class UI {
 	 */
 	public void drawTradeScreen() {
 		if (!isTrading) {
-			gp.stopMusic();
-			gp.playMusic(24);
+			if (!gp.player.isInDungeon) {
+				gp.stopMusic();
+				gp.playMusic(24);
+			} else {
+				gp.stopMusic();
+				gp.playMusic(22);
+			}
 			isTrading = true;
 		}
+		tradeScrollTimer++;
 		switch (subState) {
 		case 0:
 			trade_select();
@@ -909,11 +956,18 @@ public class UI {
 			g2.drawString(">", x - 24, y);
 			if (gp.keyH.enterPressed) {
 				commandNum = 0;
-				currentDialogue = "I'm not going anywhere. . .";
-				gp.stopMusic();
-				gp.playMusic(0);
+				if (!gp.player.isInDungeon) {
+					currentDialogue = "I'm not going anywhere. . .";
+					gp.stopMusic();
+					gp.playMusic(0);
+				} else {
+					currentDialogue = "This dungeon is a little hard to navigate. . .\nGo get me some iron scrap!";
+					gp.stopMusic();
+					gp.playMusic(21);
+				}
 				isTrading = false;
 				gp.tradeState = false;
+				tradeScrollTimer = 0;
 			}
 		}
 	}
@@ -939,16 +993,22 @@ public class UI {
 		// Coin window
 		y += gp.tileSize;
 		drawSubWindow(x, y, width, height, g2);
-		g2.drawImage(coin, x + gp.tileSize, y, null);
+		g2.drawImage(coin, x + 20, y + 8, null);
 		if (gp.player.dungeonCoin > 0) {
-			g2.drawImage(dungeonCoin, x + gp.tileSize * 2 + 12, y, null);
+			g2.drawImage(dungeonCoin, x + gp.tileSize + 36, y + 8, null);
+		}
+		if (gp.player.ironScrapAmount > 0) {
+			g2.drawImage(ironScrap, x + gp.tileSize * 2 + 44, y + 8, null);
 		}
 		x += gp.tileSize * 2;
 		y += gp.tileSize - 20;
 		g2.setColor(Color.yellow);
-		g2.drawString(gp.player.coin + "", x - 10, y);
+		g2.drawString(gp.player.coin + "", x - gp.tileSize, y - 1);
 		if (gp.player.dungeonCoin > 0) {
-			g2.drawString(gp.player.dungeonCoin + "", x + gp.tileSize, y);
+			g2.drawString(gp.player.dungeonCoin + "", x + 16, y - 1);
+		}
+		if (gp.player.ironScrapAmount > 0) {
+			g2.drawString(gp.player.ironScrapAmount + "", x + gp.tileSize + 16, y - 1);
 		}
 		// Price window
 		int itemIndex = getItemIndexOnSlot(npcSlotCol, npcSlotRow);
@@ -960,10 +1020,12 @@ public class UI {
 			drawSubWindow(x, y, width, height, g2);
 
 			boolean isDungeonKey = false;
+			boolean isIronGateKey = false;
+			boolean isAncientScroll = false;
 			int price = npc.inventory.get(itemIndex).price;
 			// Normal item
-			if (price != -1) {
-				g2.drawImage(coin, x + gp.tileSize + 40, y, null);
+			if (price >= 0) {
+				g2.drawImage(coin, x + gp.tileSize + 40, y + 7, null);
 				if (gp.player.coin >= price && gp.player.inventory.size() != gp.player.maxInventorySize) {
 					g2.setColor(Color.green);
 				} else {
@@ -972,9 +1034,9 @@ public class UI {
 				g2.drawString("Price: " + price, x + 24, y + 42);
 			}
 			// Dungeon key
-			else {
+			else if (price == -1) {
 				isDungeonKey = true;
-				g2.drawImage(dungeonCoin, x + gp.tileSize + 40, y, null);
+				g2.drawImage(dungeonCoin, x + gp.tileSize + 40, y + 7, null);
 				if (gp.player.dungeonCoin >= 10 && gp.player.inventory.size() != gp.player.maxInventorySize) {
 					g2.setColor(Color.green);
 				} else {
@@ -982,10 +1044,32 @@ public class UI {
 				}
 				g2.drawString("Price: 10", x + 24, y + 42);
 			}
+			// Iron gate key
+			else if (price == -2) {
+				isIronGateKey = true;
+				g2.drawImage(ironScrap, x + gp.tileSize + 40, y + 7, null);
+				if (gp.player.ironScrapAmount >= 5 && gp.player.inventory.size() != gp.player.maxInventorySize) {
+					g2.setColor(Color.green);
+				} else {
+					g2.setColor(Color.red);
+				}
+				g2.drawString("Price: 5", x + 24, y + 42);
+			}
+			// Ancient scroll
+			else if (price == -3) {
+				isAncientScroll = true;
+				g2.drawImage(diamond, x + gp.tileSize + 40, y + 12, null);
+				if (gp.player.diamondAmount >= 3 && gp.player.inventory.size() != gp.player.maxInventorySize) {
+					g2.setColor(Color.green);
+				} else {
+					g2.setColor(Color.red);
+				}
+				g2.drawString("Price: 3", x + 24, y + 42);
+			}
 
 			// Buy an item
 			if (gp.keyH.enterPressed && tradeTimer > 45) {
-				if (!isDungeonKey) {
+				if (!isDungeonKey && !isIronGateKey && !isAncientScroll) {
 					if (price > gp.player.coin || gp.player.inventory.size() == gp.player.maxInventorySize) {
 						canDrawTradeText = true;
 					} else {
@@ -996,8 +1080,7 @@ public class UI {
 							gp.player.coin -= price;
 							gp.player.inventory.set(0, new OBJ_Lantern_Big(gp));
 							npc.inventory.remove(npc.inventory.get(itemIndex));
-//							gp.eManager.setup(585);
-							gp.eManager.setup(700);
+							gp.eManager.setup(700, false);
 							gp.eManager.bigLanternEquipped = true;
 						} else if (npc.inventory.get(itemIndex).name == "arrow") {
 							tradeTimer = 0;
@@ -1012,14 +1095,44 @@ public class UI {
 						}
 					}
 				} else {
-					if (10 > gp.player.dungeonCoin || gp.player.inventory.size() == gp.player.maxInventorySize) {
-						canDrawTradeText = true;
-					} else {
-						tradeTimer = 0;
-						gp.playSE(1);
-						gp.player.dungeonCoin -= 10;
-						gp.player.inventory.add(npc.inventory.get(itemIndex));
-						npc.inventory.remove(npc.inventory.get(itemIndex));
+					if (isDungeonKey) {
+						if (10 > gp.player.dungeonCoin || gp.player.inventory.size() == gp.player.maxInventorySize) {
+							canDrawTradeText = true;
+						} else {
+							tradeTimer = 0;
+							gp.playSE(1);
+							gp.player.dungeonCoin -= 10;
+							gp.player.inventory.add(npc.inventory.get(itemIndex));
+							npc.inventory.remove(npc.inventory.get(itemIndex));
+						}
+					} else if (isIronGateKey) {
+						if (5 > gp.player.ironScrapAmount || gp.player.inventory.size() == gp.player.maxInventorySize) {
+							canDrawTradeText = true;
+						} else {
+							tradeTimer = 0;
+							gp.playSE(1);
+							gp.player.ironScrapAmount -= 5;
+							gp.player.inventory.add(npc.inventory.get(itemIndex));
+							npc.inventory.remove(npc.inventory.get(itemIndex));
+						}
+					} else if (isAncientScroll) {
+						if (3 > gp.player.diamondAmount || gp.player.inventory.size() == gp.player.maxInventorySize) {
+							canDrawTradeText = true;
+						} else {
+							tradeTimer = 0;
+							gp.playSE(1);
+							gp.player.diamondAmount -= 3;
+							gp.player.inventory.removeIf(e -> {
+								if (e.name.equals("diamond")) {
+									return true;
+								}
+								return false;
+							});
+							gp.player.inventory.add(npc.inventory.get(itemIndex));
+							npc.inventory.remove(npc.inventory.get(itemIndex));
+							gp.player.ancientScrollBought = true;
+							gp.npc[2].dialogues[0] = "Is that the. . . ancient scroll!? That's something\nmy master has been looking for for years! We\nhave to go show him now! Follow me.";
+						}
 					}
 				}
 			}
@@ -1065,11 +1178,23 @@ public class UI {
 		// Coin window
 		y += gp.tileSize;
 		drawSubWindow(x, y, width, height, g2);
-		g2.drawImage(coin, x + gp.tileSize, y, null);
+		g2.drawImage(coin, x + 20, y + 8, null);
+		if (gp.player.dungeonCoin > 0) {
+			g2.drawImage(dungeonCoin, x + gp.tileSize + 36, y + 8, null);
+		}
+		if (gp.player.ironScrapAmount > 0) {
+			g2.drawImage(ironScrap, x + gp.tileSize * 2 + 44, y + 8, null);
+		}
 		x += gp.tileSize * 2;
 		y += gp.tileSize - 20;
 		g2.setColor(Color.yellow);
-		g2.drawString(gp.player.coin + "", x, y);
+		g2.drawString(gp.player.coin + "", x - gp.tileSize, y - 1);
+		if (gp.player.dungeonCoin > 0) {
+			g2.drawString(gp.player.dungeonCoin + "", x + 16, y - 1);
+		}
+		if (gp.player.ironScrapAmount > 0) {
+			g2.drawString(gp.player.ironScrapAmount + "", x + gp.tileSize + 16, y - 1);
+		}
 		// Price window
 		int itemIndex = getItemIndexOnSlot(playerSlotCol, playerSlotRow);
 		if (itemIndex < gp.player.inventory.size()) {

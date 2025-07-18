@@ -11,7 +11,9 @@ import main.KeyHandler;
 import main.UtilityTool;
 import object.OBJ_Axe;
 import object.OBJ_Bow;
+import object.OBJ_Diamond;
 import object.OBJ_Dungeon_Key;
+import object.OBJ_Iron_Gate_Key;
 import object.OBJ_Key;
 import object.OBJ_Lantern_Tiny;
 import object.OBJ_Shield_Wood;
@@ -39,6 +41,7 @@ public class Player extends Entity {
 	private boolean bowEquipped;
 	public boolean arrowShot;
 	private int arrowDamageAmount;
+	public boolean isInDungeon;
 
 	/**
 	 * Constructor that initializes the player in the game, including its hit box
@@ -71,7 +74,7 @@ public class Player extends Entity {
 	public void setDefaultValues() {
 		worldX = 47 * gp.tileSize;
 		worldY = 38 * gp.tileSize;
-		speed = 6;
+		speed = 5;
 		direction = "down";
 		// Player status
 		level = 0;
@@ -82,7 +85,7 @@ public class Player extends Entity {
 		exp = 0;
 		nextLevelExp = 10;
 		coin = 0;
-		//arrowAmount = 10;
+		// arrowAmount = 10;
 		arrowDamageAmount = 1;
 		projectile = new PROJ_Arrow(gp, arrowDamageAmount);
 		// No starting weapon
@@ -102,6 +105,11 @@ public class Player extends Entity {
 		inventory.add(new OBJ_Sword_Normal(gp));
 		inventory.add(new OBJ_Bow(gp));
 		inventory.add(new OBJ_Axe(gp));
+
+		inventory.add(new OBJ_Iron_Gate_Key(gp));
+		inventory.add(new OBJ_Iron_Gate_Key(gp));
+		inventory.add(new OBJ_Iron_Gate_Key(gp));
+		inventory.add(new OBJ_Iron_Gate_Key(gp));
 	}
 
 	/**
@@ -457,23 +465,7 @@ public class Player extends Entity {
 				}
 				break;
 			case "portal":
-				mapChangeTimer = 90;
-				alphaValue = 255;
-				gp.playSE(5);
-				gp.obj[i] = null;
-				gp.tileM.loadMap("/maps/world02.txt");
-
-				// Clears all assets on map when it is loaded
-				for (int x = 0; x < gp.monster.length; x++) {
-//					System.out.println(counter);
-//					gp.obj[x] = null;
-//					gp.npc[x] = null;
-					gp.monster[x].direction = "stable";
-					gp.monster[x].worldX -= gp.tileSize * 100;
-				}
-				gp.aSetter.setAssetsDungeon();
-				worldX = 47 * gp.tileSize;
-				worldY = 38 * gp.tileSize;
+				contactPortal(i);
 				break;
 			case "dungeon_portal":
 				transitionDungeon();
@@ -508,6 +500,12 @@ public class Player extends Entity {
 					gp.ui.addMessage("Needs dungeon key. . .");
 				}
 				break;
+			case "iron_gate":
+				if (!gp.ui.messages.contains("Needs iron gate key. . .") && !gp.obj[i].isOpened) {
+					doorIndex = i;
+					gp.ui.addMessage("Needs iron gate key. . .");
+				}
+				break;
 			case "arrow":
 				gp.playSE(25);
 				gp.obj[i] = null;
@@ -523,36 +521,150 @@ public class Player extends Entity {
 					health = maxHealth;
 				}
 				break;
+			case "iron_scrap":
+				gp.playSE(1);
+				gp.obj[i] = null;
+				gp.ui.addMessage("+1 iron scrap");
+				ironScrapAmount++;
+				break;
+			case "diamond":
+				if (inventory.size() < maxInventorySize) {
+					inventory.add(new OBJ_Diamond(gp));
+					gp.playSE(1);
+					gp.obj[i] = null;
+					gp.ui.addMessage("Diamond aquired!");
+					diamondAmount++;
+				} else {
+					if (!gp.ui.messages.contains("Inventory is full!")) {
+						gp.ui.addMessage("Inventory is full!");
+					}
+				}
+				break;
 			}
 		}
+	}
+
+	/**
+	 * Calls when a player comes in contact with a portal. Each portal has a
+	 * different destination for the player.
+	 * 
+	 * @param i - index of portal
+	 */
+	private void contactPortal(int i) {
+		switch (gp.obj[i].identification) {
+		case "to_island":
+			portalTransition(85 * gp.tileSize, 87 * gp.tileSize, 1);
+			gp.isDark = false;
+			break;
+		case "from_island":
+			portalTransition(47 * gp.tileSize, 38 * gp.tileSize, 2);
+			gp.isDark = true;
+			break;
+		case "to_boss_1":
+			portalTransition(89 * gp.tileSize, 10 * gp.tileSize, 4);
+			gp.stopMusic();
+			gp.playMusic(23);
+			break;
+		case "to_boss_2":
+			portalTransition(19 * gp.tileSize + 32, 26 * gp.tileSize + 32, 4);
+			gp.stopMusic();
+			gp.playMusic(23);
+			break;
+		case "to_boss_3":
+			portalTransition(27 * gp.tileSize, 82 * gp.tileSize, 4);
+			gp.stopMusic();
+			gp.playMusic(23);
+			break;
+		case "from_boss_1":
+			portalTransition(50 * gp.tileSize, 50 * gp.tileSize, 5);
+			gp.stopMusic();
+			gp.playMusic(21);
+			break;
+		case "from_boss_2":
+			portalTransition(50 * gp.tileSize, 50 * gp.tileSize, 5);
+			gp.stopMusic();
+			gp.playMusic(21);
+			break;
+		case "from_boss_3":
+			portalTransition(50 * gp.tileSize, 50 * gp.tileSize, 5);
+			gp.stopMusic();
+			gp.playMusic(21);
+			break;
+		case "to_final_island":
+			gp.transitionState = 1;
+			mapChangeTimer = 90;
+			alphaValue = 255;
+			gp.playSE(5);
+			gp.stopMusic();
+			gp.playMusic(0);
+			gp.tileM.loadMap("/maps/final_world.txt");
+			gp.isDark = false;
+
+			// Clears all assets on map when it is loaded
+			for (int x = 0; x < gp.obj.length; x++) {
+				gp.obj[x] = null;
+			}
+			for (int x = 0; x < gp.npc.length; x++) {
+				gp.npc[x] = null;
+			}
+			for (int x = 0; x < gp.monster.length; x++) {
+				gp.monster[x] = null;
+			}
+
+			gp.aSetter.setAssetsFinalWorld();
+			worldX = 50 * gp.tileSize;
+			worldY = 50 * gp.tileSize;
+			direction = "down";
+			break;
+		}
+	}
+
+	/**
+	 * Private helper that sets a transition when a player interacts with a portal.
+	 * 
+	 * @param x               - player x position sent to
+	 * @param y               - player y position sent to
+	 * @param transitionState - state for transition text
+	 */
+	private void portalTransition(int x, int y, int transitionState) {
+		gp.transitionState = transitionState;
+		mapChangeTimer = 90;
+		alphaValue = 255;
+		gp.playSE(5);
+		worldX = x;
+		worldY = y;
+		direction = "down";
 	}
 
 	/**
 	 * Called when player transitions to or from the dungeon
 	 */
 	private void transitionDungeon() {
+		gp.transitionState = 3;
 		mapChangeTimer = 90;
 		alphaValue = 255;
 		gp.playSE(5);
-		gp.tileM.loadMap("/maps/world02.txt");
+		gp.stopMusic();
+		gp.playMusic(21);
+		gp.tileM.loadMap("/maps/dungeon.txt");
+		gp.eManager.setup(550, true);
 
 		// Clears all assets on map when it is loaded
-//		for (int x = 0; x < gp.obj.length; x++) {
-//			System.out.println(x);
-//			gp.obj[x].worldX -= gp.tileSize * 100;
-//		}
+		for (int x = 0; x < gp.obj.length; x++) {
+			gp.obj[x] = null;
+		}
 		for (int x = 0; x < gp.npc.length; x++) {
-			gp.npc[x].direction = "stable";
-			gp.npc[x].worldX -= gp.tileSize * 100;
+			gp.npc[x] = null;
 		}
 		for (int x = 0; x < gp.monster.length; x++) {
-			gp.monster[x].direction = "stable";
-			gp.monster[x].worldX -= gp.tileSize * 100;
+			gp.monster[x] = null;
 		}
 
 		gp.aSetter.setAssetsDungeon();
-		worldX = 47 * gp.tileSize;
-		worldY = 38 * gp.tileSize;
+		worldX = 50 * gp.tileSize;
+		worldY = 50 * gp.tileSize;
+		direction = "down";
+		isInDungeon = true;
 	}
 
 	/**
@@ -669,7 +781,7 @@ public class Player extends Entity {
 			defense = getDefense();
 			arrowDamageAmount++;
 			projectile = new PROJ_Arrow(gp, arrowDamageAmount);
-			
+
 			gp.playSE(14);
 			gp.levelUpState = true;
 		}

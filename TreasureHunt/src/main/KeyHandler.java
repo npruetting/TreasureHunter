@@ -50,6 +50,7 @@ public class KeyHandler implements KeyListener {
 			gp.player.arrowAmount += 100;
 			gp.player.health += 100;
 			gp.player.speed += 4;
+			gp.player.ironScrapAmount += 15;
 		}
 		// TODO temporary way to debug draw time
 		if (code == KeyEvent.VK_SHIFT) {
@@ -78,19 +79,21 @@ public class KeyHandler implements KeyListener {
 						enterPressed = true;
 					}
 					if (gp.ui.subState == 0) {
-						if (code == KeyEvent.VK_W) {
-							gp.ui.commandNum--;
-							if (gp.ui.commandNum < 0) {
-								gp.ui.commandNum = 2;
+						if (gp.ui.tradeScrollTimer > 30) {
+							if (code == KeyEvent.VK_W) {
+								gp.ui.commandNum--;
+								if (gp.ui.commandNum < 0) {
+									gp.ui.commandNum = 2;
+								}
+								gp.playSE(15);
 							}
-							gp.playSE(15);
-						}
-						if (code == KeyEvent.VK_S) {
-							gp.ui.commandNum++;
-							if (gp.ui.commandNum > 2) {
-								gp.ui.commandNum = 0;
+							if (code == KeyEvent.VK_S) {
+								gp.ui.commandNum++;
+								if (gp.ui.commandNum > 2) {
+									gp.ui.commandNum = 0;
+								}
+								gp.playSE(15);
 							}
-							gp.playSE(15);
 						}
 					}
 					if (gp.ui.subState == 1) {

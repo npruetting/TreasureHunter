@@ -46,6 +46,8 @@ public class Entity {
 	public boolean damaged;
 	public boolean treeHit;
 	public boolean skeletonAttacking;
+	public String identification;
+	public boolean isOpened;
 	// Attributes for character status
 	public int level;
 	public int strength;
@@ -60,6 +62,9 @@ public class Entity {
 	public Entity currentShield;
 	public Projectile projectile;
 	public int arrowAmount;
+	public int ironScrapAmount;
+	public int diamondAmount;
+	public boolean ancientScrollBought;
 	// Item attributes
 	public ArrayList<Entity> inventory = new ArrayList<Entity>();
 	public final int maxInventorySize = 20;
@@ -69,6 +74,7 @@ public class Entity {
 	public int price;
 	public boolean forSale;
 	public boolean isDungeonObject;
+	public boolean openingIronGateUp, openingIronGateLeft;
 	// Type
 	public int type;
 	public final int type_player = 0;
@@ -95,6 +101,7 @@ public class Entity {
 	public int damagedCounter;
 	public int shotAvailableCounter;
 	public int skeletonAttackCounter;
+	public int ironGateCounter;
 
 	/**
 	 * Constructs an entity.
@@ -159,6 +166,11 @@ public class Entity {
 		case "right":
 			direction = "left";
 			break;
+		}
+		if (gp.player.ancientScrollBought) {
+			speed = 1;
+			direction = "left";
+			gp.ui.currentDialogue = dialogues[0];
 		}
 	}
 
@@ -263,6 +275,19 @@ public class Entity {
 		if (attacking) {
 			attacking();
 		}
+		// Iron gate opening animation
+		if (gp.player.openingIronGateUp) {
+			openIronGateUp();
+		}
+		if (gp.player.openingIronGateLeft) {
+			openIronGateLeft();
+		}
+		if (gp.player.ancientScrollBought) {
+			if (gp.npc[2].worldX == 22 * gp.tileSize + 48) {
+				 gp.npc[2] = null;
+				 gp.player.ancientScrollBought = false;
+			}
+		}
 
 		// If monster interacts with player
 		if (this.type == type_monster && contactPlayer) {
@@ -328,6 +353,26 @@ public class Entity {
 			gp.player.health -= damage;
 			gp.playSE(6);
 			gp.player.invincible = true;
+		}
+	}
+
+	private void openIronGateUp() {
+		gp.player.ironGateCounter++;
+		if (gp.player.ironGateCounter < 65) {
+			gp.obj[gp.player.doorIndex].worldY -= 1;
+		} else {
+			gp.player.openingIronGateUp = false;
+			gp.player.ironGateCounter = 0;
+		}
+	}
+
+	private void openIronGateLeft() {
+		gp.player.ironGateCounter++;
+		if (gp.player.ironGateCounter < 65) {
+			gp.obj[gp.player.doorIndex].worldX -= 1;
+		} else {
+			gp.player.openingIronGateLeft = false;
+			gp.player.ironGateCounter = 0;
 		}
 	}
 

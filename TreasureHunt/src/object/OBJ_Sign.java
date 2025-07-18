@@ -4,26 +4,16 @@ import entity.Entity;
 import main.GamePanel;
 
 public class OBJ_Sign extends Entity {
-	
-	/**
-	 * Constructs the old man npc.
-	 * 
-	 * @param gp - the game panel
-	 */
-	public OBJ_Sign(GamePanel gp) {
+
+	public OBJ_Sign(GamePanel gp, String nameOfSign) {
 		super(gp);
 
-		name = "sign";
 		direction = "default";
-		
+
 		getImage();
-		setDialogue();
+		setDialogue(nameOfSign);
 	}
-	
-	/**
-	 * Method that assigns each .png file to an image variable, representing the
-	 * direction which the player is facing.
-	 */
+
 	public void getImage() {
 		up1 = setup("/objects/sign");
 		up2 = setup("/objects/sign");
@@ -36,15 +26,23 @@ public class OBJ_Sign extends Entity {
 	}
 
 	/**
-	 * Sets the dialogue for the NPC.
+	 * Sets the dialogue for the Signs, depending on their set name in AssetSetter.
 	 */
-	public void setDialogue() {
-		dialogues[0] = "There's a path of flowers down there. . .\n\n(Please come again, I have more to say)";
-		dialogues[1] = "The old man loves flowers. . .\nYou should follow them to find him\nHe's very knowledgeable. . .";
-		dialogues[2] = "The monsters here also love the flowers. . .\nYou should stay away until you find a weapon.";
-		dialogues[3] = "Good luck, and don't forget your ultimate goal. . .\nFind the sacred treasure!";
+	public void setDialogue(String nameOfSign) {
+		if (nameOfSign.equals("Starting_Sign")) {
+			dialogues[0] = "There's a path of flowers down there. . .\n\n(Please come again, I have more to say)";
+			dialogues[1] = "The old man loves flowers. . .\nYou should follow them to find him\nHe's very knowledgeable. . .";
+			dialogues[2] = "The monsters here also love the flowers. . .\nYou should stay away until you find a weapon.";
+			dialogues[3] = "Good luck, and don't forget your ultimate goal. . .\nFind the sacred treasure!";
+		} else if (nameOfSign.equals("Secret_Island_Sign")) {
+			dialogues[0] = "Welcome to the secret island! It's\na lot brighter here than the other island,\nwho would figure! These chests should\nhelp you out a lot. . .";
+		} else if (nameOfSign.equals("Dungeon_Starting_Sign")) {
+			dialogues[0] = "Welcome to the dungeon traveler.\n";
+			dialogues[1] = "Your bigger light won't work down here if you\nhappened to buy one in the overworld. It's a\nlittle darker here, and a lot more gloomy. . .";
+			dialogues[2] = "Go explore and look for any signs of life,\nThey should help you. . .";
+		}
 	}
-	
+
 	/**
 	 * Called when the sign is interacted with.
 	 */

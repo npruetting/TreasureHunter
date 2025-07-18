@@ -14,8 +14,8 @@ public class EnvironmentManager {
 		this.gp = gp;
 	}
 	
-	public void setup(int circleSize) {
-		lighting = new Lighting(gp, circleSize);
+	public void setup(int circleSize, boolean isInDungeon) {
+		lighting = new Lighting(gp, circleSize, isInDungeon);
 	}
 	
 	public void draw(Graphics2D g2) {

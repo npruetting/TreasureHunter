@@ -5,16 +5,20 @@ import object.OBJ_Sign;
 import entity.MON_GreenSlime;
 import entity.MON_Skeleton;
 import entity.NPC_Dungeon_Merchant;
+import entity.NPC_Guard;
 import entity.NPC_Merchant;
 import object.OBJ_Axe;
 import object.OBJ_Boots;
 import object.OBJ_Chest;
 import object.OBJ_Coin;
+import object.OBJ_Diamond;
 import object.OBJ_Door;
 import object.OBJ_Dungeon_Chest;
 import object.OBJ_Dungeon_Coin;
 import object.OBJ_Dungeon_Door;
 import object.OBJ_Dungeon_Portal;
+import object.OBJ_Iron_Gate;
+import object.OBJ_Iron_Scrap;
 import object.OBJ_Key;
 import object.OBJ_Portal;
 import object.OBJ_Potion_Red;
@@ -72,9 +76,14 @@ public class AssetSetter {
 		setAsset("Dungeon_Coin", 27, 44, 31, 32, 32);
 		setAsset("Dungeon_Coin", 28, 54, 37, 32, 32);
 		setAsset("Door", 29, 29, 8);
-		setAsset("Portal", 30, 47, 49, 32, 32);
+
+		// TODO temporary placement
+//		setAsset("Portal", 30, 48, 58);
+		setAsset("Portal", 30, 45, 40, 32, 32);
+		gp.obj[30].identification = "to_island";
+
 		setAsset("Chest", 31, 85, 13, 32, 32);
-		setAsset("Chest", 32, 48, 58);
+		setAsset("Chest", 32, 47, 49, 32, 32);
 		setAsset("Chest", 33, 33, 89, 32, 32);
 		setAsset("Chest", 34, 10, 34, 32, 0);
 		setAsset("Chest", 35, 76, 38);
@@ -82,17 +91,21 @@ public class AssetSetter {
 		setAsset("Chest", 37, 61, 20);
 		setAsset("Chest", 38, 90, 45, 32, 32);
 		setAsset("Chest", 39, 41, 7);
-		setAsset("Dungeon_Portal", 40, 43, 16);
+
+		// TODO temporary placement
+//		setAsset("Dungeon_Portal", 40, 43, 16);
+		setAsset("Dungeon_Portal", 40, 45, 38);
+
 		// Fragile Trees
 		setAsset("Tree_Fragile", 41, 53, 40);
 		setAsset("Tree_Fragile", 42, 53, 39);
 		setAsset("Tree_Fragile", 43, 54, 39);
-		
+
 		setAsset("Tree_Fragile", 44, 42, 29);
 		setAsset("Tree_Fragile", 45, 42, 30);
 		setAsset("Tree_Fragile", 46, 43, 30);
 		setAsset("Tree_Fragile", 47, 44, 30);
-		
+
 		setAsset("Tree_Fragile", 48, 36, 29);
 		setAsset("Tree_Fragile", 49, 36, 28);
 		setAsset("Tree_Fragile", 50, 35, 28);
@@ -102,15 +115,15 @@ public class AssetSetter {
 		setAsset("Tree_Fragile", 54, 31, 28);
 		setAsset("Tree_Fragile", 55, 31, 27);
 		setAsset("Tree_Fragile", 56, 30, 27);
-		
+
 		setAsset("Tree_Fragile", 57, 23, 10);
 		setAsset("Tree_Fragile", 58, 24, 10);
 		setAsset("Tree_Fragile", 59, 27, 10);
 		setAsset("Tree_Fragile", 60, 29, 9);
-		
+
 		setAsset("Tree_Fragile", 61, 28, 44);
 		setAsset("Tree_Fragile", 62, 33, 44);
-		
+
 		setAsset("Tree_Fragile", 63, 42, 52);
 		setAsset("Tree_Fragile", 64, 42, 51);
 		setAsset("Tree_Fragile", 65, 43, 51);
@@ -118,7 +131,7 @@ public class AssetSetter {
 		setAsset("Tree_Fragile", 67, 44, 50);
 		setAsset("Tree_Fragile", 68, 45, 50);
 		setAsset("Tree_Fragile", 69, 46, 50);
-		
+
 		setAsset("Tree_Fragile", 70, 15, 42);
 		setAsset("Tree_Fragile", 71, 14, 42);
 		setAsset("Tree_Fragile", 72, 13, 42);
@@ -129,13 +142,13 @@ public class AssetSetter {
 		setAsset("Tree_Fragile", 77, 13, 37);
 		setAsset("Tree_Fragile", 78, 13, 36);
 		setAsset("Tree_Fragile", 79, 13, 35);
-		
+
 		setAsset("Tree_Fragile", 80, 21, 52);
 		setAsset("Tree_Fragile", 81, 22, 52);
 		setAsset("Tree_Fragile", 82, 23, 52);
 		setAsset("Tree_Fragile", 83, 24, 52);
 		setAsset("Tree_Fragile", 84, 25, 52);
-		
+
 		setAsset("Tree_Fragile", 85, 17, 83);
 		setAsset("Tree_Fragile", 86, 16, 83);
 		setAsset("Tree_Fragile", 87, 15, 83);
@@ -143,7 +156,7 @@ public class AssetSetter {
 		setAsset("Tree_Fragile", 89, 15, 85);
 		setAsset("Tree_Fragile", 90, 15, 86);
 		setAsset("Tree_Fragile", 91, 15, 87);
-		
+
 		setAsset("Tree_Fragile", 92, 84, 53);
 		setAsset("Tree_Fragile", 93, 87, 49);
 		setAsset("Tree_Fragile", 94, 88, 49);
@@ -153,24 +166,24 @@ public class AssetSetter {
 		setAsset("Tree_Fragile", 98, 90, 48);
 		setAsset("Tree_Fragile", 99, 91, 48);
 		setAsset("Tree_Fragile", 100, 91, 47);
-		
+
 		setAsset("Tree_Fragile", 101, 91, 31);
 		setAsset("Tree_Fragile", 102, 91, 32);
 		setAsset("Tree_Fragile", 103, 91, 33);
 		setAsset("Tree_Fragile", 104, 91, 34);
 		setAsset("Tree_Fragile", 105, 91, 35);
-		
+
 		setAsset("Tree_Fragile", 106, 83, 17);
 		setAsset("Tree_Fragile", 107, 84, 17);
 		setAsset("Tree_Fragile", 108, 85, 17);
-		
+
 		setAsset("Tree_Fragile", 109, 79, 17);
 		setAsset("Tree_Fragile", 110, 79, 18);
 		setAsset("Tree_Fragile", 111, 79, 19);
 		setAsset("Tree_Fragile", 112, 79, 20);
 		setAsset("Tree_Fragile", 113, 80, 20);
 		setAsset("Tree_Fragile", 114, 81, 20);
-		
+
 		setAsset("Tree_Fragile", 115, 53, 21);
 		setAsset("Tree_Fragile", 116, 54, 21);
 		setAsset("Tree_Fragile", 117, 54, 20);
@@ -184,17 +197,24 @@ public class AssetSetter {
 		setAsset("Tree_Fragile", 125, 57, 19);
 		setAsset("Tree_Fragile", 126, 58, 19);
 		setAsset("Tree_Fragile", 127, 59, 19);
-		
+
 		setAsset("Tree_Fragile", 128, 55, 65);
 		setAsset("Tree_Fragile", 129, 56, 65);
+
+		setAsset("Chest", 130, 81, 86, 32, 32);
+		setAsset("Chest", 131, 88, 86, 32, 32);
+		setAsset("Chest", 132, 85, 84);
+		setAsset("Portal", 133, 85, 90);
+		gp.obj[133].identification = "from_island";
+		setAsset("Key", 134, 72, 64, 32, 32);
+
 		// NPCs
 		setAsset("Old_Man", 0, 21, 15);
-		setAsset("Merchant", 1, 17, 37);
-		setAsset("Sign", 2, 48, 39, 48, 24);
-		
-		// TODO temp
-		setAsset("Dungeon_Merchant", 3, 48, 40);
-		
+//		setAsset("Merchant", 1, 17, 37);
+		setAsset("Merchant", 1, 48, 40);
+		setSign("Starting_Sign", 2, 48, 39, 48, 24);
+		setSign("Secret_Island_Sign", 3, 86, 85, 52, 18);
+
 		// Monsters
 		setAsset("Green_Slime", 0, 21, 13);
 		setAsset("Green_Slime", 1, 21, 16);
@@ -252,20 +272,20 @@ public class AssetSetter {
 		setAsset("Skeleton", 52, 74, 38);
 		setAsset("Skeleton", 53, 74, 39);
 		setAsset("Green_Slime", 54, 76, 40);
-		
+
 		setAsset("Green_Slime", 55, 81, 38);
 		setAsset("Green_Slime", 56, 81, 39);
 		setAsset("Skeleton", 57, 82, 38);
 		setAsset("Skeleton", 58, 82, 39);
 		setAsset("Skeleton", 59, 80, 38);
 		setAsset("Skeleton", 60, 80, 39);
-		
+
 		setAsset("Skeleton", 61, 81, 15);
 		setAsset("Green_Slime", 62, 82, 16);
-		
+
 		setAsset("Green_Slime", 63, 30, 82);
 		setAsset("Skeleton", 64, 19, 82);
-		
+
 		setAsset("Green_Slime", 65, 18, 65);
 		setAsset("Green_Slime", 66, 19, 65);
 		setAsset("Skeleton", 67, 20, 65);
@@ -273,7 +293,7 @@ public class AssetSetter {
 		setAsset("Skeleton", 69, 19, 66);
 		setAsset("Green_Slime", 70, 20, 66);
 		setAsset("Green_Slime", 71, 19, 67);
-		
+
 		setAsset("Skeleton", 72, 22, 38);
 		setAsset("Green_Slime", 73, 19, 52);
 	}
@@ -282,7 +302,84 @@ public class AssetSetter {
 	 * Sets all objects, NPCs, and monsters for dungeon.
 	 */
 	public void setAssetsDungeon() {
-		setAsset("Key", 0, 23, 10);
+		// Objects
+		setAsset("Table", 0, 69, 36, 0, 32);
+		setAsset("Dungeon_Chest", 1, 63, 58, 0, 32);
+		setAsset("Dungeon_Chest", 2, 90, 65, 0, 32);
+		setAsset("Dungeon_Door", 3, 43, 40);
+		setAsset("Dungeon_Door", 4, 50, 40);
+		setAsset("Dungeon_Door", 5, 57, 40);
+		setAsset("Iron_Gate", 6, 36, 60);
+		gp.obj[6].identification = "left";
+		setAsset("Iron_Gate", 7, 50, 71);
+		gp.obj[7].identification = "left";
+		setAsset("Iron_Gate", 8, 75, 50);
+		gp.obj[8].identification = "up";
+		setAsset("Iron_Gate", 9, 42, 32);
+		gp.obj[9].identification = "up";
+		setAsset("Iron_Scrap", 10, 60, 71);
+		setAsset("Iron_Scrap", 11, 60, 79);
+		setAsset("Iron_Scrap", 12, 64, 77);
+		setAsset("Iron_Scrap", 13, 73, 77);
+		setAsset("Iron_Scrap", 14, 73, 71);
+		setAsset("Iron_Scrap", 15, 71, 62);
+		setAsset("Iron_Scrap", 16, 75, 59);
+		setAsset("Iron_Scrap", 17, 77, 73);
+		setAsset("Iron_Scrap", 18, 83, 72);
+		setAsset("Iron_Scrap", 29, 85, 78);
+		setAsset("Iron_Scrap", 20, 91, 74);
+		setAsset("Iron_Scrap", 21, 91, 63);
+		setAsset("Iron_Scrap", 22, 86, 61);
+		setAsset("Iron_Scrap", 23, 57, 53);
+		setAsset("Iron_Scrap", 24, 67, 65);
+		setAsset("Dungeon_Chest", 25, 50, 76);
+		setAsset("Dungeon_Chest", 26, 36, 65);
+		setAsset("Dungeon_Chest", 27, 48, 32);
+		setAsset("Dungeon_Chest", 28, 89, 47);
+		setAsset("Dungeon_Chest", 29, 89, 53);
+		setAsset("Portal", 30, 57, 37, 0, 32);
+		gp.obj[30].identification = "to_boss_1";
+		setAsset("Portal", 31, 50, 37, 0, 32);
+		gp.obj[31].identification = "to_boss_2";
+		setAsset("Portal", 32, 43, 37, 0, 32);
+		gp.obj[32].identification = "to_boss_3";
+		setAsset("Portal", 33, 89, 20, 32, 32);
+		gp.obj[33].identification = "from_boss_1";
+		setAsset("Portal", 34, 19, 30, 32, 32);
+		gp.obj[34].identification = "from_boss_2";
+		setAsset("Portal", 35, 13, 89);
+		gp.obj[35].identification = "from_boss_3";
+		// TODO temporary diamond placement
+//		setAsset("Diamond", 36, 59, 21);
+//		setAsset("Diamond", 37, 19, 9, 32, 32);
+//		setAsset("Diamond", 38, 21, 86);
+		setAsset("Diamond", 36, 51, 51);
+		setAsset("Diamond", 37, 51, 50);
+		setAsset("Diamond", 38, 51, 49);
+		setAsset("Portal", 39, 22, 50);
+		gp.obj[39].identification = "to_final_island";
+		setAsset("Chest", 40, 89, 50);
+		setAsset("Chest", 41, 69, 34);
+		setAsset("Chest", 42, 21, 91);
+		setAsset("Chest", 43, 10, 16, 32, 32);
+		setAsset("Chest", 44, 64, 8, 32, 32);
+		setAsset("Chest", 45, 50, 30);
+		setAsset("Chest", 46, 81, 59);
+		
+		// NPCs
+		setAsset("Dungeon_Merchant", 0, 69, 35, 0, 32);
+		setSign("Dungeon_Starting_Sign", 1, 51, 48, 48, 12);
+		setAsset("Guard", 2, 34, 50);
+
+		// Monsters
+
+	}
+	
+	/**
+	 * Sets all assets for the final world.
+	 */
+	public void setAssetsFinalWorld() {
+		
 	}
 
 	/**
@@ -297,6 +394,11 @@ public class AssetSetter {
 		switch (objectName) {
 		case "Key":
 			gp.obj[arrIndex] = new OBJ_Key(gp);
+			gp.obj[arrIndex].worldX = xPos * gp.tileSize;
+			gp.obj[arrIndex].worldY = yPos * gp.tileSize;
+			break;
+		case "Diamond":
+			gp.obj[arrIndex] = new OBJ_Diamond(gp);
 			gp.obj[arrIndex].worldX = xPos * gp.tileSize;
 			gp.obj[arrIndex].worldY = yPos * gp.tileSize;
 			break;
@@ -370,6 +472,16 @@ public class AssetSetter {
 			gp.obj[arrIndex].worldX = xPos * gp.tileSize;
 			gp.obj[arrIndex].worldY = yPos * gp.tileSize;
 			break;
+		case "Iron_Gate":
+			gp.obj[arrIndex] = new OBJ_Iron_Gate(gp);
+			gp.obj[arrIndex].worldX = xPos * gp.tileSize;
+			gp.obj[arrIndex].worldY = yPos * gp.tileSize;
+			break;
+		case "Iron_Scrap":
+			gp.obj[arrIndex] = new OBJ_Iron_Scrap(gp);
+			gp.obj[arrIndex].worldX = xPos * gp.tileSize;
+			gp.obj[arrIndex].worldY = yPos * gp.tileSize;
+			break;
 		case "Old_Man":
 			gp.npc[arrIndex] = new NPC_OldMan(gp);
 			gp.npc[arrIndex].worldX = xPos * gp.tileSize;
@@ -385,8 +497,8 @@ public class AssetSetter {
 			gp.npc[arrIndex].worldX = xPos * gp.tileSize;
 			gp.npc[arrIndex].worldY = yPos * gp.tileSize;
 			break;
-		case "Sign":
-			gp.npc[arrIndex] = new OBJ_Sign(gp);
+		case "Guard":
+			gp.npc[arrIndex] = new NPC_Guard(gp);
 			gp.npc[arrIndex].worldX = xPos * gp.tileSize;
 			gp.npc[arrIndex].worldY = yPos * gp.tileSize;
 			break;
@@ -419,6 +531,11 @@ public class AssetSetter {
 		switch (objectName) {
 		case "Key":
 			gp.obj[arrIndex] = new OBJ_Key(gp);
+			gp.obj[arrIndex].worldX = xPos * gp.tileSize + xOffset;
+			gp.obj[arrIndex].worldY = yPos * gp.tileSize + yOffset;
+			break;
+		case "Diamond":
+			gp.obj[arrIndex] = new OBJ_Diamond(gp);
 			gp.obj[arrIndex].worldX = xPos * gp.tileSize + xOffset;
 			gp.obj[arrIndex].worldY = yPos * gp.tileSize + yOffset;
 			break;
@@ -482,18 +599,28 @@ public class AssetSetter {
 			gp.obj[arrIndex].worldX = xPos * gp.tileSize + xOffset;
 			gp.obj[arrIndex].worldY = yPos * gp.tileSize + yOffset;
 			break;
+		case "Dungeon_Chest":
+			gp.obj[arrIndex] = new OBJ_Dungeon_Chest(gp);
+			gp.obj[arrIndex].worldX = xPos * gp.tileSize + xOffset;
+			gp.obj[arrIndex].worldY = yPos * gp.tileSize + yOffset;
+			break;
+		case "Iron_Scrap":
+			gp.obj[arrIndex] = new OBJ_Iron_Scrap(gp);
+			gp.obj[arrIndex].worldX = xPos * gp.tileSize + xOffset;
+			gp.obj[arrIndex].worldY = yPos * gp.tileSize + yOffset;
+			break;
 		case "Old_Man":
 			gp.npc[arrIndex] = new NPC_OldMan(gp);
 			gp.npc[arrIndex].worldX = xPos * gp.tileSize + xOffset;
 			gp.npc[arrIndex].worldY = yPos * gp.tileSize + yOffset;
 			break;
-		case "Sign":
-			gp.npc[arrIndex] = new OBJ_Sign(gp);
+		case "Merchant":
+			gp.npc[arrIndex] = new NPC_Merchant(gp);
 			gp.npc[arrIndex].worldX = xPos * gp.tileSize + xOffset;
 			gp.npc[arrIndex].worldY = yPos * gp.tileSize + yOffset;
 			break;
-		case "Merchant":
-			gp.npc[arrIndex] = new NPC_Merchant(gp);
+		case "Dungeon_Merchant":
+			gp.npc[arrIndex] = new NPC_Dungeon_Merchant(gp);
 			gp.npc[arrIndex].worldX = xPos * gp.tileSize + xOffset;
 			gp.npc[arrIndex].worldY = yPos * gp.tileSize + yOffset;
 			break;
@@ -503,5 +630,22 @@ public class AssetSetter {
 			gp.monster[arrIndex].worldY = yPos * gp.tileSize + yOffset;
 			break;
 		}
+	}
+
+	/**
+	 * Private helper that sets signs based on their name for the use of multiple
+	 * dialogues for different signs.
+	 * 
+	 * @param nameOfSign - name of the sign for dialogue purposes
+	 * @param arrIndex   - index of the object array to set the object
+	 * @param xPos       - x position on map
+	 * @param yPos       - y position on map
+	 * @param xOffset    - x offset from tile
+	 * @param yOffset    - y offset from tile
+	 */
+	private void setSign(String nameOfSign, int arrIndex, int xPos, int yPos, int xOffset, int yOffset) {
+		gp.npc[arrIndex] = new OBJ_Sign(gp, nameOfSign);
+		gp.npc[arrIndex].worldX = xPos * gp.tileSize + xOffset;
+		gp.npc[arrIndex].worldY = yPos * gp.tileSize + yOffset;
 	}
 }
