@@ -830,7 +830,7 @@ public class UI {
 			x += gp.tileSize - 24;
 			y += gp.tileSize;
 			if (!gp.tradeState) {
-				g2.drawString("Press e to escape", x + gp.tileSize * 8 + 6, y + gp.tileSize * 3 - 20);
+				g2.drawString("Press e to continue", x + gp.tileSize * 7 + 60, y + gp.tileSize * 3 - 20);
 			}
 			g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40F));
 			g2.setColor(new Color(255, 255, 125));
@@ -1086,7 +1086,7 @@ public class UI {
 							tradeTimer = 0;
 							gp.playSE(1);
 							gp.player.coin -= price;
-							gp.player.arrowAmount += 5;
+							gp.player.arrowAmount += 15;
 						} else {
 							tradeTimer = 0;
 							gp.playSE(1);
@@ -1132,6 +1132,8 @@ public class UI {
 							npc.inventory.remove(npc.inventory.get(itemIndex));
 							gp.player.ancientScrollBought = true;
 							gp.npc[2].dialogues[0] = "Is that the. . . ancient scroll!? That's something\nmy master has been looking for for years! We\nhave to go show him now! Follow me.";
+							gp.npc[2].dialogues[1] = null;
+							gp.npc[2].dialogues[2] = null;
 						}
 					}
 				}
@@ -1204,7 +1206,7 @@ public class UI {
 			height = gp.tileSize;
 			drawSubWindow(x, y, width, height, g2);
 			if (gp.player.inventory.get(itemIndex).forSale) {
-				g2.drawImage(coin, x + gp.tileSize * 2 - 8, y, null);
+				g2.drawImage(coin, x + gp.tileSize * 2, y + 8, null);
 			}
 			// NPC offer is half of original price
 			int price = gp.player.inventory.get(itemIndex).price / 2;

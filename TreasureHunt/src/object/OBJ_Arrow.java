@@ -11,7 +11,7 @@ public class OBJ_Arrow extends Entity{
 		name = "arrow";
 		direction = "default";
 		down1 = setup("/objects/" + name, gp.tileSize, gp.tileSize);
-		description = "[Arrows]\nBought in packs\nof 5. Necessary\nfor using the bow.";
+		description = "[Arrows]\nBought in packs\nof 15. Necessary\nfor using the bow.";
 		price = 5;
 	}
 }

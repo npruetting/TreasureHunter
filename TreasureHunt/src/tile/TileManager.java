@@ -81,6 +81,7 @@ public class TileManager {
 			setup(32, "water_9", true, true);
 			// Extras
 			setup(33, "wooden_floor", false, true);
+			setup(34, "zGold_block", false, true);
 		} else if (mapToLoad.equals("/maps/dungeon.txt")) {
 			setupDungeon(0, "dungeon_floor_0", false, true);
 			setupDungeon(1, "dungeon_floor_1", false, true);

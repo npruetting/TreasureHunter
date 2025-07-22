@@ -52,6 +52,8 @@ public class Sound {
 		soundURL[24] = getClass().getResource("/music/music_Merchant.wav");
 		soundURL[25] = getClass().getResource("/sound/pickup.wav");
 		soundURL[26] = getClass().getResource("/sound/iron_gate_slide.wav");
+		soundURL[27] = getClass().getResource("/music/music_BossFight.wav");
+		soundURL[28] = getClass().getResource("/sound/finale.wav");
 	}
 
 	/**

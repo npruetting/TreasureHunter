@@ -25,6 +25,7 @@ public class NPC_Dungeon_Merchant extends Entity{
 		super(gp);
 
 		name = "dungeon_merchant";
+		type = type_merchant;
 		direction = "down";
 		this.solidArea = new Rectangle(0, 0, gp.tileSize, gp.tileSize * 2);
 

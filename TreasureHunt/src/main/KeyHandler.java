@@ -116,11 +116,16 @@ public class KeyHandler implements KeyListener {
 				// Not trading
 				else {
 					if (code == KeyEvent.VK_E) {
-						gp.dialogueState = false;
-						if (gp.npcIsBeingSpokenTo) {
-							gp.npc[gp.player.npcIndex].interactionReaction();
+						if (gp.player.npcIndex != -1) {
+							if (gp.npc[gp.player.npcIndex].type != gp.player.type_merchant) {
+								gp.npc[gp.player.npcIndex].speak();
+							} else {
+								gp.npc[gp.player.npcIndex].speak();
+								gp.tradeState = false;
+							}
+						} else {
+							gp.dialogueState = false;
 						}
-						gp.npcIsBeingSpokenTo = false;
 					}
 				}
 			}

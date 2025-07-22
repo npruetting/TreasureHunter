@@ -59,7 +59,7 @@ public class GamePanel extends JPanel implements Runnable {
 	// Entity and object
 	public Player player = new Player(this, keyH);
 	public Entity obj[] = new Entity[150];
-	public Entity npc[] = new Entity[10];
+	public Entity npc[] = new Entity[30];
 	public Entity monster[] = new Entity[100];
 	public ArrayList<Entity> projectileList = new ArrayList<Entity>();
 	public ArrayList<Entity> particleList = new ArrayList<Entity>();
@@ -98,7 +98,6 @@ public class GamePanel extends JPanel implements Runnable {
 	 */
 	public void setUpGame() {
 		aSetter.setAssetsMap1();
-//		eManager.setup(550, false);
 		eManager.setup(590, false);
 		isDark = true;
 	}
@@ -221,7 +220,7 @@ public class GamePanel extends JPanel implements Runnable {
 		// Tile
 		if (isDark && !eManager.bigLanternEquipped) {
 			tileM.draw(g2, 4);
-		} else if (eManager.bigLanternEquipped) {
+		} else if (eManager.bigLanternEquipped && isDark) {
 			tileM.draw(g2, 5);
 		} else {
 			tileM.draw(g2);

@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.UtilityTool;
+import object.OBJ_Portal;
 
 /**
  * Class that houses many variables used by entities among the tile map.
@@ -48,6 +49,9 @@ public class Entity {
 	public boolean skeletonAttacking;
 	public String identification;
 	public boolean isOpened;
+	public boolean isZeroDialogue;
+	public boolean talkingToGuard;
+	public boolean talkingToGuardFinal;
 	// Attributes for character status
 	public int level;
 	public int strength;
@@ -85,6 +89,7 @@ public class Entity {
 	public final int type_shield = 5;
 	public final int type_item = 6;
 	public final int type_bow = 7;
+	public final int type_merchant = 8;
 
 	// Imaging
 	private BufferedImage image;
@@ -138,17 +143,53 @@ public class Entity {
 	}
 
 	/**
-	 * Called by extending classes if an entity is being spoken to.
+	 * Called if an entity is being spoken to.
 	 */
 	public void speak() {
 		gp.npcIsBeingSpokenTo = true;
-		// Sound effect
-		Random rng = new Random();
-		int npcTalk = rng.nextInt(9, 11);
-		gp.playSE(npcTalk);
+
+		if (isZeroDialogue) {
+			dialogueIndex = 0;
+			isZeroDialogue = false;
+		}
 		// Resets back to first dialogue if dialogue limit is reached
 		if (dialogues[dialogueIndex] == null) {
-			dialogueIndex = 0;
+			gp.dialogueState = false;
+			isZeroDialogue = true;
+			if (gp.npcIsBeingSpokenTo) {
+				gp.npc[gp.player.npcIndex].interactionReaction();
+			}
+			gp.npcIsBeingSpokenTo = false;
+
+			if (talkingToGuard && !talkingToGuardFinal) {
+				gp.stopMusic();
+				gp.playMusic(21);
+				talkingToGuard = false;
+			}
+			// Guard master
+			if (gp.player.npcIndex == 26) {
+				gp.obj[109] = new OBJ_Portal(gp);
+				gp.obj[109].worldX = 50 * gp.tileSize;
+				gp.obj[109].worldY = 50 * gp.tileSize;
+				gp.obj[109].identification = "to_finale";
+			}
+		} else {
+			// Sound effect
+			Random rng = new Random();
+			int npcTalk = rng.nextInt(9, 11);
+			gp.playSE(npcTalk);
+
+			if (gp.player.isInDungeon && gp.player.npcIndex == 2 && !talkingToGuard && !talkingToGuardFinal) {
+				if (gp.player.ancientScrollBought) {
+					gp.stopMusic();
+					gp.playMusic(0);
+					talkingToGuardFinal = true;
+				} else {
+					gp.stopMusic();
+					gp.playMusic(23);
+					talkingToGuard = true;
+				}
+			}
 		}
 		gp.ui.currentDialogue = dialogues[dialogueIndex];
 		dialogueIndex++;
@@ -167,7 +208,7 @@ public class Entity {
 			direction = "left";
 			break;
 		}
-		if (gp.player.ancientScrollBought) {
+		if (gp.player.ancientScrollBought && gp.player.npcIndex == 2) {
 			speed = 1;
 			direction = "left";
 			gp.ui.currentDialogue = dialogues[0];
@@ -284,8 +325,8 @@ public class Entity {
 		}
 		if (gp.player.ancientScrollBought) {
 			if (gp.npc[2].worldX == 22 * gp.tileSize + 48) {
-				 gp.npc[2] = null;
-				 gp.player.ancientScrollBought = false;
+				gp.npc[2] = null;
+				gp.player.ancientScrollBought = false;
 			}
 		}
 

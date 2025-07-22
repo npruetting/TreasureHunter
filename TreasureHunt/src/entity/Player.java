@@ -442,7 +442,7 @@ public class Player extends Entity {
 				if (gp.obj[i].health == 0) {
 					gp.playSE(1);
 					Random rng = new Random();
-					int coinAmount = rng.nextInt(10, 21);
+					int coinAmount = rng.nextInt(8, 16);
 					coin += coinAmount;
 					gp.dialogueState = true;
 					gp.ui.currentDialogue = "You found treasure!\n+ " + coinAmount + " coins!";
@@ -462,6 +462,14 @@ public class Player extends Entity {
 					gp.ui.addMessage("+ " + coinAmount + " dungeon coins!");
 					gp.obj[i].down1 = setup("/objects/dungeon_chest_opened", gp.tileSize, gp.tileSize);
 					gp.obj[i].health = 1;
+				}
+				break;
+			case "chest_final":
+				if (gp.obj[i].health == 0) {
+					gp.obj[i].down1 = setup("/objects/chest_final_opened", gp.tileSize * 2, gp.tileSize * 2);
+					gp.obj[i].health = 1;
+					gp.stopMusic();
+					gp.playSE(28);
 				}
 				break;
 			case "portal":
@@ -563,17 +571,17 @@ public class Player extends Entity {
 		case "to_boss_1":
 			portalTransition(89 * gp.tileSize, 10 * gp.tileSize, 4);
 			gp.stopMusic();
-			gp.playMusic(23);
+			gp.playMusic(27);
 			break;
 		case "to_boss_2":
 			portalTransition(19 * gp.tileSize + 32, 26 * gp.tileSize + 32, 4);
 			gp.stopMusic();
-			gp.playMusic(23);
+			gp.playMusic(27);
 			break;
 		case "to_boss_3":
 			portalTransition(27 * gp.tileSize, 82 * gp.tileSize, 4);
 			gp.stopMusic();
-			gp.playMusic(23);
+			gp.playMusic(27);
 			break;
 		case "from_boss_1":
 			portalTransition(50 * gp.tileSize, 50 * gp.tileSize, 5);
@@ -595,8 +603,6 @@ public class Player extends Entity {
 			mapChangeTimer = 90;
 			alphaValue = 255;
 			gp.playSE(5);
-			gp.stopMusic();
-			gp.playMusic(0);
 			gp.tileM.loadMap("/maps/final_world.txt");
 			gp.isDark = false;
 
@@ -615,6 +621,9 @@ public class Player extends Entity {
 			worldX = 50 * gp.tileSize;
 			worldY = 50 * gp.tileSize;
 			direction = "down";
+			break;
+		case "to_finale":
+			portalTransition(50 * gp.tileSize, 80 * gp.tileSize, 1);
 			break;
 		}
 	}

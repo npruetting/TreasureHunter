@@ -6,10 +6,13 @@ import entity.MON_GreenSlime;
 import entity.MON_Skeleton;
 import entity.NPC_Dungeon_Merchant;
 import entity.NPC_Guard;
+import entity.NPC_Guard_Friendly;
+import entity.NPC_Guard_Master;
 import entity.NPC_Merchant;
 import object.OBJ_Axe;
 import object.OBJ_Boots;
 import object.OBJ_Chest;
+import object.OBJ_Chest_Final;
 import object.OBJ_Coin;
 import object.OBJ_Diamond;
 import object.OBJ_Door;
@@ -367,9 +370,12 @@ public class AssetSetter {
 		setAsset("Chest", 46, 81, 59);
 		
 		// NPCs
-		setAsset("Dungeon_Merchant", 0, 69, 35, 0, 32);
+//		setAsset("Dungeon_Merchant", 0, 69, 35, 0, 32);
+		// TODO temporary dungeon merchant placement
+		setAsset("Dungeon_Merchant", 0, 50, 48);
 		setSign("Dungeon_Starting_Sign", 1, 51, 48, 48, 12);
-		setAsset("Guard", 2, 34, 50);
+		// TODO replace guard
+		//setAsset("Guard", 2, 34, 50);
 
 		// Monsters
 
@@ -379,7 +385,162 @@ public class AssetSetter {
 	 * Sets all assets for the final world.
 	 */
 	public void setAssetsFinalWorld() {
+		// Objects
+		setAsset("Dungeon_Coin", 0, 48, 48);
+		setAsset("Coin", 1, 49, 48);
+		setAsset("Coin", 2, 50, 48);
+		setAsset("Dungeon_Coin", 3, 51, 48);
+		setAsset("Coin", 4, 52, 48);
 		
+		setAsset("Coin", 5, 48, 47);
+		setAsset("Coin", 6, 49, 47);
+		setAsset("Dungeon_Coin", 7, 50, 47);
+		setAsset("Coin", 8, 51, 47);
+		setAsset("Dungeon_Coin", 9, 52, 47);
+		
+		setAsset("Coin", 10, 48, 46);
+		setAsset("Coin", 11, 49, 46);
+		setAsset("Coin", 12, 50, 46);
+		setAsset("Diamond", 13, 51, 46);
+		
+		setAsset("Coin", 14, 48, 49);
+		setAsset("Coin", 15, 48, 50);
+		setAsset("Dungeon_Coin", 16, 48, 51);
+		setAsset("Coin", 17, 48, 52);
+		setAsset("Coin", 18, 49, 52);
+		setAsset("Coin", 19, 50, 52);
+		setAsset("Coin", 20, 51, 52);
+		setAsset("Coin", 21, 52, 52);
+		setAsset("Dungeon_Coin", 22, 52, 51);
+		setAsset("Coin", 23, 52, 50);
+		setAsset("Dungeon_Coin", 24, 52, 49);
+		
+		setAsset("Coin", 25, 47, 45);
+		setAsset("Dungeon_Coin", 26, 48, 45);
+		setAsset("Coin", 27, 49, 45);
+		setAsset("Dungeon_Coin", 28, 50, 45);
+		setAsset("Coin", 29, 51, 45);
+		
+		setAsset("Coin", 30, 47, 44);
+		setAsset("Dungeon_Coin", 31, 48, 44);
+		setAsset("Coin", 32, 49, 44);
+		setAsset("Coin", 33, 50, 44);
+		setAsset("Coin", 34, 51, 44);
+		
+		setAsset("Coin", 35, 47, 43);
+		setAsset("Dungeon_Coin", 36, 48, 43);
+		setAsset("Coin", 37, 49, 43);
+		setAsset("Diamond", 38, 50, 43);
+		setAsset("Coin", 39, 51, 43);
+		
+		setAsset("Dungeon_Coin", 40, 47, 42);
+		setAsset("Coin", 41, 48, 42);
+		setAsset("Coin", 42, 49, 42);
+		setAsset("Coin", 43, 50, 42);
+		setAsset("Dungeon_Coin", 44, 51, 42);
+		
+		setAsset("Coin", 45, 47, 41);
+		setAsset("Dungeon_Coin", 46, 48, 41);
+		setAsset("Coin", 47, 49, 41);
+		setAsset("Coin", 48, 50, 41);
+		setAsset("Coin", 49, 51, 41);
+		
+		setAsset("Coin", 50, 48, 40);
+		setAsset("Dungeon_Coin", 51, 49, 40);
+		setAsset("Coin", 52, 50, 40);
+		setAsset("Coin", 53, 51, 40);
+		
+		setAsset("Diamond", 54, 48, 39);
+		setAsset("Coin", 55, 49, 39);
+		setAsset("Coin", 56, 50, 39);
+		setAsset("Dungeon_Coin", 57, 51, 39);
+		setAsset("Coin", 58, 52, 39);
+		
+		setAsset("Dungeon_Coin", 59, 48, 38);
+		setAsset("Coin", 60, 49, 38);
+		setAsset("Coin", 61, 50, 38);
+		setAsset("Coin", 62, 51, 38);
+		setAsset("Coin", 63, 52, 38);
+		
+		setAsset("Coin", 64, 48, 37);
+		setAsset("Dungeon_Coin", 65, 49, 37);
+		setAsset("Coin", 66, 50, 37);
+		setAsset("Dungeon_Coin", 67, 51, 37);
+		setAsset("Coin", 68, 52, 37);
+		
+		setAsset("Coin", 69, 48, 36);
+		setAsset("Coin", 70, 49, 36);
+		setAsset("Dungeon_Coin", 71, 50, 36);
+		setAsset("Coin", 72, 51, 36);
+		setAsset("Coin", 73, 52, 36);
+		
+		setAsset("Dungeon_Coin", 74, 47, 35);
+		setAsset("Coin", 75, 48, 35);
+		setAsset("Diamond", 79, 52, 35);
+		setAsset("Coin", 80, 53, 35);
+		
+		setAsset("Coin", 81, 46, 34);
+		setAsset("Dungeon_Coin", 82, 47, 34);
+		setAsset("Coin", 83, 48, 34);
+		setAsset("Coin", 84, 52, 34);
+		setAsset("Dungeon_Coin", 85, 53, 34);
+		setAsset("Coin", 86, 54, 34);
+		
+		setAsset("Coin", 87, 46, 33);
+		setAsset("Dungeon_Coin", 88, 47, 33);
+		setAsset("Coin", 91, 53, 33);
+		setAsset("Dungeon_Coin", 92, 54, 33);
+		
+		setAsset("Dungeon_Coin", 93, 46, 32);
+		setAsset("Coin", 94, 47, 32);
+		setAsset("Coin", 97, 53, 32);
+		setAsset("Coin", 98, 54, 32);
+		
+		setAsset("Dungeon_Coin", 99, 46, 31);
+		setAsset("Coin", 100, 47, 31);
+		setAsset("Coin", 101, 53, 31);
+		setAsset("Coin", 102, 54, 31);
+		
+		setAsset("Coin", 103, 46, 30);
+		setAsset("Coin", 104, 47, 30);
+		setAsset("Diamond", 105, 53, 30);
+		setAsset("Coin", 106, 54, 30);
+		
+		setAsset("Dungeon_Coin", 107, 47, 29);
+		setAsset("Coin", 108, 53, 29);
+		
+		setAsset("Chest_Final", 110, 56, 79, 32, 32);
+		
+		// NPCs
+		setAsset("Guard_Friendly", 0, 50, 57);
+		setAsset("Guard_Friendly", 1, 44, 56);
+		setAsset("Guard_Friendly", 2, 55, 56);
+		setAsset("Guard_Friendly", 3, 58, 52);
+		setAsset("Guard_Friendly", 4, 43, 51);
+		setAsset("Guard_Friendly", 5, 41, 44);
+		setAsset("Guard_Friendly", 6, 57, 47);
+		setAsset("Guard_Friendly", 7, 55, 43);
+		setAsset("Guard_Friendly", 8, 58, 38);
+		setAsset("Guard_Friendly", 9, 43, 39);
+		setAsset("Guard_Friendly", 10, 41, 34);
+		setAsset("Guard_Friendly", 11, 59, 33);
+		setAsset("Guard_Friendly", 12, 58, 27);
+		setAsset("Guard_Friendly", 13, 50, 25);
+		setAsset("Guard_Friendly", 14, 43, 26);
+		setAsset("Guard_Friendly", 15, 40, 29);
+		
+		setAsset("Guard_Friendly", 16, 50, 34);
+		
+		setAsset("Guard_Friendly", 17, 45, 80);
+		setAsset("Guard_Friendly", 19, 49, 75);
+		setAsset("Guard_Friendly", 20, 55, 73);
+		setAsset("Guard_Friendly", 21, 63, 74);
+		setAsset("Guard_Friendly", 22, 64, 80);
+		setAsset("Guard_Friendly", 23, 63, 86);
+		setAsset("Guard_Friendly", 24, 55, 87);
+		setAsset("Guard_Friendly", 25, 49, 85);
+		
+		setAsset("Guard_Master", 26, 49, 30, 32, 32);
 	}
 
 	/**
@@ -502,6 +663,11 @@ public class AssetSetter {
 			gp.npc[arrIndex].worldX = xPos * gp.tileSize;
 			gp.npc[arrIndex].worldY = yPos * gp.tileSize;
 			break;
+		case "Guard_Friendly":
+			gp.npc[arrIndex] = new NPC_Guard_Friendly(gp);
+			gp.npc[arrIndex].worldX = xPos * gp.tileSize;
+			gp.npc[arrIndex].worldY = yPos * gp.tileSize;
+			break;
 		case "Green_Slime":
 			gp.monster[arrIndex] = new MON_GreenSlime(gp);
 			gp.monster[arrIndex].worldX = xPos * gp.tileSize;
@@ -541,6 +707,11 @@ public class AssetSetter {
 			break;
 		case "Chest":
 			gp.obj[arrIndex] = new OBJ_Chest(gp);
+			gp.obj[arrIndex].worldX = xPos * gp.tileSize + xOffset;
+			gp.obj[arrIndex].worldY = yPos * gp.tileSize + yOffset;
+			break;
+		case "Chest_Final":
+			gp.obj[arrIndex] = new OBJ_Chest_Final(gp);
 			gp.obj[arrIndex].worldX = xPos * gp.tileSize + xOffset;
 			gp.obj[arrIndex].worldY = yPos * gp.tileSize + yOffset;
 			break;
@@ -621,6 +792,11 @@ public class AssetSetter {
 			break;
 		case "Dungeon_Merchant":
 			gp.npc[arrIndex] = new NPC_Dungeon_Merchant(gp);
+			gp.npc[arrIndex].worldX = xPos * gp.tileSize + xOffset;
+			gp.npc[arrIndex].worldY = yPos * gp.tileSize + yOffset;
+			break;
+		case "Guard_Master":
+			gp.npc[arrIndex] = new NPC_Guard_Master(gp);
 			gp.npc[arrIndex].worldX = xPos * gp.tileSize + xOffset;
 			gp.npc[arrIndex].worldY = yPos * gp.tileSize + yOffset;
 			break;
