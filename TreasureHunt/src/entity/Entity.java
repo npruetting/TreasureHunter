@@ -52,6 +52,7 @@ public class Entity {
 	public boolean isZeroDialogue;
 	public boolean talkingToGuard;
 	public boolean talkingToGuardFinal;
+	private boolean talkingToOldMan;
 	// Attributes for character status
 	public int level;
 	public int strength;
@@ -146,7 +147,15 @@ public class Entity {
 	 * Called if an entity is being spoken to.
 	 */
 	public void speak() {
+		
+		if (!gp.player.isInDungeon && gp.player.npcIndex == 0 && !talkingToOldMan) {
+			gp.stopMusic();
+			gp.playMusic(29);
+			talkingToOldMan = true;
+		}
+		
 		gp.npcIsBeingSpokenTo = true;
+		
 
 		if (isZeroDialogue) {
 			dialogueIndex = 0;
@@ -172,6 +181,12 @@ public class Entity {
 				gp.obj[109].worldX = 50 * gp.tileSize;
 				gp.obj[109].worldY = 50 * gp.tileSize;
 				gp.obj[109].identification = "to_finale";
+			}
+			// Old Man
+			if (talkingToOldMan) {
+				gp.stopMusic();
+				gp.playMusic(0);
+				talkingToOldMan = false;
 			}
 		} else {
 			// Sound effect

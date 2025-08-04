@@ -470,6 +470,8 @@ public class Player extends Entity {
 					gp.obj[i].health = 1;
 					gp.stopMusic();
 					gp.playSE(28);
+					gp.gameCompleted = true;
+					gp.ui.gameCompleted = true;
 				}
 				break;
 			case "portal":
@@ -517,8 +519,8 @@ public class Player extends Entity {
 			case "arrow":
 				gp.playSE(25);
 				gp.obj[i] = null;
-				gp.ui.addMessage("+1 arrow");
-				arrowAmount++;
+				gp.ui.addMessage("+5 arrows");
+				arrowAmount += 5;
 				break;
 			case "heart":
 				gp.playSE(1);

@@ -210,6 +210,9 @@ public class AssetSetter {
 		setAsset("Portal", 133, 85, 90);
 		gp.obj[133].identification = "from_island";
 		setAsset("Key", 134, 72, 64, 32, 32);
+		
+		// TODO temp final chest
+		setAsset("Chest_Final", 135, 45, 35, 32, 32);
 
 		// NPCs
 		setAsset("Old_Man", 0, 21, 15);

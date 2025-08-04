@@ -52,6 +52,10 @@ public class KeyHandler implements KeyListener {
 			gp.player.speed += 4;
 			gp.player.ironScrapAmount += 15;
 		}
+		// TODO temp way to lose health
+		if (code == KeyEvent.VK_H) {
+			gp.player.health--;
+		}
 		// TODO temporary way to debug draw time
 		if (code == KeyEvent.VK_SHIFT) {
 			toggleDebug = !toggleDebug;
@@ -66,7 +70,7 @@ public class KeyHandler implements KeyListener {
 			gp.setMusicVolume(.8f);
 			gp.setSFXVolume(10);
 		}
-		if (gp.gameStarted) {
+		if (gp.gameStarted && !gp.gameCompleted) {
 			// Toggle game time
 			if (code == KeyEvent.VK_T) {
 				gp.ui.showTime = !gp.ui.showTime;
@@ -187,10 +191,53 @@ public class KeyHandler implements KeyListener {
 					}
 				}
 			}
-		}
-		// Controls for game end screen if player dies
-		else if (gp.gameEnded) {
-
+			// Controls for player death
+			else if (gp.gameEnded) {
+				// Menu options
+				if (gp.menuState == -1) {
+					gp.menuState = 1;
+				}
+				if (gp.menuState == 2) {
+					gp.menuState = 0;
+				}
+				switch (code) {
+				case KeyEvent.VK_W:
+					gp.menuState--;
+					if (gp.menuState < 0) {
+						gp.menuState = 1;
+					}
+					gp.playSE(15);
+					break;
+				case KeyEvent.VK_S:
+					gp.menuState++;
+					if (gp.menuState > 1) {
+						gp.menuState = 0;
+					}
+					gp.playSE(15);
+					break;
+				case KeyEvent.VK_ENTER:
+					// Re-spawn
+					if (gp.menuState == 0) {
+						gp.player.coin /= 2;
+						if (!gp.player.isInDungeon) {
+							gp.player.worldX = gp.tileSize * 47;
+							gp.player.worldY = gp.tileSize * 38;
+							gp.playMusic(0);
+						} else {
+							gp.player.worldX = gp.tileSize * 50;
+							gp.player.worldY = gp.tileSize * 50;
+							gp.playMusic(21);
+						}
+						gp.gameEnded = false;
+						gp.player.health = 6 + gp.player.level;
+					}
+					// Exit
+					else if (gp.menuState == 1) {
+						System.exit(0);
+					}
+					break;
+				}
+			}
 		}
 		// Game menu state
 		else if (!gp.gameStarted) {
@@ -212,13 +259,6 @@ public class KeyHandler implements KeyListener {
 					gp.playSE(15);
 					break;
 				}
-				if (code == KeyEvent.VK_C) {
-					if (gp.ui.controlsMenuIsOpened) {
-						gp.ui.controlsMenuIsOpened = false;
-					} else {
-						gp.ui.controlsMenuIsOpened = true;
-					}
-				}
 			}
 			if (code == KeyEvent.VK_ENTER && !gp.ui.introTransitionPhase) {
 				// Start game
@@ -235,14 +275,21 @@ public class KeyHandler implements KeyListener {
 						gp.gameIntroCounter++;
 					}
 				}
-				// Load game
-				if (gp.menuState == 1) {
-
+				// Controls menu
+				else if (gp.menuState == 1) {
+					gp.ui.controlsMenuIsOpened = !gp.ui.controlsMenuIsOpened;
+					gp.introState = !gp.introState;
 				}
 				// Exit
-				if (gp.menuState == 2) {
+				else if (gp.menuState == 2) {
 					System.exit(0);
 				}
+			}
+		} 
+		// Outro scene
+		else if (gp.gameCompleted && gp.ui.canPressEnter) {
+			if (code == KeyEvent.VK_ENTER) {
+				gp.completedTextState++;
 			}
 		}
 	}

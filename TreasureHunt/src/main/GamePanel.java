@@ -71,6 +71,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public int menuState;
 	public boolean finalGameStart;
 	public boolean gameEnded;
+	public boolean gameCompleted;
 	public boolean isViewingStatus;
 	public boolean levelUpState;
 	public boolean npcIsBeingSpokenTo;
@@ -81,6 +82,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public boolean tradeState;
 	public boolean isDark;
 	public int transitionState;
+	public int completedTextState = 0;
 
 	/**
 	 * Constructs this game panel.

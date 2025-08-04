@@ -55,9 +55,11 @@ public class UI {
 	public boolean buyState, sellState;
 	public boolean canDrawTradeText;
 	private boolean isTrading;
+	private int gameEndCounter, gameEndCounter2, gameEndCounter3, gameEndCounter4 = 0;
+	public boolean canPressEnter;
 	// UI Images
-	private BufferedImage boyRight1, boyRight2, chest, oldManDown1, oldManDown2, shield, coin, dungeonCoin, tinyLantern,
-			arrow, ironScrap, diamond;
+	private BufferedImage boyRight1, boyRight2, boyDown1, chest, oldManDown1, oldManDown2, shield, coin, dungeonCoin,
+			tinyLantern, arrow, ironScrap, diamond;
 
 	/**
 	 * Constructor that sets the elements to be displayed on the screen.
@@ -91,6 +93,12 @@ public class UI {
 			e.printStackTrace();
 		}
 		boyRight2 = uTool.scaleImage(boyRight2, gp.tileSize * 4, gp.tileSize * 4);
+		try {
+			boyDown1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_1.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		boyDown1 = uTool.scaleImage(boyDown1, gp.tileSize * 2, gp.tileSize * 2);
 		try {
 			chest = ImageIO.read(getClass().getResourceAsStream("/objects/chest.png"));
 		} catch (IOException e) {
@@ -344,7 +352,7 @@ public class UI {
 	 */
 	public void drawTime() {
 		// Time
-		if (!gp.isPaused && gp.player.mapChangeTimer <= 0) {
+		if (!gp.isPaused) {
 			playTime += (double) 1 / 60;
 		}
 		if (showTime) {
@@ -413,13 +421,29 @@ public class UI {
 	 * Draws the game finished screen when called in the draw method.
 	 */
 	public void drawGameFinished() {
-		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40F));
-		g2.setColor(Color.white);
 
 		String text;
 		int textLength;
 		int x;
 		int y;
+
+		if (gameEndCounter > 255) {
+			gameEndCounter = 255;
+			gameEndCounter2++;
+		}
+		if (gameEndCounter2 > 255) {
+			gameEndCounter2 = 255;
+		}
+		if (gameEndCounter3 > 1154) {
+			gameEndCounter3 = 1154;
+		}
+
+		g2.setColor(new Color(0, 0, 0, gameEndCounter));
+		gameEndCounter += 2;
+		g2.fillRect(0, 0, gp.tileSize * 16, gp.tileSize * 12);
+
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40F));
+		g2.setColor(new Color(255, 255, 255, gameEndCounter2));
 
 		text = "You found the treasure!";
 		textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
@@ -434,14 +458,91 @@ public class UI {
 		g2.drawString(text, x, y);
 
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 80F));
-		g2.setColor(Color.yellow);
+		g2.setColor(new Color(255, 255, 0, gameEndCounter2));
 		text = "Congratulations!";
 		textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
 		x = gp.screenWidth / 2 - textLength / 2;
 		y = gp.screenHeight / 2 + (gp.tileSize * 2);
 		g2.drawString(text, x, y);
 
-		gp.gameThread = null;
+		if (gameEndCounter2 > 0) {
+			g2.drawImage(boyDown1, gp.tileSize * 7, gp.tileSize * 4, null);
+			g2.setColor(new Color(0, 0, 0, 255 - gameEndCounter2));
+			g2.fillRect(gp.tileSize * 7, gp.tileSize * 4, gp.tileSize * 2, gp.tileSize * 2);
+			gameEndCounter3 += 2;
+		}
+		if (gameEndCounter3 > 900) {
+			g2.setColor(new Color(0, 0, 0, gameEndCounter3 - 901));
+			g2.fillRect(0, 0, gp.tileSize * 16, gp.tileSize * 12);
+			gameEndCounter4++;
+		}
+		// Old Man Outro
+		if (gameEndCounter4 > 200) {
+			if (gameEndCounter4 == 201) {
+				canPressEnter = true;
+				canPlaySE = true;
+			}
+			// Text window
+			int xOutro = gp.tileSize * 2;
+			int yOutro = gp.tileSize / 2 + gp.tileSize - 24;
+			int width = gp.screenWidth - (gp.tileSize * 4);
+			int height = gp.tileSize * 5;
+			drawSubWindow(xOutro, yOutro, width, height, g2);
+			g2.setFont(g2.getFont().deriveFont(Font.ITALIC, 30F));
+			x += gp.tileSize - 24;
+			y += gp.tileSize;
+			g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40F));
+			// Old man image
+			spriteCounter++;
+			if (spriteCounter < 60) {
+				g2.drawImage(oldManDown1, gp.tileSize * 6, gp.tileSize * 6 + 32, null);
+			} else {
+				g2.drawImage(oldManDown2, gp.tileSize * 6, gp.tileSize * 6 + 32, null);
+			}
+			if (spriteCounter == 120) {
+				spriteCounter = 0;
+			}
+			g2.setColor(new Color(255, 255, 125));
+			// Intro screens
+			Random rng = new Random();
+			int npcTalk = rng.nextInt(9, 11);
+			String theText;
+			x = gp.tileSize * 2 + 20;
+			y = gp.tileSize * 2 - 8;
+			if (gp.completedTextState == 0) {
+				theText = "Look at yourself lad! You did it, you found the\ntreasure! Oh how proud of you I am, you\njust did something very few have ever\naccomplished.";
+				for (String line : theText.split("\n")) {
+					g2.drawString(line, x, y);
+					y += 50;
+				}
+				if (canPlaySE) {
+					gp.playSE(npcTalk);
+					canPlaySE = false;
+				}
+			} else if (gp.completedTextState == 1) {
+				theText = "From the journey of the dark overworld, with\nall those monsters trying to get you, to\nthe depths of the even darker dungeon, you\nstood your ground and never gave up!";
+				for (String line : theText.split("\n")) {
+					g2.drawString(line, x, y);
+					y += 50;
+				}
+				if (!canPlaySE) {
+					gp.playSE(npcTalk);
+					canPlaySE = true;
+				}
+			} else if (gp.completedTextState == 2) {
+				theText = "Thank you for playing my game and I hope you\nhad fun! A lot of time and effort was put into it,\nand I want to give a big shoutout to RyiSnow\non YouTube for the inspiration to start a project\nlike this. Your tutorials and inspiration made this\nproject as a whole. Signing off for now, GeoNate17.";
+				for (String line : theText.split("\n")) {
+					g2.drawString(line, x, y);
+					y += 50;
+				}
+				if (canPlaySE) {
+					gp.playSE(npcTalk);
+					canPlaySE = false;
+				}
+			} else if (gp.completedTextState == 3) {
+				System.exit(0);
+			}
+		}
 	}
 
 	/**
@@ -483,17 +584,16 @@ public class UI {
 		g2.drawString("Exit", gp.tileSize * 8 - 30, gp.tileSize * 11 + 5);
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 32F));
 		drawSubWindow(gp.tileSize * 6 + 32, gp.tileSize * 9 + 12, gp.tileSize * 3, gp.tileSize, g2);
-		g2.drawString("Load Game", gp.tileSize * 7 - 5, gp.tileSize * 10 - 10);
+		g2.drawString("Controls", gp.tileSize * 7 + 14, gp.tileSize * 10 - 10);
 		// Menu instructions
 		drawSubWindow(gp.tileSize * 11 - 14, gp.tileSize * 10, gp.tileSize * 6, gp.tileSize * 3, g2);
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20F));
 		g2.drawString("Select an option by pressing          ", gp.tileSize * 11 + 13, gp.tileSize * 10 + 40);
 		g2.drawString("Use     and    to toggle selections", gp.tileSize * 11 + 21, gp.tileSize * 11 + 8);
-		g2.drawString("Press     to view game controls", gp.tileSize * 11 + 29, gp.tileSize * 11 + 40);
+		g2.drawString("Good luck and have fun!", gp.tileSize * 12 - 12, gp.tileSize * 11 + 40);
 		g2.setColor(Color.YELLOW);
 		g2.drawString("enter", gp.tileSize * 15, gp.tileSize * 10 + 40);
 		g2.drawString("w        s", gp.tileSize * 12 - 8, gp.tileSize * 11 + 8);
-		g2.drawString("c", gp.tileSize * 12 + 18, gp.tileSize * 11 + 40);
 		// Cursor
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
 		if (gp.menuState == 0 || gp.menuState == 3) {
@@ -543,9 +643,9 @@ public class UI {
 		g2.drawString("t     toggle time on and off", gp.tileSize * 8 + 32, gp.tileSize + 40);
 		// c to exit controls text
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20F));
-		g2.drawString("c", gp.tileSize * 7 - 10, gp.tileSize - 36);
+		g2.drawString("enter", gp.tileSize * 7 - 10, gp.tileSize - 36);
 		g2.setColor(Color.white);
-		g2.drawString("Press     to exit game controls", gp.tileSize * 6, gp.tileSize - 36);
+		g2.drawString("Press            to exit game controls", gp.tileSize * 6, gp.tileSize - 36);
 	}
 
 	/**
@@ -860,7 +960,7 @@ public class UI {
 		g2.setColor(Color.yellow);
 		g2.drawString("Leveled Up!", x + gp.tileSize * 4 - 20, y);
 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40F));
-		g2.setColor(Color.white);
+		g2.setColor(new Color(255, 255, 125));
 		g2.drawString("Extra heart + health restored", x, y + 40);
 		g2.drawString("Strength + 1", x, y + 30 + gp.tileSize);
 		g2.drawString("Dexterity + 1", x, y + 20 + gp.tileSize * 2);
@@ -884,9 +984,38 @@ public class UI {
 		g2.fillRect(0, 0, gp.tileSize * 16, gp.tileSize * 12);
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 150F));
 		g2.setColor(new Color(70, 70, 70));
-		g2.drawString("Game Over", gp.tileSize * 3 + 32, gp.tileSize * 3 + 3);
+		g2.drawString("Game Over", gp.tileSize * 3 + 28, gp.tileSize * 3 + 3);
 		g2.setColor(new Color(100, 100, 100));
-		g2.drawString("Game Over", gp.tileSize * 3 + 25, gp.tileSize * 3);
+		g2.drawString("Game Over", gp.tileSize * 3 + 21, gp.tileSize * 3);
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
+		// Menu tabs
+		drawSubWindow(gp.tileSize * 6 + 32, gp.tileSize * 8, gp.tileSize * 3, gp.tileSize, g2);
+		g2.drawString("Respawn", gp.tileSize * 7 - 6, gp.tileSize * 9 - 20);
+		drawSubWindow(gp.tileSize * 6 + 32, gp.tileSize * 9 + 12, gp.tileSize * 3, gp.tileSize, g2);
+		g2.drawString("Exit", gp.tileSize * 8 - 30, gp.tileSize * 10 - 6);
+		// Cursor
+		g2.setColor(Color.YELLOW);
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
+		if (gp.menuState == 2 || gp.menuState == 0) {
+			g2.drawString(">", gp.tileSize * 6 + 12, gp.tileSize * 9 - 20);
+		} else if (gp.menuState == -1 || gp.menuState == 1) {
+			g2.drawString(">", gp.tileSize * 6 + 12, gp.tileSize * 10 - 8);
+		}
+		// Text
+		int x = gp.tileSize * 2;
+		int y = gp.tileSize / 2 + gp.tileSize * 3;
+		int width = gp.screenWidth - (gp.tileSize * 4);
+		int height = gp.tileSize * 4;
+		drawSubWindow(x, y, width, height, g2);
+		x += gp.tileSize - 24;
+		y += gp.tileSize;
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40F));
+		g2.setColor(new Color(255, 255, 125));
+		String text = "Respawning will take you back to the initial\nmap spawn. You keep all of your inventory\nitems, though you will lose half of your coins.\nHealth restored depends on your current level.";
+		for (String line : text.split("\n")) {
+			g2.drawString(line, x, y);
+			y += 50;
+		}
 	}
 
 	/**

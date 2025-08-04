@@ -13,7 +13,7 @@ import javax.sound.sampled.FloatControl;
 public class Sound {
 
 	private Clip clip;
-	public URL soundURL[] = new URL[30];
+	public URL soundURL[] = new URL[31];
 	UtilityTool uTool = new UtilityTool();
 	public int volumeMusic;
 	public int volumeSFX;
@@ -54,6 +54,8 @@ public class Sound {
 		soundURL[26] = getClass().getResource("/sound/iron_gate_slide.wav");
 		soundURL[27] = getClass().getResource("/music/music_BossFight.wav");
 		soundURL[28] = getClass().getResource("/sound/finale.wav");
+		soundURL[29] = getClass().getResource("/music/music_OldManEncounter.wav");
+		soundURL[30] = getClass().getResource("/music/music_TreasureNPC.wav");
 	}
 
 	/**
