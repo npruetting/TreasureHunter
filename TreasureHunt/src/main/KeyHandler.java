@@ -71,10 +71,6 @@ public class KeyHandler implements KeyListener {
 			gp.setSFXVolume(10);
 		}
 		if (gp.gameStarted && !gp.gameCompleted) {
-			// Toggle game time
-			if (code == KeyEvent.VK_T) {
-				gp.ui.showTime = !gp.ui.showTime;
-			}
 			// Dialogue state
 			if (gp.dialogueState) {
 				// Trading

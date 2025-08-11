@@ -52,7 +52,7 @@ public class AssetSetter {
 		// Objects
 		setAsset("Door", 0, 40, 82);
 		setAsset("Door", 1, 19, 63);
-		setAsset("Door", 2, 17, 41);
+		//setAsset("Door", 2, 17, 41);
 		setAsset("Door", 3, 52, 16);
 		setAsset("Door", 4, 60, 7);
 		setAsset("Door", 5, 85, 16);

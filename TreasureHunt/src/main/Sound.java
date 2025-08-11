@@ -55,7 +55,7 @@ public class Sound {
 		soundURL[27] = getClass().getResource("/music/music_BossFight.wav");
 		soundURL[28] = getClass().getResource("/sound/finale.wav");
 		soundURL[29] = getClass().getResource("/music/music_OldManEncounter.wav");
-		soundURL[30] = getClass().getResource("/music/music_TreasureNPC.wav");
+		soundURL[30] = getClass().getResource("/music/music_TreasureIsland.wav");
 	}
 
 	/**

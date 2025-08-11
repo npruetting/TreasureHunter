@@ -564,10 +564,14 @@ public class Player extends Entity {
 		switch (gp.obj[i].identification) {
 		case "to_island":
 			portalTransition(85 * gp.tileSize, 87 * gp.tileSize, 1);
+			gp.stopMusic();
+			gp.playMusic(30);
 			gp.isDark = false;
 			break;
 		case "from_island":
 			portalTransition(47 * gp.tileSize, 38 * gp.tileSize, 2);
+			gp.stopMusic();
+			gp.playMusic(0);
 			gp.isDark = true;
 			break;
 		case "to_boss_1":

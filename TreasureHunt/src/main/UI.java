@@ -8,7 +8,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -29,8 +28,6 @@ public class UI {
 	public ArrayList<String> messages = new ArrayList<String>();
 	public ArrayList<Integer> messageCounter = new ArrayList<Integer>();
 	public boolean gameCompleted;
-	private double playTime;
-	private DecimalFormat dFormat = new DecimalFormat("#0.00");
 	public String currentDialogue = "";
 	private UtilityTool uTool = new UtilityTool();
 	private int spriteCounter;
@@ -39,7 +36,6 @@ public class UI {
 	public int playerSlotRow = 0;
 	public int npcSlotCol = 0;
 	public int npcSlotRow = 0;
-	public boolean showTime = true;
 	public boolean equippedMessage;
 	public int equippedTimer;
 	public int introEndTimer;
@@ -190,7 +186,6 @@ public class UI {
 		}
 		// Drawn Continuously
 		if (gp.gameStarted && !gameCompleted && !gp.gameEnded) {
-			drawTime();
 			drawMessages();
 			if (!gp.levelUpState && !gp.dialogueState) {
 				drawHealthBar();
@@ -348,28 +343,6 @@ public class UI {
 	}
 
 	/**
-	 * Draws the time bar.
-	 */
-	public void drawTime() {
-		// Time
-		if (!gp.isPaused) {
-			playTime += (double) 1 / 60;
-		}
-		if (showTime) {
-			g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 60F));
-			if (playTime < 10) {
-				drawSubWindowLowOpacity(-gp.tileSize, gp.tileSize * 11, gp.tileSize * 5 - 32, gp.tileSize * 2, g2);
-			} else if (playTime >= 10 && playTime < 100) {
-				drawSubWindowLowOpacity(-gp.tileSize, gp.tileSize * 11, gp.tileSize * 5 - 8, gp.tileSize * 2, g2);
-			} else if (playTime >= 100) {
-				drawSubWindowLowOpacity(-gp.tileSize, gp.tileSize * 11, gp.tileSize * 5 + 16, gp.tileSize * 2, g2);
-			}
-			g2.setColor(new Color(255, 255, 255, 155));
-			g2.drawString("Time: " + dFormat.format(playTime), 7, gp.tileSize * 12 - 6);
-		}
-	}
-
-	/**
 	 * Draws the health bar.
 	 */
 	public void drawHealthBar() {
@@ -451,12 +424,6 @@ public class UI {
 		y = gp.screenHeight / 2 - (gp.tileSize * 3);
 		g2.drawString(text, x, y);
 
-		text = "Your time is : " + dFormat.format(playTime) + "!";
-		textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-		x = gp.screenWidth / 2 - textLength / 2;
-		y = gp.screenHeight / 2 + (gp.tileSize * 4);
-		g2.drawString(text, x, y);
-
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 80F));
 		g2.setColor(new Color(255, 255, 0, gameEndCounter2));
 		text = "Congratulations!";
@@ -519,6 +486,9 @@ public class UI {
 					gp.playSE(npcTalk);
 					canPlaySE = false;
 				}
+				g2.setFont(g2.getFont().deriveFont(Font.ITALIC, 30F));
+				g2.setColor(Color.white);
+				g2.drawString("Press enter to continue", x + gp.tileSize * 7 + 32, y + gp.tileSize - 10);
 			} else if (gp.completedTextState == 1) {
 				theText = "From the journey of the dark overworld, with\nall those monsters trying to get you, to\nthe depths of the even darker dungeon, you\nstood your ground and never gave up!";
 				for (String line : theText.split("\n")) {
@@ -529,8 +499,11 @@ public class UI {
 					gp.playSE(npcTalk);
 					canPlaySE = true;
 				}
+				g2.setFont(g2.getFont().deriveFont(Font.ITALIC, 30F));
+				g2.setColor(Color.white);
+				g2.drawString("Press enter to continue", x + gp.tileSize * 7 + 32, y + gp.tileSize - 10);
 			} else if (gp.completedTextState == 2) {
-				theText = "Thank you for playing my game and I hope you\nhad fun! A lot of time and effort was put into it,\nand I want to give a big shoutout to RyiSnow\non YouTube for the inspiration to start a project\nlike this. Your tutorials and inspiration made this\nproject as a whole. Signing off for now, GeoNate17.";
+				theText = "Thank you for playing my game and I hope you\nhad fun! A lot of time and effort was put into it,\nand I want to give a big shoutout to RyiSnow\non YouTube for the inspiration to start a project\nlike this. Your tutorials and dedication made this\nproject as a whole. Signing off for now, GeoNate17.";
 				for (String line : theText.split("\n")) {
 					g2.drawString(line, x, y);
 					y += 50;
@@ -629,7 +602,7 @@ public class UI {
 		g2.drawString("Press          to", gp.tileSize, gp.tileSize * 9 + 8);
 		g2.drawString("Press    to", gp.tileSize, gp.tileSize * 10 + 40);
 		// Row 2 white
-		g2.drawString("Press   to", gp.tileSize * 7, gp.tileSize + 40);
+		//g2.drawString("Press   to", gp.tileSize * 7, gp.tileSize + 40);
 		g2.setColor(Color.YELLOW);
 		// Row 1 yellow
 		g2.drawString("w     move up", gp.tileSize * 2 + 32, gp.tileSize + 40);
@@ -640,7 +613,7 @@ public class UI {
 		g2.drawString("enter     attack", gp.tileSize * 2 + 32, gp.tileSize * 9 + 8);
 		g2.drawString("e     open character status", gp.tileSize * 2 + 32, gp.tileSize * 10 + 40);
 		// Row 2 yellow
-		g2.drawString("t     toggle time on and off", gp.tileSize * 8 + 32, gp.tileSize + 40);
+		//g2.drawString("t     toggle time on and off", gp.tileSize * 8 + 32, gp.tileSize + 40);
 		// c to exit controls text
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20F));
 		g2.drawString("enter", gp.tileSize * 7 - 10, gp.tileSize - 36);
