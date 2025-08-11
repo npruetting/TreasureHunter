@@ -7,7 +7,7 @@ import javax.swing.SwingUtilities;
  * The main method for the game which opens the window when the program is ran.
  */
 public class Main {
-	public static void main(String[] args) {		
+	public static void main(String[] args) {	
 		SwingUtilities.invokeLater(() -> {
 		    JFrame window = new JFrame();
 		    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -40,10 +40,14 @@ public class NPC_OldMan extends Entity {
 	 * Sets the dialogue for the NPC.
 	 */
 	public void setDialogue() {
-		dialogues[0] = "Haha! You found me! I almost got lost here\nmyself, and I've been here for ages! Remember\nhow I was telling you about how dark it is\nout here? Hah, no joke, am I right!";
-		dialogues[1] = "Looks like you've made some progress in the\ndarkness. I'ts so dark, I tripped and dropped\nmy sword on this trail, but I'm up to letting you\nfind and use it! Could be useful. . .";
-		dialogues[2] = "I'ts alright though, I'll try and find the merchant\nwho lives around these parts. If I remember\ncorrectly, his lair is within the bottom left\nquadrant, guarded by monsters. . .";
-		dialogues[3] = "Good luck again lad, I'm going to continue\nwandering around to look for that merchant.\nA very powerful tool of his is that axe used\nto chop trees, I'd consider buying!";
+		dialogues[0] = "Haha! You found me! I almost got lost\nmyself, and I've been here for ages!";
+		dialogues[1] = "Remember how I was telling you about\nhow dark it is out here? No joke, am I right!";
+		dialogues[2] = "I've heard stories of a dungeon where\nit's even darker than this! The dungeon is\nprobably all just a hoax! Probably. . .";
+		dialogues[3] = "Anyways, I tripped and dropped\nmy sword on this trail, but I want you to\nfind and use it! Could be useful for\nattacking monsters. . .";
+		dialogues[4] = "I know of a merchant who\nlives around these parts, I'll just\nask him for a new weapon.";
+		dialogues[5] = "If I remember correctly, his lair is\nwithin the bottom left quadrant,\nguarded by monsters. . .";
+		dialogues[6] = "A very powerful tool of his is that axe used\nto chop trees, I'd consider buying!";
+		dialogues[7] = "Good luck again lad! I'm giving you this map\nI made of the island. It should be\nsuper useful for your further exploration. . .";
 	}
 
 	/**

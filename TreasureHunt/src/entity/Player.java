@@ -42,6 +42,7 @@ public class Player extends Entity {
 	public boolean arrowShot;
 	private int arrowDamageAmount;
 	public boolean isInDungeon;
+	public boolean overworldMapAquired;
 
 	/**
 	 * Constructor that initializes the player in the game, including its hit box
@@ -85,7 +86,6 @@ public class Player extends Entity {
 		exp = 0;
 		nextLevelExp = 10;
 		coin = 0;
-		// arrowAmount = 10;
 		arrowDamageAmount = 1;
 		projectile = new PROJ_Arrow(gp, arrowDamageAmount);
 		// No starting weapon
@@ -144,6 +144,7 @@ public class Player extends Entity {
 		left2 = setup("/player/boy_left_2");
 		right1 = setup("/player/boy_right_1");
 		right2 = setup("/player/boy_right_2");
+		pointer = setup("/objects/pointer");
 	}
 
 	/**
@@ -663,6 +664,7 @@ public class Player extends Entity {
 		gp.playMusic(21);
 		gp.tileM.loadMap("/maps/dungeon.txt");
 		gp.eManager.setup(550, true);
+		gp.player.overworldMapAquired = false;
 
 		// Clears all assets on map when it is loaded
 		for (int x = 0; x < gp.obj.length; x++) {

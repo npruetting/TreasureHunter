@@ -53,6 +53,7 @@ public class Entity {
 	public boolean talkingToGuard;
 	public boolean talkingToGuardFinal;
 	private boolean talkingToOldMan;
+	private boolean mapIsAquired;
 	// Attributes for character status
 	public int level;
 	public int strength;
@@ -94,7 +95,7 @@ public class Entity {
 
 	// Imaging
 	private BufferedImage image;
-	public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
+	public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, pointer;
 	public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1,
 			attackRight2;
 	public int spriteCounter = 0;
@@ -186,6 +187,11 @@ public class Entity {
 			if (talkingToOldMan) {
 				gp.stopMusic();
 				gp.playMusic(0);
+				gp.player.overworldMapAquired = true;
+				if (!mapIsAquired) {
+					gp.ui.addMessage("Map Aquired");
+					mapIsAquired = true;
+				}
 				talkingToOldMan = false;
 			}
 		} else {

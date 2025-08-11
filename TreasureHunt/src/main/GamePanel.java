@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import entity.Entity;
 import entity.Player;
 import environment.EnvironmentManager;
+import tile.Map;
 import tile.TileManager;
 
 /**
@@ -54,6 +55,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public UI ui = new UI(this);
 	public HealthSetter hSetter = new HealthSetter(this);
 	public EnvironmentManager eManager = new EnvironmentManager(this);
+	public Map map = new Map(this);
 	public Thread gameThread;
 
 	// Entity and object

@@ -29,7 +29,7 @@ public class Sound {
 		soundURL[1] = getClass().getResource("/sound/coin.wav");
 		soundURL[2] = getClass().getResource("/sound/powerup.wav");
 		soundURL[3] = getClass().getResource("/sound/unlock.wav");
-		soundURL[4] = getClass().getResource("/sound/fanfare.wav");
+		soundURL[4] = getClass().getResource("/music/music_Ominous.wav");
 		soundURL[5] = getClass().getResource("/sound/portal.wav");
 		soundURL[6] = getClass().getResource("/sound/damage.wav");
 		soundURL[7] = getClass().getResource("/sound/game_over_1.wav");

@@ -215,7 +215,9 @@ public class AssetSetter {
 		setAsset("Chest_Final", 135, 45, 35, 32, 32);
 
 		// NPCs
-		setAsset("Old_Man", 0, 21, 15);
+		// TODO temp npc placements
+//		setAsset("Old_Man", 0, 21, 15);
+		setAsset("Old_Man", 0, 48, 36);
 //		setAsset("Merchant", 1, 17, 37);
 		setAsset("Merchant", 1, 48, 40);
 		setSign("Starting_Sign", 2, 48, 39, 48, 24);

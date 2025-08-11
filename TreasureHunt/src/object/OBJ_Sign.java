@@ -31,9 +31,9 @@ public class OBJ_Sign extends Entity {
 	public void setDialogue(String nameOfSign) {
 		if (nameOfSign.equals("Starting_Sign")) {
 			dialogues[0] = "There's a path of flowers down there. . .";
-			dialogues[1] = "The old man loves flowers. . .\nYou should follow them to find him,\nhe's very knowledgeable. . .";
+			dialogues[1] = "The old man loves flowers. . .\nYou should follow them and he can help you. . .";
 			dialogues[2] = "The monsters here also love the flowers. . .\nYou should stay away until you find a weapon.";
-			dialogues[3] = "Good luck, and don't forget your ultimate goal. . .\nFind the sacred treasure!";
+			dialogues[3] = "Good luck, you'll need it,\nFind the sacred treasure. . .";
 		} else if (nameOfSign.equals("Secret_Island_Sign")) {
 			dialogues[0] = "Welcome to the secret island! It's\na lot brighter here than the other island,\nwho would figure! These chests should\nhelp you out a lot. . .";
 		} else if (nameOfSign.equals("Dungeon_Starting_Sign")) {
