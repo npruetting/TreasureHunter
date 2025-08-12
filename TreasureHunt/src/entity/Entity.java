@@ -19,6 +19,7 @@ import object.OBJ_Portal;
  */
 public class Entity {
 
+	// General
 	public GamePanel gp;
 	private UtilityTool uTool = new UtilityTool();
 	public Rectangle solidArea = new Rectangle(0, 0, 64, 64);
@@ -31,7 +32,6 @@ public class Entity {
 	private boolean oneToggled;
 	private boolean twoToggled;
 	public boolean collision;
-
 	// Entity attributes
 	public String name = "";
 	public int speed;
@@ -53,7 +53,8 @@ public class Entity {
 	public boolean talkingToGuard;
 	public boolean talkingToGuardFinal;
 	private boolean talkingToOldMan;
-	private boolean mapIsAquired;
+	private boolean mapIsAcquired;
+	public boolean hitByPurpleArrow;
 	// Attributes for character status
 	public int level;
 	public int strength;
@@ -92,7 +93,6 @@ public class Entity {
 	public final int type_item = 6;
 	public final int type_bow = 7;
 	public final int type_merchant = 8;
-
 	// Imaging
 	private BufferedImage image;
 	public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, pointer;
@@ -100,7 +100,6 @@ public class Entity {
 			attackRight2;
 	public int spriteCounter = 0;
 	public int spriteNum = 1;
-
 	// Counters
 	public int actionLockCounter;
 	public int invincibleCounter;
@@ -109,6 +108,7 @@ public class Entity {
 	public int shotAvailableCounter;
 	public int skeletonAttackCounter;
 	public int ironGateCounter;
+	public int slowedCounter;
 
 	/**
 	 * Constructs an entity.
@@ -187,10 +187,10 @@ public class Entity {
 			if (talkingToOldMan) {
 				gp.stopMusic();
 				gp.playMusic(0);
-				gp.player.overworldMapAquired = true;
-				if (!mapIsAquired) {
-					gp.ui.addMessage("Map Aquired");
-					mapIsAquired = true;
+				gp.player.overworldMapAcquired = true;
+				if (!mapIsAcquired) {
+					gp.ui.addMessage("Map Acquired!");
+					mapIsAcquired = true;
 				}
 				talkingToOldMan = false;
 			}
@@ -376,7 +376,7 @@ public class Entity {
 		}
 		// Used to animate the entities movement
 		int spriteCounterInt;
-		if (name == "Skeleton") {
+		if (name == "Skeleton" || name == "Skeleton_Purple") {
 			spriteCounterInt = 10;
 		} else {
 			spriteCounterInt = 30;
@@ -513,7 +513,7 @@ public class Entity {
 			// Health bar
 			if (type == type_monster && damaged) {
 				damagedCounter++;
-				if (name == "Skeleton") {
+				if (name == "Skeleton" || name == "Skeleton_Purple") {
 					yValue = screenY - 24;
 				}
 				double oneScale = (double) gp.tileSize / maxHealth;

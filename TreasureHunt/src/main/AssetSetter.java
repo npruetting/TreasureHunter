@@ -4,6 +4,7 @@ import entity.NPC_OldMan;
 import object.OBJ_Sign;
 import entity.MON_GreenSlime;
 import entity.MON_Skeleton;
+import entity.MON_Skeleton_Purple;
 import entity.NPC_Dungeon_Merchant;
 import entity.NPC_Guard;
 import entity.NPC_Guard_Friendly;
@@ -19,6 +20,7 @@ import object.OBJ_Door;
 import object.OBJ_Dungeon_Chest;
 import object.OBJ_Dungeon_Coin;
 import object.OBJ_Dungeon_Door;
+import object.OBJ_Dungeon_Map;
 import object.OBJ_Dungeon_Portal;
 import object.OBJ_Iron_Gate;
 import object.OBJ_Iron_Scrap;
@@ -334,7 +336,7 @@ public class AssetSetter {
 		setAsset("Iron_Scrap", 16, 75, 59);
 		setAsset("Iron_Scrap", 17, 77, 73);
 		setAsset("Iron_Scrap", 18, 83, 72);
-		setAsset("Iron_Scrap", 29, 85, 78);
+		setAsset("Iron_Scrap", 19, 85, 78);
 		setAsset("Iron_Scrap", 20, 91, 74);
 		setAsset("Iron_Scrap", 21, 91, 63);
 		setAsset("Iron_Scrap", 22, 86, 61);
@@ -373,6 +375,13 @@ public class AssetSetter {
 		setAsset("Chest", 44, 64, 8, 32, 32);
 		setAsset("Chest", 45, 50, 30);
 		setAsset("Chest", 46, 81, 59);
+		setAsset("Portal", 47, 89, 70);
+		gp.obj[47].identification = "to_dungeon_map";
+		setAsset("Portal", 48, 88, 90, 0, 32);
+		gp.obj[48].identification = "from_dungeon_map";
+		// TODO temp dungeon map placement
+//		setAsset("Dungeon_Map", 49, 83, 90, 0, 32);
+		setAsset("Dungeon_Map", 49, 48, 48, 0, 32);
 		
 		// NPCs
 //		setAsset("Dungeon_Merchant", 0, 69, 35, 0, 32);
@@ -383,7 +392,8 @@ public class AssetSetter {
 		//setAsset("Guard", 2, 34, 50);
 
 		// Monsters
-
+		setAsset("Skeleton_Purple", 0, 48, 48);
+		setAsset("Skeleton", 1, 48, 49);
 	}
 	
 	/**
@@ -683,6 +693,11 @@ public class AssetSetter {
 			gp.monster[arrIndex].worldX = xPos * gp.tileSize;
 			gp.monster[arrIndex].worldY = yPos * gp.tileSize;
 			break;
+		case "Skeleton_Purple":
+			gp.monster[arrIndex] = new MON_Skeleton_Purple(gp);
+			gp.monster[arrIndex].worldX = xPos * gp.tileSize;
+			gp.monster[arrIndex].worldY = yPos * gp.tileSize;
+			break;
 		}
 	}
 
@@ -777,6 +792,11 @@ public class AssetSetter {
 			break;
 		case "Dungeon_Chest":
 			gp.obj[arrIndex] = new OBJ_Dungeon_Chest(gp);
+			gp.obj[arrIndex].worldX = xPos * gp.tileSize + xOffset;
+			gp.obj[arrIndex].worldY = yPos * gp.tileSize + yOffset;
+			break;
+		case "Dungeon_Map":
+			gp.obj[arrIndex] = new OBJ_Dungeon_Map(gp);
 			gp.obj[arrIndex].worldX = xPos * gp.tileSize + xOffset;
 			gp.obj[arrIndex].worldY = yPos * gp.tileSize + yOffset;
 			break;

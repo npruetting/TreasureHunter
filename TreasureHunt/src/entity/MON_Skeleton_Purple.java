@@ -4,16 +4,14 @@ import java.awt.Color;
 import java.util.Random;
 
 import main.GamePanel;
-import object.OBJ_Arrow;
-import object.OBJ_Coin;
-import object.OBJ_Heart;
-import object.PROJ_Arrow;
+import object.OBJ_Dungeon_Coin;
+import object.PROJ_Arrow_Purple;
 
-public class MON_Skeleton extends Entity {
+public class MON_Skeleton_Purple extends Entity {
 
-	public MON_Skeleton(GamePanel gp) {
+	public MON_Skeleton_Purple(GamePanel gp) {
 		super(gp);
-		name = "Skeleton";
+		name = "Skeleton_Purple";
 		type = type_monster;
 		direction = "down";
 		speed = 2;
@@ -22,7 +20,7 @@ public class MON_Skeleton extends Entity {
 		attack = 4;
 		defense = 0;
 		exp = 4;
-		projectile = new PROJ_Arrow(gp, 6);
+		projectile = (Projectile) new PROJ_Arrow_Purple(gp, 6);
 
 		solidArea.x = 4;
 		solidArea.y = 4;
@@ -36,14 +34,14 @@ public class MON_Skeleton extends Entity {
 	}
 
 	public void getImage() {
-		up1 = setup("/monster/skeleton_up_1");
-		up2 = setup("/monster/skeleton_up_2");
-		down1 = setup("/monster/skeleton_down_1");
-		down2 = setup("/monster/skeleton_down_2");
-		left1 = setup("/monster/skeleton_left_1");
-		left2 = setup("/monster/skeleton_left_2");
-		right1 = setup("/monster/skeleton_right_1");
-		right2 = setup("/monster/skeleton_right_2");
+		up1 = setup("/monster/skeleton_purple_up_1");
+		up2 = setup("/monster/skeleton_purple_up_2");
+		down1 = setup("/monster/skeleton_purple_down_1");
+		down2 = setup("/monster/skeleton_purple_down_2");
+		left1 = setup("/monster/skeleton_purple_left_1");
+		left2 = setup("/monster/skeleton_purple_left_2");
+		right1 = setup("/monster/skeleton_purple_right_1");
+		right2 = setup("/monster/skeleton_purple_right_2");
 	}
 
 	/**
@@ -52,14 +50,14 @@ public class MON_Skeleton extends Entity {
 	 * that the width and height match the original image width and height.
 	 */
 	private void getSkeletonAttackImage() {
-		attackUp1 = setup("/monster/skeleton_attack_up");
-		attackUp2 = setup("/monster/skeleton_attack_up");
-		attackDown1 = setup("/monster/skeleton_attack_down");
-		attackDown2 = setup("/monster/skeleton_attack_down");
-		attackLeft1 = setup("/monster/skeleton_attack_left");
-		attackLeft2 = setup("/monster/skeleton_attack_left");
-		attackRight1 = setup("/monster/skeleton_attack_right");
-		attackRight2 = setup("/monster/skeleton_attack_right");
+		attackUp1 = setup("/monster/skeleton_purple_attack_up");
+		attackUp2 = setup("/monster/skeleton_purple_attack_up");
+		attackDown1 = setup("/monster/skeleton_purple_attack_down");
+		attackDown2 = setup("/monster/skeleton_purple_attack_down");
+		attackLeft1 = setup("/monster/skeleton_purple_attack_left");
+		attackLeft2 = setup("/monster/skeleton_purple_attack_left");
+		attackRight1 = setup("/monster/skeleton_purple_attack_right");
+		attackRight2 = setup("/monster/skeleton_purple_attack_right");
 	}
 
 	/**
@@ -141,18 +139,11 @@ public class MON_Skeleton extends Entity {
 	}
 
 	public void checkDrop() {
-		int rng = new Random().nextInt(100) + 1;
-		if (rng < 40) {
-			dropItem(new OBJ_Coin(gp));
-		} else if (rng >= 40 && rng < 60) {
-			dropItem(new OBJ_Heart(gp));
-		} else if (rng > 75) {
-			dropItem(new OBJ_Arrow(gp));
-		}
+		dropItem(new OBJ_Dungeon_Coin(gp));
 	}
 
 	public Color getParticleColor() {
-		return Color.gray;
+		return Color.magenta;
 	}
 
 	public int getParticleSize() {

@@ -75,6 +75,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public boolean gameEnded;
 	public boolean gameCompleted;
 	public boolean isViewingStatus;
+	public boolean isViewingMap;
 	public boolean levelUpState;
 	public boolean npcIsBeingSpokenTo;
 	public int gameIntroCounter;
@@ -159,6 +160,13 @@ public class GamePanel extends JPanel implements Runnable {
 	 */
 	public void toggleCharacterStatus() {
 		isViewingStatus = !isViewingStatus;
+	}
+	
+	/**
+	 * Toggles view of map, to be called in KeyPressed.
+	 */
+	public void toggleMap() {
+		isViewingMap = !isViewingMap;
 	}
 
 	/**

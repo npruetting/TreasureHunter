@@ -42,7 +42,7 @@ public class Player extends Entity {
 	public boolean arrowShot;
 	private int arrowDamageAmount;
 	public boolean isInDungeon;
-	public boolean overworldMapAquired;
+	public boolean overworldMapAcquired;
 
 	/**
 	 * Constructor that initializes the player in the game, including its hit box
@@ -87,6 +87,7 @@ public class Player extends Entity {
 		nextLevelExp = 10;
 		coin = 0;
 		arrowDamageAmount = 1;
+		arrowAmount = 25;
 		projectile = new PROJ_Arrow(gp, arrowDamageAmount);
 		// No starting weapon
 		currentShield = new OBJ_Shield_Wood(gp);
@@ -195,6 +196,16 @@ public class Player extends Entity {
 			if (invincibleCounter > 60) {
 				invincible = false;
 				invincibleCounter = 0;
+			}
+		}
+		// Player slowed counter
+		if (hitByPurpleArrow) {
+			slowedCounter++;
+			System.out.println(slowedCounter);
+			if (slowedCounter > 180) {
+				hitByPurpleArrow = false;
+				slowedCounter = 0;
+				speed += 2;
 			}
 		}
 		// Map change
@@ -426,7 +437,7 @@ public class Player extends Entity {
 					inventory.add(new OBJ_Key(gp));
 					gp.playSE(1);
 					gp.obj[i] = null;
-					gp.ui.addMessage("Key aquired!");
+					gp.ui.addMessage("Key acquired!");
 				} else {
 					if (!gp.ui.messages.contains("Inventory is full!")) {
 						gp.ui.addMessage("Inventory is full!");
@@ -486,7 +497,7 @@ public class Player extends Entity {
 					inventory.add(new OBJ_Sword_Normal(gp));
 					gp.playSE(1);
 					gp.obj[i] = null;
-					gp.ui.addMessage("Sword aquired!");
+					gp.ui.addMessage("Sword acquired!");
 				} else {
 					if (!gp.ui.messages.contains("Inventory is full!")) {
 						gp.ui.addMessage("Inventory is full!");
@@ -538,12 +549,20 @@ public class Player extends Entity {
 				gp.ui.addMessage("+1 iron scrap");
 				ironScrapAmount++;
 				break;
+			case "dungeon_map":
+				gp.playSE(1);
+				gp.obj[i] = null;
+				gp.ui.addMessage("Dungeon Map Acquired!");
+				// TODO dungeon map logic
+				gp.map.createWorldMap();
+				this.overworldMapAcquired = true;
+				break;
 			case "diamond":
 				if (inventory.size() < maxInventorySize) {
 					inventory.add(new OBJ_Diamond(gp));
 					gp.playSE(1);
 					gp.obj[i] = null;
-					gp.ui.addMessage("Diamond aquired!");
+					gp.ui.addMessage("Diamond acquired!");
 					diamondAmount++;
 				} else {
 					if (!gp.ui.messages.contains("Inventory is full!")) {
@@ -605,6 +624,12 @@ public class Player extends Entity {
 			gp.stopMusic();
 			gp.playMusic(21);
 			break;
+		case "to_dungeon_map":
+			portalTransition(78 * gp.tileSize, 90 * gp.tileSize + 32, 1);
+			break;
+		case "from_dungeon_map":
+			portalTransition(88 * gp.tileSize, 70 * gp.tileSize, 6);
+			break;
 		case "to_final_island":
 			gp.transitionState = 1;
 			mapChangeTimer = 90;
@@ -664,7 +689,7 @@ public class Player extends Entity {
 		gp.playMusic(21);
 		gp.tileM.loadMap("/maps/dungeon.txt");
 		gp.eManager.setup(550, true);
-		gp.player.overworldMapAquired = false;
+		gp.player.overworldMapAcquired = false;
 
 		// Clears all assets on map when it is loaded
 		for (int x = 0; x < gp.obj.length; x++) {

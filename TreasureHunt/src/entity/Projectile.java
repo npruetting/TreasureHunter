@@ -34,8 +34,15 @@ public class Projectile extends Entity{
 				damagePlayer(attack);
 				gp.ui.addMessage("Damaged from arrow!");
 				alive = false;
+				// Player gets slowed by purple arrow
+				if (name.equals("purple_arrow") && !hitByPurpleArrow) {
+					gp.ui.addMessage("Slowed!");
+					gp.player.hitByPurpleArrow = true;
+					gp.player.speed -= 2;
+				}
 			}
 		}
+		
 		// Tile collision
 		collisionOn = false;
 		gp.cChecker.checkTile(this);

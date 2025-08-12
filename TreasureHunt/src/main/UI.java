@@ -189,8 +189,12 @@ public class UI {
 			drawMessages();
 			if (!gp.levelUpState && !gp.dialogueState) {
 				drawHealthBar();
-				if (gp.player.overworldMapAquired && !gp.isViewingStatus) {
-					gp.map.drawFullMapScreen(g2);
+				if (gp.player.overworldMapAcquired && !gp.isViewingStatus) {
+					if (gp.isViewingMap) {
+						gp.map.drawMapFullScreen(g2);
+					} else {
+						gp.map.drawMapCornerScreen(g2);
+					}
 				}
 			}
 		}
@@ -367,6 +371,13 @@ public class UI {
 			gp.hSetter.drawEmptyHeart5(g2);
 			break;
 		}
+	}
+
+	/**
+	 * Draws the map bigger when toggled.
+	 */
+	public void drawMap() {
+
 	}
 
 	/**
@@ -605,7 +616,7 @@ public class UI {
 		g2.drawString("Press          to", gp.tileSize, gp.tileSize * 9 + 8);
 		g2.drawString("Press    to", gp.tileSize, gp.tileSize * 10 + 40);
 		// Row 2 white
-		// g2.drawString("Press to", gp.tileSize * 7, gp.tileSize + 40);
+		g2.drawString("Press     to", gp.tileSize * 7, gp.tileSize + 40);
 		g2.setColor(Color.YELLOW);
 		// Row 1 yellow
 		g2.drawString("w     move up", gp.tileSize * 2 + 32, gp.tileSize + 40);
@@ -616,8 +627,7 @@ public class UI {
 		g2.drawString("enter     attack", gp.tileSize * 2 + 32, gp.tileSize * 9 + 8);
 		g2.drawString("e     open character status", gp.tileSize * 2 + 32, gp.tileSize * 10 + 40);
 		// Row 2 yellow
-		// g2.drawString("t toggle time on and off", gp.tileSize * 8 + 32, gp.tileSize +
-		// 40);
+		g2.drawString("m     toggle map full screen", gp.tileSize * 8 + 32, gp.tileSize + 40);
 		// c to exit controls text
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20F));
 		g2.drawString("enter", gp.tileSize * 7 - 10, gp.tileSize - 36);
@@ -888,6 +898,9 @@ public class UI {
 			break;
 		case 5:
 			g2.drawString("Leaving Battle", gp.tileSize * 5 + 6, gp.tileSize * 6 + 12);
+			break;
+		case 6:
+			g2.drawString("Back to the Dungeon", gp.tileSize * 4 + 38, gp.tileSize * 6 + 12);
 			break;
 		}
 	}

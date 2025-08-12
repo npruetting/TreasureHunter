@@ -135,6 +135,16 @@ public class KeyHandler implements KeyListener {
 					gp.levelUpState = false;
 				}
 			}
+			// Map toggled
+			else if (code == KeyEvent.VK_M && !gp.isPaused) {
+				if (gp.player.overworldMapAcquired) {
+					gp.toggleMap();
+					upPressed = false;
+					leftPressed = false;
+					rightPressed = false;
+					downPressed = false;
+				}
+			}
 			// Character status
 			else if (gp.isViewingStatus) {
 				if (code == KeyEvent.VK_E) {
@@ -146,7 +156,7 @@ public class KeyHandler implements KeyListener {
 				playerInventory(code);
 			}
 			// Game running state
-			else if (!gp.gameEnded) {
+			else if (!gp.gameEnded && !gp.isViewingMap) {
 				switch (code) {
 				case KeyEvent.VK_W:
 					upPressed = true;
@@ -264,7 +274,16 @@ public class KeyHandler implements KeyListener {
 					if (gp.gameIntroCounter > 15) {
 						gp.introBreak = true;
 					} else if (gp.gameIntroCounter == -1) {
-						gp.playMusic(0);
+						if (gp.player.isInDungeon) {
+							gp.playMusic(21);
+						} else {
+							if (!gp.player.overworldMapAcquired) {
+								gp.playMusic(4);
+							} else {
+								gp.playMusic(0);
+							}
+						}
+						
 						gp.gameStarted = true;
 						gp.introState = false;
 					} else {
