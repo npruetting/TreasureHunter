@@ -13,7 +13,7 @@ import javax.sound.sampled.FloatControl;
 public class Sound {
 
 	private Clip clip;
-	public URL soundURL[] = new URL[31];
+	public URL soundURL[] = new URL[32];
 	UtilityTool uTool = new UtilityTool();
 	public int volumeMusic;
 	public int volumeSFX;
@@ -56,6 +56,7 @@ public class Sound {
 		soundURL[28] = getClass().getResource("/sound/finale.wav");
 		soundURL[29] = getClass().getResource("/music/music_OldManEncounter.wav");
 		soundURL[30] = getClass().getResource("/music/music_TreasureIsland.wav");
+		soundURL[31] = getClass().getResource("/sound/map_change.wav");
 	}
 
 	/**

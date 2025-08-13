@@ -137,8 +137,9 @@ public class KeyHandler implements KeyListener {
 			}
 			// Map toggled
 			else if (code == KeyEvent.VK_M && !gp.isPaused) {
-				if (gp.player.overworldMapAcquired) {
+				if (gp.player.mapAcquired) {
 					gp.toggleMap();
+					gp.playSE(31);
 					upPressed = false;
 					leftPressed = false;
 					rightPressed = false;
@@ -277,7 +278,7 @@ public class KeyHandler implements KeyListener {
 						if (gp.player.isInDungeon) {
 							gp.playMusic(21);
 						} else {
-							if (!gp.player.overworldMapAcquired) {
+							if (!gp.player.mapAcquired) {
 								gp.playMusic(4);
 							} else {
 								gp.playMusic(0);

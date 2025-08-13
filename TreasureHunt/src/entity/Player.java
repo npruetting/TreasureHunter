@@ -42,7 +42,7 @@ public class Player extends Entity {
 	public boolean arrowShot;
 	private int arrowDamageAmount;
 	public boolean isInDungeon;
-	public boolean overworldMapAcquired;
+	public boolean mapAcquired;
 
 	/**
 	 * Constructor that initializes the player in the game, including its hit box
@@ -553,9 +553,7 @@ public class Player extends Entity {
 				gp.playSE(1);
 				gp.obj[i] = null;
 				gp.ui.addMessage("Dungeon Map Acquired!");
-				// TODO dungeon map logic
-				gp.map.createWorldMap();
-				this.overworldMapAcquired = true;
+				mapAcquired = true;
 				break;
 			case "diamond":
 				if (inventory.size() < maxInventorySize) {
@@ -634,6 +632,7 @@ public class Player extends Entity {
 			gp.transitionState = 1;
 			mapChangeTimer = 90;
 			alphaValue = 255;
+			
 			gp.playSE(5);
 			gp.tileM.loadMap("/maps/final_world.txt");
 			gp.isDark = false;
@@ -689,7 +688,8 @@ public class Player extends Entity {
 		gp.playMusic(21);
 		gp.tileM.loadMap("/maps/dungeon.txt");
 		gp.eManager.setup(550, true);
-		gp.player.overworldMapAcquired = false;
+		mapAcquired = false;
+		gp.map.createWorldMap(gp.tileM);
 
 		// Clears all assets on map when it is loaded
 		for (int x = 0; x < gp.obj.length; x++) {

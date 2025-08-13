@@ -187,7 +187,7 @@ public class Entity {
 			if (talkingToOldMan) {
 				gp.stopMusic();
 				gp.playMusic(0);
-				gp.player.overworldMapAcquired = true;
+				gp.player.mapAcquired = true;
 				if (!mapIsAcquired) {
 					gp.ui.addMessage("Map Acquired!");
 					mapIsAcquired = true;

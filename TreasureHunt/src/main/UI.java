@@ -189,7 +189,7 @@ public class UI {
 			drawMessages();
 			if (!gp.levelUpState && !gp.dialogueState) {
 				drawHealthBar();
-				if (gp.player.overworldMapAcquired && !gp.isViewingStatus) {
+				if (gp.player.mapAcquired && !gp.isViewingStatus) {
 					if (gp.isViewingMap) {
 						gp.map.drawMapFullScreen(g2);
 					} else {
