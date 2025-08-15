@@ -53,6 +53,9 @@ public class UI {
 	private boolean isTrading;
 	private int gameEndCounter, gameEndCounter2, gameEndCounter3, gameEndCounter4 = 0;
 	public boolean canPressEnter;
+	public int questsCompleted = 0;
+	public boolean questOneComplete, questTwoComplete, questThreeComplete, questFourComplete, questFiveComplete,
+			questSixComplete, questSevenComplete, questEightComplete;
 	// UI Images
 	private BufferedImage boyRight1, boyRight2, boyDown1, chest, oldManDown1, oldManDown2, shield, coin, dungeonCoin,
 			tinyLantern, arrow, ironScrap, diamond;
@@ -374,13 +377,6 @@ public class UI {
 	}
 
 	/**
-	 * Draws the map bigger when toggled.
-	 */
-	public void drawMap() {
-
-	}
-
-	/**
 	 * Used to draw messages that pop up.
 	 */
 	public void drawMessages() {
@@ -408,7 +404,6 @@ public class UI {
 	 * Draws the game finished screen when called in the draw method.
 	 */
 	public void drawGameFinished() {
-
 		String text;
 		int textLength;
 		int x;
@@ -437,6 +432,28 @@ public class UI {
 		x = gp.screenWidth / 2 - textLength / 2;
 		y = gp.screenHeight / 2 - (gp.tileSize * 3);
 		g2.drawString(text, x, y);
+		
+		text = "You completed " + questsCompleted + "/8 quests!";
+		textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+		x = gp.screenWidth / 2 - textLength / 2;
+		y = gp.tileSize * 9 + 32;
+		g2.drawString(text, x, y);
+		questsCompleted = 8;
+		// Special for all 8 quests completed
+		if (questsCompleted == 8) {
+			g2.setColor(new Color(0, 200, 0, gameEndCounter2));
+			text = "AMAZON GIFTCARD FOR COMPLETING 8/8 QUESTS:";
+			textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+			x = gp.screenWidth / 2 - textLength / 2;
+			y = gp.tileSize * 10 + 32;;
+			g2.drawString(text, x, y);
+			
+			text = "______GIFTCARDNUMBER______";
+			textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+			x = gp.screenWidth / 2 - textLength / 2;
+			y = gp.tileSize * 11 + 32;
+			g2.drawString(text, x, y);
+		}
 
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 80F));
 		g2.setColor(new Color(255, 255, 0, gameEndCounter2));
@@ -543,11 +560,11 @@ public class UI {
 			g2.setColor(new Color(0, 0, 0, 240));
 		}
 		g2.fillRect(0, 0, gp.tileSize * 16, gp.tileSize * 12);
-		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 150F));
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 144F));
 		g2.setColor(new Color(70, 70, 70));
-		g2.drawString("Treasure Hunt", gp.tileSize * 2 - 10, gp.tileSize * 3 + 3);
+		g2.drawString("Treasure Hunter", gp.tileSize * 1 + 14, gp.tileSize * 2 + 33);
 		g2.setColor(new Color(100, 100, 100));
-		g2.drawString("Treasure Hunt", gp.tileSize * 2 - 17, gp.tileSize * 3);
+		g2.drawString("Treasure Hunter", gp.tileSize * 1 + 7, gp.tileSize * 2 + 30);
 		// Images on menu
 		spriteCounter++;
 		if (spriteCounter < 45) {
@@ -564,14 +581,19 @@ public class UI {
 		drawSubWindow(gp.tileSize * 6 + 32, gp.tileSize * 8, gp.tileSize * 3, gp.tileSize, g2);
 		if (!gp.finalGameStart) {
 			g2.drawString("Start", gp.tileSize * 7 + 24, gp.tileSize * 9 - 20);
+			g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20F));
+			g2.setColor(new Color(255, 255, 125));
+			g2.drawString("*Hold enter to skip intro scene", gp.tileSize * 10 - 24, gp.tileSize * 9 - 28);
+			g2.setColor(Color.white);
+			g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
 		} else {
 			g2.drawString("Resume", gp.tileSize * 7, gp.tileSize * 9 - 20);
 		}
 		drawSubWindow(gp.tileSize * 6 + 32, gp.tileSize * 10 + 24, gp.tileSize * 3, gp.tileSize, g2);
 		g2.drawString("Exit", gp.tileSize * 8 - 30, gp.tileSize * 11 + 5);
-		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 32F));
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 23F));
 		drawSubWindow(gp.tileSize * 6 + 32, gp.tileSize * 9 + 12, gp.tileSize * 3, gp.tileSize, g2);
-		g2.drawString("Controls", gp.tileSize * 7 + 14, gp.tileSize * 10 - 10);
+		g2.drawString("Controls & Quests", gp.tileSize * 7 - 16, gp.tileSize * 10 - 12);
 		// Menu instructions
 		drawSubWindow(gp.tileSize * 11 - 14, gp.tileSize * 10, gp.tileSize * 6, gp.tileSize * 3, g2);
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20F));
@@ -590,9 +612,6 @@ public class UI {
 		} else if (gp.menuState == 2 || gp.menuState == -1) {
 			g2.drawString(">", gp.tileSize * 6 + 12, gp.tileSize * 11 + 6);
 		}
-		// Volume control
-		// TODO temp volume UI in menu
-		g2.drawString("Volume: " + 100, gp.tileSize, gp.tileSize);
 	}
 
 	/**
@@ -605,34 +624,110 @@ public class UI {
 			g2.setColor(new Color(0, 0, 0, 240));
 		}
 		g2.fillRect(0, 0, gp.tileSize * 16, gp.tileSize * 12);
-		drawSubWindow(gp.tileSize - 32, gp.tileSize - 32, gp.tileSize * 15, gp.tileSize * 11, g2);
+		drawSubWindow(gp.tileSize - 32, gp.tileSize - 32, gp.tileSize * 7, gp.tileSize * 11, g2);
+		drawSubWindow(gp.tileSize - 32, gp.tileSize - 32, gp.tileSize * 7, gp.tileSize * 2 - 32, g2);
+		drawSubWindow(gp.tileSize * 8, gp.tileSize - 32, gp.tileSize * 7 + 32, gp.tileSize * 11, g2);
+		drawSubWindow(gp.tileSize * 8, gp.tileSize - 32, gp.tileSize * 7 + 32, gp.tileSize * 2 - 32, g2);
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
 		// Row 1 white
-		g2.drawString("Press     to", gp.tileSize, gp.tileSize + 40);
-		g2.drawString("Press    to", gp.tileSize, gp.tileSize * 3 + 8);
-		g2.drawString("Press    to", gp.tileSize, gp.tileSize * 4 + 40);
-		g2.drawString("Press    to", gp.tileSize, gp.tileSize * 6 + 8);
-		g2.drawString("Press           to", gp.tileSize, gp.tileSize * 7 + 40);
-		g2.drawString("Press          to", gp.tileSize, gp.tileSize * 9 + 8);
-		g2.drawString("Press    to", gp.tileSize, gp.tileSize * 10 + 40);
-		// Row 2 white
-		g2.drawString("Press     to", gp.tileSize * 7, gp.tileSize + 40);
-		g2.setColor(Color.YELLOW);
+		g2.drawString("Press     to", gp.tileSize, gp.tileSize + 40 + 98 - 30);
+		g2.drawString("Press    to", gp.tileSize, gp.tileSize * 3 + 8 + 84 - 36);
+		g2.drawString("Press    to", gp.tileSize, gp.tileSize * 4 + 40 + 70 - 42);
+		g2.drawString("Press    to", gp.tileSize, gp.tileSize * 6 + 8 + 56 - 48);
+		g2.drawString("Press           to", gp.tileSize, gp.tileSize * 7 + 40 + 42 - 54);
+		g2.drawString("Press          to", gp.tileSize, gp.tileSize * 9 + 8 + 28 - 60);
+		g2.drawString("Press    to", gp.tileSize, gp.tileSize * 10 + 40 + 14 - 66);
+		g2.drawString("Press     to", gp.tileSize, gp.tileSize * 12 + 8 - 72);
+		// Row 2 quest text and status box
+		g2.drawString("Speak to the old man", gp.tileSize * 9, gp.tileSize + 40 + 98 - 30);
+		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize + 40 + 98 - 30 - 32, 32, 32);
+		g2.drawString("Speak to the merchant", gp.tileSize * 9, gp.tileSize * 3 + 8 + 84 - 36);
+		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 3 + 8 + 84 - 36 - 32, 32, 32);
+		g2.drawString("Chop down 50 trees", gp.tileSize * 9, gp.tileSize * 4 + 40 + 70 - 42);
+		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 4 + 40 + 70 - 42 - 32, 32, 32);
+		g2.drawString("Enter the dungeon", gp.tileSize * 9, gp.tileSize * 6 + 8 + 56 - 48);
+		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 6 + 8 + 56 - 48 - 32, 32, 32);
+		g2.drawString("Have a full inventory", gp.tileSize * 9, gp.tileSize * 7 + 40 + 42 - 54);
+		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 7 + 40 + 42 - 54 - 32, 32, 32);
+		g2.drawString("Kill 40 monsters", gp.tileSize * 9, gp.tileSize * 9 + 8 + 28 - 60);
+		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 9 + 8 + 28 - 60 - 32, 32, 32);
+		g2.drawString("Kill 80 monsters", gp.tileSize * 9, gp.tileSize * 10 + 40 + 14 - 66);
+		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 10 + 40 + 14 - 66 - 32, 32, 32);
+		g2.drawString("? ? ?", gp.tileSize * 9, gp.tileSize * 12 + 8 - 72);
+		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 12 + 8 - 72 - 32, 32, 32);
+		// Titles
+		g2.setColor(new Color(255, 255, 125));
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50F));
+		g2.drawString("Controls", gp.tileSize * 3 - 24, gp.tileSize + 32);
+		g2.drawString(questsCompleted + "/8 Quests Completed", gp.tileSize * 8 + 24, gp.tileSize + 32);
 		// Row 1 yellow
-		g2.drawString("w     move up", gp.tileSize * 2 + 32, gp.tileSize + 40);
-		g2.drawString("a     move left", gp.tileSize * 2 + 32, gp.tileSize * 3 + 8);
-		g2.drawString("s     move down", gp.tileSize * 2 + 32, gp.tileSize * 4 + 40);
-		g2.drawString("d     move right", gp.tileSize * 2 + 32, gp.tileSize * 6 + 8);
-		g2.drawString("space     pause game", gp.tileSize * 2 + 32, gp.tileSize * 7 + 40);
-		g2.drawString("enter     attack", gp.tileSize * 2 + 32, gp.tileSize * 9 + 8);
-		g2.drawString("e     open character status", gp.tileSize * 2 + 32, gp.tileSize * 10 + 40);
-		// Row 2 yellow
-		g2.drawString("m     toggle map full screen", gp.tileSize * 8 + 32, gp.tileSize + 40);
-		// c to exit controls text
+		g2.setColor(Color.YELLOW);
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
+		g2.drawString("w     move up", gp.tileSize * 2 + 32, gp.tileSize + 40 + 98 - 30);
+		g2.drawString("a     move left", gp.tileSize * 2 + 32, gp.tileSize * 3 + 8 + 84 - 36);
+		g2.drawString("s     move down", gp.tileSize * 2 + 32, gp.tileSize * 4 + 40 + 70 - 42);
+		g2.drawString("d     move right", gp.tileSize * 2 + 32, gp.tileSize * 6 + 8 + 56 - 48);
+		g2.drawString("space     pause", gp.tileSize * 2 + 32, gp.tileSize * 7 + 40 + 42 - 54);
+		g2.drawString("enter     attack", gp.tileSize * 2 + 32, gp.tileSize * 9 + 8 + 28 - 60);
+		g2.drawString("e     open inventory", gp.tileSize * 2 + 32, gp.tileSize * 10 + 40 + 14 - 66);
+		g2.drawString("m      toggle map", gp.tileSize * 2 + 32, gp.tileSize * 12 + 8 - 72);
+		// Row 2 achievements coin image with value
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 24F));
+		// 1
+		g2.drawImage(coin, gp.tileSize * 14 + 36, gp.tileSize + 40 + 98 - 30 - 48, null);
+		g2.drawString("10", gp.tileSize * 14 + 24 + 26, gp.tileSize + 40 + 98 - 30 - 48 + 58);
+		// 2
+		g2.drawImage(coin, gp.tileSize * 14 + 36, gp.tileSize * 3 + 8 + 84 - 36 - 48, null);
+		g2.drawString("15", gp.tileSize * 14 + 24 + 26, gp.tileSize * 3 + 8 + 84 - 36 - 48 + 58);
+		// 3
+		g2.drawImage(coin, gp.tileSize * 14 + 36, gp.tileSize * 4 + 40 + 70 - 42 - 48, null);
+		g2.drawString("50", gp.tileSize * 14 + 24 + 26, gp.tileSize * 4 + 40 + 70 - 42 - 48 + 58);
+		// 4
+		g2.drawImage(coin, gp.tileSize * 14 + 36, gp.tileSize * 6 + 8 + 56 - 48 - 48, null);
+		g2.drawString("30", gp.tileSize * 14 + 24 + 26, gp.tileSize * 6 + 8 + 56 - 48 - 48 + 58);
+		// 5
+		g2.drawImage(coin, gp.tileSize * 14 + 36, gp.tileSize * 7 + 40 + 42 - 54 - 48, null);
+		g2.drawString("40", gp.tileSize * 14 + 24 + 26, gp.tileSize * 7 + 40 + 42 - 54 - 48 + 58);
+		// 6
+		g2.drawImage(coin, gp.tileSize * 14 + 36, gp.tileSize * 9 + 8 + 28 - 60 - 48, null);
+		g2.drawString("40", gp.tileSize * 14 + 24 + 26, gp.tileSize * 9 + 8 + 28 - 60 - 48 + 58);
+		// 7
+		g2.drawImage(coin, gp.tileSize * 14 + 36, gp.tileSize * 10 + 40 + 14 - 66 - 48, null);
+		g2.drawString("80", gp.tileSize * 14 + 24 + 26, gp.tileSize * 10 + 40 + 14 - 66 - 48 + 58);
+		// 8
+		g2.drawImage(coin, gp.tileSize * 14 + 36, gp.tileSize * 12 + 8 - 72 - 48, null);
+		g2.drawString(" ?", gp.tileSize * 14 + 24 + 26, gp.tileSize * 12 + 8 - 72 - 48 + 58);
+		// Exit controls text
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20F));
 		g2.drawString("enter", gp.tileSize * 7 - 10, gp.tileSize - 36);
 		g2.setColor(Color.white);
-		g2.drawString("Press            to exit game controls", gp.tileSize * 6, gp.tileSize - 36);
+		g2.drawString("Press            to exit this menu", gp.tileSize * 6, gp.tileSize - 36);
+		// Quests completed are filled in green
+		g2.setColor(new Color(0, 191, 0));
+		if (questOneComplete) {
+			g2.fillRect(gp.tileSize * 8 + 20, gp.tileSize + 40 + 98 - 30 - 32, 32, 32);
+		}
+		if (questTwoComplete) {
+			g2.fillRect(gp.tileSize * 8 + 20, gp.tileSize * 3 + 8 + 84 - 36 - 32, 32, 32);
+		}
+		if (questThreeComplete) {
+			g2.fillRect(gp.tileSize * 8 + 20, gp.tileSize * 4 + 40 + 70 - 42 - 32, 32, 32);
+		}
+		if (questFourComplete) {
+			g2.fillRect(gp.tileSize * 8 + 20, gp.tileSize * 6 + 8 + 56 - 48 - 32, 32, 32);
+		}
+		if (questFiveComplete) {
+			g2.fillRect(gp.tileSize * 8 + 20, gp.tileSize * 7 + 40 + 42 - 54 - 32, 32, 32);
+		}
+		if (questSixComplete) {
+			g2.fillRect(gp.tileSize * 8 + 20, gp.tileSize * 9 + 8 + 28 - 60 - 32, 32, 32);
+		}
+		if (questSevenComplete) {
+			g2.fillRect(gp.tileSize * 8 + 20, gp.tileSize * 10 + 40 + 14 - 66 - 32, 32, 32);
+		}
+		if (questEightComplete) {
+			g2.fillRect(gp.tileSize * 8 + 20, gp.tileSize * 12 + 8 - 72 - 32, 32, 32);
+		}
 	}
 
 	/**

@@ -292,7 +292,6 @@ public class KeyHandler implements KeyListener {
 								gp.playMusic(0);
 							}
 						}
-
 						gp.gameStarted = true;
 						gp.introState = false;
 					} else {

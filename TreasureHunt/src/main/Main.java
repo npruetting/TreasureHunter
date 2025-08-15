@@ -12,7 +12,7 @@ public class Main {
 		    JFrame window = new JFrame();
 		    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		    window.setResizable(false);
-		    window.setTitle("Treasure Hunt");
+		    window.setTitle("Treasure Hunter");
 
 		    LoadingPanel loadingPanel = new LoadingPanel();
 		    window.add(loadingPanel);
