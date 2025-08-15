@@ -43,6 +43,9 @@ public class Player extends Entity {
 	private int arrowDamageAmount;
 	public boolean isInDungeon;
 	public boolean mapAcquired;
+	private String identificationForMapChange = "";
+	private boolean mapChangeBufferReached;
+	public int playerDeathBuffer;
 
 	/**
 	 * Constructor that initializes the player in the game, including its hit box
@@ -201,7 +204,6 @@ public class Player extends Entity {
 		// Player slowed counter
 		if (hitByPurpleArrow) {
 			slowedCounter++;
-			System.out.println(slowedCounter);
 			if (slowedCounter > 180) {
 				hitByPurpleArrow = false;
 				slowedCounter = 0;
@@ -210,7 +212,65 @@ public class Player extends Entity {
 		}
 		// Map change
 		if (mapChangeTimer > 0) {
+			if (!mapChangeBufferReached) {
+				mapChangeBufferTimer++;
+			}
 			mapChangeTimer--;
+			if (mapChangeBufferTimer == 50) {
+				System.out.println("Buffer timer reached!");
+				switch (identificationForMapChange) {
+				case "to_dungeon_map":
+					System.out.println("Dungeon transition");
+					gp.tileM.loadMap("/maps/dungeon.txt");
+					gp.eManager.setup(550, true);
+					mapAcquired = false;
+					gp.map.createWorldMap(gp.tileM);
+
+					// Clears all assets on map when it is loaded
+					for (int x = 0; x < gp.obj.length; x++) {
+						gp.obj[x] = null;
+					}
+					for (int x = 0; x < gp.npc.length; x++) {
+						gp.npc[x] = null;
+					}
+					for (int x = 0; x < gp.monster.length; x++) {
+						gp.monster[x] = null;
+					}
+
+					gp.aSetter.setAssetsDungeon();
+					worldX = 50 * gp.tileSize;
+					worldY = 50 * gp.tileSize;
+					direction = "down";
+					isInDungeon = true;
+					break;
+				case "to_final_island":
+					System.out.println("Final island transition");
+					gp.tileM.loadMap("/maps/final_world.txt");
+					gp.isDark = false;
+					
+					// Clears all assets on map when it is loaded
+					for (int x = 0; x < gp.obj.length; x++) {
+						gp.obj[x] = null;
+					}
+					for (int x = 0; x < gp.npc.length; x++) {
+						gp.npc[x] = null;
+					}
+					for (int x = 0; x < gp.monster.length; x++) {
+						gp.monster[x] = null;
+					}
+
+					gp.aSetter.setAssetsFinalWorld();
+					worldX = 50 * gp.tileSize;
+					worldY = 50 * gp.tileSize;
+					direction = "down";
+					break;
+					default:
+						System.out.println("default");
+						break;
+				}
+				mapChangeBufferReached = true;
+				mapChangeBufferTimer = 0;
+			}
 			if (mapChangeTimer < 13) {
 				alphaValue -= 20;
 			}
@@ -579,6 +639,8 @@ public class Player extends Entity {
 	 * @param i - index of portal
 	 */
 	private void contactPortal(int i) {
+		mapChangeBufferReached = false;
+		identificationForMapChange = "";
 		switch (gp.obj[i].identification) {
 		case "to_island":
 			portalTransition(85 * gp.tileSize, 87 * gp.tileSize, 1);
@@ -632,26 +694,8 @@ public class Player extends Entity {
 			gp.transitionState = 1;
 			mapChangeTimer = 90;
 			alphaValue = 255;
-			
 			gp.playSE(5);
-			gp.tileM.loadMap("/maps/final_world.txt");
-			gp.isDark = false;
-
-			// Clears all assets on map when it is loaded
-			for (int x = 0; x < gp.obj.length; x++) {
-				gp.obj[x] = null;
-			}
-			for (int x = 0; x < gp.npc.length; x++) {
-				gp.npc[x] = null;
-			}
-			for (int x = 0; x < gp.monster.length; x++) {
-				gp.monster[x] = null;
-			}
-
-			gp.aSetter.setAssetsFinalWorld();
-			worldX = 50 * gp.tileSize;
-			worldY = 50 * gp.tileSize;
-			direction = "down";
+			identificationForMapChange = "to_final_island";
 			break;
 		case "to_finale":
 			portalTransition(50 * gp.tileSize, 80 * gp.tileSize, 1);
@@ -680,33 +724,14 @@ public class Player extends Entity {
 	 * Called when player transitions to or from the dungeon
 	 */
 	private void transitionDungeon() {
+		mapChangeBufferReached = false;
 		gp.transitionState = 3;
 		mapChangeTimer = 90;
 		alphaValue = 255;
 		gp.playSE(5);
 		gp.stopMusic();
 		gp.playMusic(21);
-		gp.tileM.loadMap("/maps/dungeon.txt");
-		gp.eManager.setup(550, true);
-		mapAcquired = false;
-		gp.map.createWorldMap(gp.tileM);
-
-		// Clears all assets on map when it is loaded
-		for (int x = 0; x < gp.obj.length; x++) {
-			gp.obj[x] = null;
-		}
-		for (int x = 0; x < gp.npc.length; x++) {
-			gp.npc[x] = null;
-		}
-		for (int x = 0; x < gp.monster.length; x++) {
-			gp.monster[x] = null;
-		}
-
-		gp.aSetter.setAssetsDungeon();
-		worldX = 50 * gp.tileSize;
-		worldY = 50 * gp.tileSize;
-		direction = "down";
-		isInDungeon = true;
+		identificationForMapChange = "to_dungeon_map";
 	}
 
 	/**

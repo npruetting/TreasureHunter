@@ -963,6 +963,8 @@ public class UI {
 	 * Drawn if the player dies.
 	 */
 	public void drawDeathScreen() {
+		// Player death buffer
+		gp.player.playerDeathBuffer++;
 		// Game over sound
 		if (!gp.gameEnded) {
 			gp.playSE(7);

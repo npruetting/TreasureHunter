@@ -109,6 +109,7 @@ public class Entity {
 	public int skeletonAttackCounter;
 	public int ironGateCounter;
 	public int slowedCounter;
+	public int mapChangeBufferTimer;
 
 	/**
 	 * Constructs an entity.

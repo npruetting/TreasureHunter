@@ -207,42 +207,50 @@ public class KeyHandler implements KeyListener {
 				if (gp.menuState == 2) {
 					gp.menuState = 0;
 				}
-				switch (code) {
-				case KeyEvent.VK_W:
-					gp.menuState--;
-					if (gp.menuState < 0) {
-						gp.menuState = 1;
-					}
-					gp.playSE(15);
-					break;
-				case KeyEvent.VK_S:
-					gp.menuState++;
-					if (gp.menuState > 1) {
-						gp.menuState = 0;
-					}
-					gp.playSE(15);
-					break;
-				case KeyEvent.VK_ENTER:
-					// Re-spawn
-					if (gp.menuState == 0) {
-						gp.player.coin /= 2;
-						if (!gp.player.isInDungeon) {
-							gp.player.worldX = gp.tileSize * 47;
-							gp.player.worldY = gp.tileSize * 38;
-							gp.playMusic(0);
-						} else {
-							gp.player.worldX = gp.tileSize * 50;
-							gp.player.worldY = gp.tileSize * 50;
-							gp.playMusic(21);
+				// Buffer for player death
+				if (gp.player.playerDeathBuffer > 30) {
+					switch (code) {
+					case KeyEvent.VK_W:
+						gp.menuState--;
+						if (gp.menuState < 0) {
+							gp.menuState = 1;
 						}
-						gp.gameEnded = false;
-						gp.player.health = 6 + gp.player.level;
+						gp.playSE(15);
+						break;
+					case KeyEvent.VK_S:
+						gp.menuState++;
+						if (gp.menuState > 1) {
+							gp.menuState = 0;
+						}
+						gp.playSE(15);
+						break;
+					case KeyEvent.VK_ENTER:
+						// Re-spawn
+						if (gp.menuState == 0) {
+							gp.player.coin /= 2;
+							if (!gp.player.isInDungeon) {
+								gp.player.worldX = gp.tileSize * 47;
+								gp.player.worldY = gp.tileSize * 38;
+								if (!gp.player.mapAcquired) {
+									gp.playMusic(4);
+								} else {
+									gp.playMusic(0);
+								}
+							} else {
+								gp.player.worldX = gp.tileSize * 50;
+								gp.player.worldY = gp.tileSize * 50;
+								gp.playMusic(21);
+							}
+							gp.gameEnded = false;
+							gp.player.health = 6 + gp.player.level;
+							gp.player.playerDeathBuffer = 0;
+						}
+						// Exit
+						else if (gp.menuState == 1) {
+							System.exit(0);
+						}
+						break;
 					}
-					// Exit
-					else if (gp.menuState == 1) {
-						System.exit(0);
-					}
-					break;
 				}
 			}
 		}
@@ -284,7 +292,7 @@ public class KeyHandler implements KeyListener {
 								gp.playMusic(0);
 							}
 						}
-						
+
 						gp.gameStarted = true;
 						gp.introState = false;
 					} else {
@@ -301,7 +309,7 @@ public class KeyHandler implements KeyListener {
 					System.exit(0);
 				}
 			}
-		} 
+		}
 		// Outro scene
 		else if (gp.gameCompleted && gp.ui.canPressEnter) {
 			if (code == KeyEvent.VK_ENTER) {
