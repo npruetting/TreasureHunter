@@ -95,11 +95,7 @@ public class Map extends TileManager {
 		g2.drawImage(gp.player.pointer, playerX - 3, playerY - 3, playerSize, playerSize, null);
 		// Text
 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 16F));
-		if (gp.player.isInDungeon) {
-			g2.setColor(new Color(128, 128, 128, 128));
-		} else {
-			g2.setColor(new Color(255, 255, 125, 128));
-		}
+		g2.setColor(new Color(128, 128, 128, 128));
 		g2.drawString("Press m to toggle map view", gp.tileSize * 13 + 4, gp.tileSize * 3 + 32);
 	}
 

@@ -77,6 +77,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public boolean isViewingStatus;
 	public boolean isViewingMap;
 	public boolean levelUpState;
+	public boolean questCompleteState;
 	public boolean npcIsBeingSpokenTo;
 	public int gameIntroCounter;
 	public boolean canShowGameIntro = true;
@@ -135,7 +136,7 @@ public class GamePanel extends JPanel implements Runnable {
 			lastTime = currentTime;
 
 			if (delta >= 1) {
-				if (!isPaused && gameStarted && !dialogueState && !gameEnded && !levelUpState) {
+				if (!isPaused && gameStarted && !dialogueState && !gameEnded && !levelUpState && !questCompleteState) {
 					update();
 				}
 				repaint();
@@ -167,6 +168,7 @@ public class GamePanel extends JPanel implements Runnable {
 	 */
 	public void toggleMap() {
 		isViewingMap = !isViewingMap;
+		
 	}
 
 	/**

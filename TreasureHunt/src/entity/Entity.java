@@ -192,6 +192,8 @@ public class Entity {
 				if (!mapIsAcquired) {
 					gp.ui.addMessage("Map Acquired!");
 					mapIsAcquired = true;
+					// Quest one completed
+					questComplete(1, 10);
 				}
 				talkingToOldMan = false;
 			}
@@ -235,6 +237,21 @@ public class Entity {
 			direction = "left";
 			gp.ui.currentDialogue = dialogues[0];
 		}
+	}
+	
+	/**
+	 * Called from methods when a quest is completed to enable quest complete ui.
+	 * 
+	 * @param questNumber - the number of the quest completed
+	 * @param coinAmount - the number of coins to add
+	 */
+	public void questComplete(int questNumber, int coinAmount) {
+		gp.questCompleteState = true;
+		gp.ui.questOneComplete = true;
+		gp.ui.questNumberCompleted = questNumber;
+		gp.ui.questsCompleted++;
+		gp.player.coin += coinAmount;
+		gp.playSE(32);
 	}
 
 	/**

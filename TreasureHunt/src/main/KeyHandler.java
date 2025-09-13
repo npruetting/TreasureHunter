@@ -134,6 +134,11 @@ public class KeyHandler implements KeyListener {
 				if (code == KeyEvent.VK_E) {
 					gp.levelUpState = false;
 				}
+			} // Quest completed state
+			else if (gp.questCompleteState) {
+				if (code == KeyEvent.VK_E) {
+					gp.questCompleteState = false;
+				}
 			}
 			// Map toggled
 			else if (code == KeyEvent.VK_M && !gp.isPaused) {

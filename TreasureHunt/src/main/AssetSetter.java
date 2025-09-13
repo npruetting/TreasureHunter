@@ -25,6 +25,7 @@ import object.OBJ_Dungeon_Portal;
 import object.OBJ_Iron_Gate;
 import object.OBJ_Iron_Scrap;
 import object.OBJ_Key;
+import object.OBJ_Merchant_Found_Map;
 import object.OBJ_Portal;
 import object.OBJ_Potion_Red;
 import object.OBJ_Sword_Normal;
@@ -212,9 +213,10 @@ public class AssetSetter {
 		setAsset("Portal", 133, 85, 90);
 		gp.obj[133].identification = "from_island";
 		setAsset("Key", 134, 72, 64, 32, 32);
+		setAsset("Merchant_Found_Map", 135, 17, 41);
 		
 		// TODO temp final chest
-		setAsset("Chest_Final", 135, 45, 35, 32, 32);
+		setAsset("Chest_Final", 136, 45, 35, 32, 32);
 
 		// NPCs
 		// TODO temp npc placements
@@ -655,6 +657,11 @@ public class AssetSetter {
 			break;
 		case "Iron_Scrap":
 			gp.obj[arrIndex] = new OBJ_Iron_Scrap(gp);
+			gp.obj[arrIndex].worldX = xPos * gp.tileSize;
+			gp.obj[arrIndex].worldY = yPos * gp.tileSize;
+			break;
+		case "Merchant_Found_Map":
+			gp.obj[arrIndex] = new OBJ_Merchant_Found_Map(gp);
 			gp.obj[arrIndex].worldX = xPos * gp.tileSize;
 			gp.obj[arrIndex].worldY = yPos * gp.tileSize;
 			break;

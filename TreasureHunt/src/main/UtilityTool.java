@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  * Class used to house methods that act as utilities for the game.
  */
 public class UtilityTool {
-
+	
 	/**
 	 * Method that scales the image as the tile is created to improve rendering
 	 * performance.

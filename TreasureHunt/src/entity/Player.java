@@ -552,6 +552,10 @@ public class Player extends Entity {
 			case "dungeon_portal":
 				transitionDungeon();
 				break;
+			case "merchant_found_map":
+				questComplete(2, 20);
+				gp.obj[i] = null;
+				break;
 			case "sword_normal":
 				if (inventory.size() < maxInventorySize) {
 					inventory.add(new OBJ_Sword_Normal(gp));

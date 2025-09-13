@@ -56,6 +56,8 @@ public class UI {
 	public int questsCompleted = 0;
 	public boolean questOneComplete, questTwoComplete, questThreeComplete, questFourComplete, questFiveComplete,
 			questSixComplete, questSevenComplete, questEightComplete;
+	public int questNumberCompleted;
+	private boolean quest8Complete;
 	// UI Images
 	private BufferedImage boyRight1, boyRight2, boyDown1, chest, oldManDown1, oldManDown2, shield, coin, dungeonCoin,
 			tinyLantern, arrow, ironScrap, diamond;
@@ -236,6 +238,10 @@ public class UI {
 		// Level up state
 		if (gp.levelUpState) {
 			drawLevelUpScreen();
+		}
+		// Quest complete state
+		if (gp.questCompleteState) {
+			drawQuestCompleted();
 		}
 	}
 
@@ -432,23 +438,23 @@ public class UI {
 		x = gp.screenWidth / 2 - textLength / 2;
 		y = gp.screenHeight / 2 - (gp.tileSize * 3);
 		g2.drawString(text, x, y);
-		
+
 		text = "You completed " + questsCompleted + "/8 quests!";
 		textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
 		x = gp.screenWidth / 2 - textLength / 2;
 		y = gp.tileSize * 9 + 32;
 		g2.drawString(text, x, y);
-		questsCompleted = 8;
 		// Special for all 8 quests completed
 		if (questsCompleted == 8) {
 			g2.setColor(new Color(0, 200, 0, gameEndCounter2));
-			text = "AMAZON GIFTCARD FOR COMPLETING 8/8 QUESTS:";
+			text = "You completed all of the quests!";
 			textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
 			x = gp.screenWidth / 2 - textLength / 2;
-			y = gp.tileSize * 10 + 32;;
+			y = gp.tileSize * 10 + 32;
+			;
 			g2.drawString(text, x, y);
-			
-			text = "______GIFTCARDNUMBER______";
+
+			text = "Great work!";
 			textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
 			x = gp.screenWidth / 2 - textLength / 2;
 			y = gp.tileSize * 11 + 32;
@@ -583,7 +589,7 @@ public class UI {
 			g2.drawString("Start", gp.tileSize * 7 + 24, gp.tileSize * 9 - 20);
 			g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20F));
 			g2.setColor(new Color(255, 255, 125));
-			g2.drawString("*Hold enter to skip intro scene", gp.tileSize * 10 - 24, gp.tileSize * 9 - 28);
+			g2.drawString("*Holding enter will skip intro scene", gp.tileSize * 10 - 24, gp.tileSize * 9 - 28);
 			g2.setColor(Color.white);
 			g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
 		} else {
@@ -641,19 +647,23 @@ public class UI {
 		// Row 2 quest text and status box
 		g2.drawString("Speak to the old man", gp.tileSize * 9, gp.tileSize + 40 + 98 - 30);
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize + 40 + 98 - 30 - 32, 32, 32);
-		g2.drawString("Speak to the merchant", gp.tileSize * 9, gp.tileSize * 3 + 8 + 84 - 36);
+		g2.drawString("Find the merchant", gp.tileSize * 9, gp.tileSize * 3 + 8 + 84 - 36);
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 3 + 8 + 84 - 36 - 32, 32, 32);
 		g2.drawString("Chop down 50 trees", gp.tileSize * 9, gp.tileSize * 4 + 40 + 70 - 42);
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 4 + 40 + 70 - 42 - 32, 32, 32);
 		g2.drawString("Enter the dungeon", gp.tileSize * 9, gp.tileSize * 6 + 8 + 56 - 48);
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 6 + 8 + 56 - 48 - 32, 32, 32);
-		g2.drawString("Have a full inventory", gp.tileSize * 9, gp.tileSize * 7 + 40 + 42 - 54);
+		g2.drawString("Obtain a full inventory", gp.tileSize * 9, gp.tileSize * 7 + 40 + 42 - 54);
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 7 + 40 + 42 - 54 - 32, 32, 32);
 		g2.drawString("Kill 40 monsters", gp.tileSize * 9, gp.tileSize * 9 + 8 + 28 - 60);
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 9 + 8 + 28 - 60 - 32, 32, 32);
 		g2.drawString("Kill 80 monsters", gp.tileSize * 9, gp.tileSize * 10 + 40 + 14 - 66);
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 10 + 40 + 14 - 66 - 32, 32, 32);
-		g2.drawString("? ? ?", gp.tileSize * 9, gp.tileSize * 12 + 8 - 72);
+		if (!quest8Complete) {
+			g2.drawString("? ? ?", gp.tileSize * 9, gp.tileSize * 12 + 8 - 72);
+		} else {
+			g2.drawString("Toggle map 100 times", gp.tileSize * 9, gp.tileSize * 12 + 8 - 72);
+		}
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 12 + 8 - 72 - 32, 32, 32);
 		// Titles
 		g2.setColor(new Color(255, 255, 125));
@@ -678,7 +688,7 @@ public class UI {
 		g2.drawString("10", gp.tileSize * 14 + 24 + 26, gp.tileSize + 40 + 98 - 30 - 48 + 58);
 		// 2
 		g2.drawImage(coin, gp.tileSize * 14 + 36, gp.tileSize * 3 + 8 + 84 - 36 - 48, null);
-		g2.drawString("15", gp.tileSize * 14 + 24 + 26, gp.tileSize * 3 + 8 + 84 - 36 - 48 + 58);
+		g2.drawString("20", gp.tileSize * 14 + 24 + 26, gp.tileSize * 3 + 8 + 84 - 36 - 48 + 58);
 		// 3
 		g2.drawImage(coin, gp.tileSize * 14 + 36, gp.tileSize * 4 + 40 + 70 - 42 - 48, null);
 		g2.drawString("50", gp.tileSize * 14 + 24 + 26, gp.tileSize * 4 + 40 + 70 - 42 - 48 + 58);
@@ -687,7 +697,7 @@ public class UI {
 		g2.drawString("30", gp.tileSize * 14 + 24 + 26, gp.tileSize * 6 + 8 + 56 - 48 - 48 + 58);
 		// 5
 		g2.drawImage(coin, gp.tileSize * 14 + 36, gp.tileSize * 7 + 40 + 42 - 54 - 48, null);
-		g2.drawString("40", gp.tileSize * 14 + 24 + 26, gp.tileSize * 7 + 40 + 42 - 54 - 48 + 58);
+		g2.drawString("50", gp.tileSize * 14 + 24 + 26, gp.tileSize * 7 + 40 + 42 - 54 - 48 + 58);
 		// 6
 		g2.drawImage(coin, gp.tileSize * 14 + 36, gp.tileSize * 9 + 8 + 28 - 60 - 48, null);
 		g2.drawString("40", gp.tileSize * 14 + 24 + 26, gp.tileSize * 9 + 8 + 28 - 60 - 48 + 58);
@@ -696,7 +706,11 @@ public class UI {
 		g2.drawString("80", gp.tileSize * 14 + 24 + 26, gp.tileSize * 10 + 40 + 14 - 66 - 48 + 58);
 		// 8
 		g2.drawImage(coin, gp.tileSize * 14 + 36, gp.tileSize * 12 + 8 - 72 - 48, null);
-		g2.drawString(" ?", gp.tileSize * 14 + 24 + 26, gp.tileSize * 12 + 8 - 72 - 48 + 58);
+		if (!quest8Complete) {
+			g2.drawString(" ?", gp.tileSize * 14 + 24 + 26, gp.tileSize * 12 + 8 - 72 - 48 + 58);
+		} else {
+			g2.drawString("100", gp.tileSize * 14 + 24 + 22, gp.tileSize * 12 + 8 - 72 - 48 + 58);
+		}
 		// Exit controls text
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20F));
 		g2.drawString("enter", gp.tileSize * 7 - 10, gp.tileSize - 36);
@@ -1040,6 +1054,7 @@ public class UI {
 		int width = gp.screenWidth - (gp.tileSize * 4);
 		int height = gp.tileSize * 4;
 		drawSubWindow(x, y, width, height, g2);
+		// Text
 		g2.setFont(g2.getFont().deriveFont(Font.ITALIC, 30F));
 		x += gp.tileSize - 24;
 		y += gp.tileSize;
@@ -1052,6 +1067,68 @@ public class UI {
 		g2.drawString("Extra heart + health restored", x, y + 40);
 		g2.drawString("Strength + 1", x, y + 30 + gp.tileSize);
 		g2.drawString("Dexterity + 1", x, y + 20 + gp.tileSize * 2);
+	}
+
+	/**
+	 * Draws the quest completed screen.
+	 */
+	public void drawQuestCompleted() {
+		// Quest complete window
+		int x = gp.tileSize * 2;
+		int y = gp.tileSize / 2 + gp.tileSize - 24;
+		int width = gp.screenWidth - (gp.tileSize * 4);
+		int height = gp.tileSize * 4;
+		drawSubWindow(x, y, width, height, g2);
+		// Text
+		g2.setFont(g2.getFont().deriveFont(Font.ITALIC, 30F));
+		x += gp.tileSize - 24;
+		y += gp.tileSize;
+		g2.drawString("Press e to escape", x + gp.tileSize * 8 + 6, y + gp.tileSize * 3 - 20);
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50F));
+		g2.setColor(Color.green);
+		g2.drawString("Quest Completed!", x + gp.tileSize * 3 - 20, y);
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40F));
+		g2.setColor(new Color(255, 255, 125));
+		String text = "";
+		String coinAmount = "";
+
+		switch (questNumberCompleted) {
+		case 1:
+			text = "Speak to the old man";
+			coinAmount = "10";
+			break;
+		case 2:
+			text = "Find the merchant";
+			coinAmount = "20";
+			break;
+		case 3:
+			text = "Chop down 50 trees";
+			coinAmount = "50";
+			break;
+		case 4:
+			text = "Enter the dungeon";
+			coinAmount = "30";
+			break;
+		case 5:
+			text = "Obtain a full inventory";
+			coinAmount = "50";
+			break;
+		case 6:
+			text = "Kill 40 monsters";
+			coinAmount = "40";
+			break;
+		case 7:
+			text = "Kill 80 monsters";
+			coinAmount = "80";
+			break;
+		case 8:
+			text = "Toggle map 100 times";
+			coinAmount = "100";
+			quest8Complete = true;
+			break;
+		}
+		g2.drawString(text, x, y + 40);
+		g2.drawString("+" + coinAmount + " coins!", x, y + 30 + gp.tileSize);
 	}
 
 	/**
