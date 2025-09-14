@@ -310,6 +310,11 @@ public class AssetSetter {
 
 		setAsset("Skeleton", 72, 22, 38);
 		setAsset("Green_Slime", 73, 19, 52);
+		
+		setAsset("Skeleton", 74, 49, 15);
+		setAsset("Skeleton_Purple", 75, 49, 16);
+		setAsset("Skeleton", 76, 50, 15);
+		setAsset("Skeleton_Purple", 77, 50, 16);
 	}
 
 	/**
@@ -398,8 +403,70 @@ public class AssetSetter {
 		//setAsset("Guard", 2, 34, 50);
 
 		// Monsters
-		setAsset("Skeleton_Purple", 0, 48, 48);
-		setAsset("Skeleton", 1, 48, 49);
+		setAsset("Skeleton", 0, 65, 44);
+		setAsset("Skeleton", 1, 73, 50);
+		setAsset("Skeleton", 2, 36, 58);
+		setAsset("Skeleton", 3, 39, 32);
+		setAsset("Skeleton", 4, 50, 69);
+		
+		setAsset("Skeleton", 5, 66, 56);
+		setAsset("Skeleton", 6, 71, 71);
+		setAsset("Skeleton", 7, 81, 64);
+		setAsset("Skeleton", 8, 86, 72);
+		setAsset("Skeleton", 9, 73, 57);
+		setAsset("Skeleton", 10, 65, 69);
+		
+		setAsset("Skeleton_Purple", 11, 80, 49);
+		setAsset("Skeleton_Purple", 12, 82, 49);
+		setAsset("Skeleton", 13, 84, 49);
+		setAsset("Skeleton_Purple", 14, 81, 51);
+		setAsset("Skeleton", 15, 83, 51);
+		setAsset("Skeleton_Purple", 16, 85, 51);
+		setAsset("Skeleton", 17, 90, 49);
+		setAsset("Skeleton_Purple", 18, 90, 52);
+		
+		setAsset("Skeleton_Purple", 19, 45, 32);
+		setAsset("Skeleton_Purple", 20, 46, 31);
+		setAsset("Skeleton", 21, 46, 33);
+		setAsset("Skeleton_Purple", 22, 50, 32);
+		
+		setAsset("Skeleton_Purple", 23, 36, 63);
+		setAsset("Skeleton_Purple", 24, 35, 64);
+		setAsset("Skeleton", 25, 37, 64);
+		setAsset("Skeleton_Purple", 26, 36, 67);
+		
+		setAsset("Skeleton_Purple", 27, 50, 74);
+		setAsset("Skeleton", 28, 49, 75);
+		setAsset("Skeleton_Purple", 29, 51, 75);
+		setAsset("Skeleton_Purple", 30, 50, 78);
+		
+		setAsset("Skeleton_Purple", 31, 67, 19);
+		setAsset("Skeleton", 32, 61, 13);
+		setAsset("Skeleton_Purple", 33, 74, 11);
+		setAsset("Skeleton_Purple", 34, 77, 17);
+		setAsset("Skeleton", 35, 84, 15);
+		setAsset("Skeleton_Purple", 36, 71, 15);
+		
+		setAsset("Skeleton_Purple", 37, 16, 13);
+		setAsset("Skeleton", 38, 17, 13);
+		setAsset("Skeleton_Purple", 39, 18, 13);
+		setAsset("Skeleton", 40, 19, 13);
+		setAsset("Skeleton_Purple", 41, 20, 13);
+		setAsset("Skeleton_Purple", 42, 21, 13);
+		setAsset("Skeleton_Purple", 43, 22, 13);
+		setAsset("Skeleton_Purple", 44, 23, 13);
+		setAsset("Skeleton", 45, 16, 16);
+		setAsset("Skeleton_Purple", 46, 18, 16);
+		setAsset("Skeleton", 47, 20, 16);
+		setAsset("Skeleton_Purple", 48, 22, 16);
+		
+		setAsset("Skeleton_Purple", 49, 15, 82);
+		setAsset("Skeleton_Purple", 50, 21, 81);
+		setAsset("Skeleton_Purple", 51, 29, 89);
+		setAsset("Skeleton_Purple", 52, 26, 91);
+		setAsset("Skeleton_Purple", 53, 16, 91);
+		setAsset("Skeleton_Purple", 54, 11, 85);
+		setAsset("Skeleton_Purple", 55, 31, 85);
 	}
 	
 	/**

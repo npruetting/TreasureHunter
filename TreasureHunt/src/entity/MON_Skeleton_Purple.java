@@ -139,7 +139,10 @@ public class MON_Skeleton_Purple extends Entity {
 	}
 
 	public void checkDrop() {
-		dropItem(new OBJ_Dungeon_Coin(gp));
+		int rng = new Random().nextInt(100) + 1;
+		if (rng > 50) {
+			dropItem(new OBJ_Dungeon_Coin(gp));
+		}
 	}
 
 	public Color getParticleColor() {

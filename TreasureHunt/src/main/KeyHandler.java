@@ -11,6 +11,7 @@ public class KeyHandler implements KeyListener {
 	private GamePanel gp;
 	public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed;
 	public boolean toggleDebug;
+	public int exitGameTimer;
 
 	/**
 	 * Constructs a key handler with access to the game panel.
@@ -216,6 +217,7 @@ public class KeyHandler implements KeyListener {
 				if (gp.player.playerDeathBuffer > 30) {
 					switch (code) {
 					case KeyEvent.VK_W:
+						exitGameTimer = 0;
 						gp.menuState--;
 						if (gp.menuState < 0) {
 							gp.menuState = 1;
@@ -223,6 +225,7 @@ public class KeyHandler implements KeyListener {
 						gp.playSE(15);
 						break;
 					case KeyEvent.VK_S:
+						exitGameTimer = 0;
 						gp.menuState++;
 						if (gp.menuState > 1) {
 							gp.menuState = 0;
@@ -252,7 +255,10 @@ public class KeyHandler implements KeyListener {
 						}
 						// Exit
 						else if (gp.menuState == 1) {
-							System.exit(0);
+							exitGameTimer++;
+							if (exitGameTimer > 15) {
+								System.exit(0);
+							}
 						}
 						break;
 					}
@@ -271,10 +277,12 @@ public class KeyHandler implements KeyListener {
 			if (!gp.introState) {
 				switch (code) {
 				case KeyEvent.VK_W:
+					exitGameTimer = 0;
 					gp.menuState--;
 					gp.playSE(15);
 					break;
 				case KeyEvent.VK_S:
+					exitGameTimer = 0;
 					gp.menuState++;
 					gp.playSE(15);
 					break;
@@ -310,7 +318,10 @@ public class KeyHandler implements KeyListener {
 				}
 				// Exit
 				else if (gp.menuState == 2) {
-					System.exit(0);
+					exitGameTimer++;
+					if (exitGameTimer > 15) {
+						System.exit(0);
+					}
 				}
 			}
 		}

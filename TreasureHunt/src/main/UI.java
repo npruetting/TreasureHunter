@@ -598,6 +598,13 @@ public class UI {
 		}
 		drawSubWindow(gp.tileSize * 6 + 32, gp.tileSize * 10 + 24, gp.tileSize * 3, gp.tileSize, g2);
 		g2.drawString("Exit", gp.tileSize * 8 - 30, gp.tileSize * 11 + 5);
+		if (gp.keyH.exitGameTimer > 0) {
+			g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20F));
+			g2.setColor(new Color(255, 255, 125));
+			g2.drawString("(hold)", gp.tileSize * 8 - 26, gp.tileSize * 12 - 16);
+			g2.setColor(Color.white);
+			g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
+		}
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 23F));
 		drawSubWindow(gp.tileSize * 6 + 32, gp.tileSize * 9 + 12, gp.tileSize * 3, gp.tileSize, g2);
 		g2.drawString("Controls & Quests", gp.tileSize * 7 - 16, gp.tileSize * 10 - 12);
@@ -1203,8 +1210,12 @@ public class UI {
 		drawSubWindow(x, y, width, height, g2);
 		x += gp.tileSize - 24;
 		y += gp.tileSize;
-		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40F));
 		g2.setColor(new Color(255, 255, 125));
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20F));
+		if (gp.keyH.exitGameTimer > 0) {
+			g2.drawString("(hold)", gp.tileSize * 8 - 26, gp.tileSize * 11 - 28);
+		}
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40F));
 		String text = "Respawning will take you back to the initial\nmap spawn. You keep all of your inventory\nitems, though you will lose half of your coins.\nHealth restored depends on your current level.";
 		for (String line : text.split("\n")) {
 			g2.drawString(line, x, y);

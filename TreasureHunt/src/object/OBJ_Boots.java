@@ -20,7 +20,7 @@ public class OBJ_Boots extends Entity{
 		direction = "default";
 		down1 = setup("/objects/" + name, gp.tileSize, gp.tileSize);
 		description = "[Boots]\nGives a temporary\nspeed boost.";
-		price = 8;
+		price = 6;
 		forSale = true;
 	}
 	
