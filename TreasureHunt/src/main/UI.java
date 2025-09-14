@@ -651,7 +651,7 @@ public class UI {
 		g2.drawString("Press           to", gp.tileSize, gp.tileSize * 7 + 40 + 42 - 54);
 		g2.drawString("Press          to", gp.tileSize, gp.tileSize * 9 + 8 + 28 - 60);
 		g2.drawString("Press    to", gp.tileSize, gp.tileSize * 10 + 40 + 14 - 66);
-		g2.drawString("Press     to", gp.tileSize, gp.tileSize * 12 + 8 - 72);
+		g2.drawString("Press          to", gp.tileSize, gp.tileSize * 12 + 8 - 72);
 		// Row 2 quest text and status box
 		g2.drawString("Speak to the old man", gp.tileSize * 9, gp.tileSize + 40 + 98 - 30);
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize + 40 + 98 - 30 - 32, 32, 32);
@@ -714,7 +714,7 @@ public class UI {
 		g2.drawString("space     pause", gp.tileSize * 2 + 32, gp.tileSize * 7 + 40 + 42 - 54);
 		g2.drawString("enter     attack", gp.tileSize * 2 + 32, gp.tileSize * 9 + 8 + 28 - 60);
 		g2.drawString("e     open inventory", gp.tileSize * 2 + 32, gp.tileSize * 10 + 40 + 14 - 66);
-		g2.drawString("m      toggle map", gp.tileSize * 2 + 32, gp.tileSize * 12 + 8 - 72);
+		g2.drawString("enter     equip item", gp.tileSize * 2 + 32, gp.tileSize * 12 + 8 - 72);
 		// Row 2 achievements coin image with value
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 24F));
 		// 1
@@ -824,7 +824,11 @@ public class UI {
 		g2.drawString(gp.player.attack + "", gp.tileSize * 5, gp.tileSize * 2 + 200);
 		g2.drawString(gp.player.defense + "", gp.tileSize * 5, gp.tileSize * 2 + 250);
 		g2.drawString(gp.player.exp + "", gp.tileSize * 5, gp.tileSize * 2 + 300);
-		g2.drawString(gp.player.nextLevelExp + "", gp.tileSize * 5, gp.tileSize * 2 + 350);
+		if (gp.player.nextLevelExp != 10000) {
+			g2.drawString(gp.player.nextLevelExp + "", gp.tileSize * 5, gp.tileSize * 2 + 350);
+		} else {
+			g2.drawString("MAX", gp.tileSize * 5 - 32, gp.tileSize * 2 + 350);
+		}
 		// Currency
 		g2.drawImage(coin, gp.tileSize * 5, gp.tileSize + 484 - gp.tileSize, null);
 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 30F));
@@ -1096,11 +1100,26 @@ public class UI {
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50F));
 		g2.setColor(Color.yellow);
 		g2.drawString("Leveled Up!", x + gp.tileSize * 4 - 20, y);
-		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40F));
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
 		g2.setColor(new Color(255, 255, 125));
-		g2.drawString("Extra heart + health restored", x, y + 40);
-		g2.drawString("Strength + 1", x, y + 30 + gp.tileSize);
-		g2.drawString("Dexterity + 1", x, y + 20 + gp.tileSize * 2);
+		g2.drawString("Extra heart + health restored", x, y + 50);
+		switch (gp.player.level) {
+		case 1:
+			g2.drawString("Strength + 1", x, y + 40 + gp.tileSize);
+			break;
+		case 2:
+			g2.drawString("Dexterity + 1", x, y + 40 + gp.tileSize);
+			break;
+		case 3:
+			g2.drawString("+ 30 coins!", x, y + 40 + gp.tileSize);
+			break;
+		case 4:
+			g2.drawString("Strength + 1", x, y + 40 + gp.tileSize);
+			break;
+		case 5:
+			g2.drawString("+ 50 coins!", x, y + 40 + gp.tileSize);
+			break;
+		}
 	}
 
 	/**
@@ -1121,7 +1140,7 @@ public class UI {
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50F));
 		g2.setColor(Color.green);
 		g2.drawString("Quest Completed!", x + gp.tileSize * 3 - 20, y);
-		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40F));
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
 		g2.setColor(new Color(255, 255, 125));
 		String text = "";
 		String coinAmount = "";
@@ -1161,8 +1180,8 @@ public class UI {
 			quest8Complete = true;
 			break;
 		}
-		g2.drawString(text, x, y + 40);
-		g2.drawString("+" + coinAmount + " coins!", x, y + 30 + gp.tileSize);
+		g2.drawString(text, x, y + 50);
+		g2.drawString("+" + coinAmount + " coins!", x, y + 40 + gp.tileSize);
 	}
 
 	/**

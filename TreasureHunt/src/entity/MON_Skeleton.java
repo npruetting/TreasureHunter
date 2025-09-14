@@ -20,7 +20,7 @@ public class MON_Skeleton extends Entity {
 		speed = 2;
 		maxHealth = 6;
 		health = maxHealth;
-		attack = 4;
+		attack = 6;
 		defense = 0;
 		exp = 4;
 		projectile = new PROJ_Arrow(gp, 6);

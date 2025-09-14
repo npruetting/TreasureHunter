@@ -13,7 +13,7 @@ public class OBJ_Axe extends Entity{
 		down1 = setup("/objects/" + name, gp.tileSize, gp.tileSize);
 		attackArea.width = 22;
 		attackArea.height = 22;
-		attackValue = 2;
+		attackValue = 1;
 		description = "[Woodcutter's Axe]\nUseful for cutting\ntrees. Much shorter\nattack range.";
 		price = 30;
 		forSale = true;

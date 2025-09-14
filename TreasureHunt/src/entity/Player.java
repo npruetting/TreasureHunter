@@ -16,6 +16,7 @@ import object.OBJ_Dungeon_Key;
 import object.OBJ_Iron_Gate_Key;
 import object.OBJ_Key;
 import object.OBJ_Lantern_Tiny;
+import object.OBJ_Shield_Blue;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
 import object.PROJ_Arrow;
@@ -47,6 +48,7 @@ public class Player extends Entity {
 	private boolean mapChangeBufferReached;
 	public int playerDeathBuffer;
 	public int treeChoppedAmount, monsterKilledCount, mapToggledCount;
+	private int healthCounter;
 
 	/**
 	 * Constructor that initializes the player in the game, including its hit box
@@ -107,9 +109,10 @@ public class Player extends Entity {
 		// TODO temp items
 //		inventory.add(new OBJ_Key(gp));
 //		inventory.add(new OBJ_Dungeon_Key(gp));
-//		inventory.add(new OBJ_Sword_Normal(gp));
-//		inventory.add(new OBJ_Bow(gp));
-//		inventory.add(new OBJ_Axe(gp));
+		inventory.add(new OBJ_Sword_Normal(gp));
+		inventory.add(new OBJ_Bow(gp));
+		inventory.add(new OBJ_Axe(gp));
+		inventory.add(new OBJ_Shield_Blue(gp));
 //
 //		inventory.add(new OBJ_Iron_Gate_Key(gp));
 //		inventory.add(new OBJ_Iron_Gate_Key(gp));
@@ -194,6 +197,18 @@ public class Player extends Entity {
 	 * Calls this method 60 times per second which updates the Player on the map.
 	 */
 	public void update() {
+		// Player health auto-increases every 30 seconds
+		if (health < maxHealth) {
+			healthCounter++;
+			if (healthCounter > 1800) {
+				health++;
+				healthCounter = 0;
+				gp.ui.addMessage("Health regenerated");
+			}
+		}
+		if (healthCounter > 0 && health == maxHealth) {
+			healthCounter = 0;
+		}
 		// Player invincible
 		if (invincible) {
 			invincibleCounter++;
@@ -772,6 +787,7 @@ public class Player extends Entity {
 				gp.monster[i].hitPlayerReaction();
 				gp.ui.addMessage("Damaged by a " + gp.monster[i].showcaseName + "!");
 				invincible = true;
+				healthCounter = 0;
 			}
 		}
 	}
@@ -855,16 +871,36 @@ public class Player extends Entity {
 			gp.hSetter.extraHeartsDisplayed++;
 			// Character status
 			level++;
-			nextLevelExp *= 2 + 10;
 			if (maxHealth < 20) {
 				maxHealth += 2;
 			}
 			health = maxHealth;
-			strength++;
-			dexterity++;
+			switch (level) {
+			case 1:
+				strength++;
+				arrowDamageAmount++;
+				nextLevelExp = 30;
+				break;
+			case 2:
+				dexterity++;
+				nextLevelExp = 60;
+				break;
+			case 3:
+				coin += 30;
+				nextLevelExp = 100;
+				break;
+			case 4:
+				strength++;
+				arrowDamageAmount++;
+				nextLevelExp = 150;
+				break;
+			case 5:
+				coin += 50;
+				nextLevelExp = 10000;
+				break;
+			}
 			attack = getAttack();
 			defense = getDefense();
-			arrowDamageAmount++;
 			projectile = new PROJ_Arrow(gp, arrowDamageAmount);
 
 			gp.playSE(14);
