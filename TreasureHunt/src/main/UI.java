@@ -666,6 +666,32 @@ public class UI {
 			g2.drawString("Toggle map 100 times", gp.tileSize * 9, gp.tileSize * 12 + 8 - 72);
 		}
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 12 + 8 - 72 - 32, 32, 32);
+		// Progress of quests text next to quest name
+		g2.setColor(new Color(100, 100, 100));
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30F));
+		// Tree amount
+		if (this.questThreeComplete) {
+			g2.setColor(new Color(0, 191, 0));
+		}
+		g2.drawString("[" + gp.player.treeChoppedAmount + "]", gp.tileSize * 13 + 58, gp.tileSize * 4 + 40 + 70 - 42);
+		g2.setColor(new Color(100, 100, 100));
+		// Items bought amount
+		if (this.questFiveComplete) {
+			g2.setColor(new Color(0, 191, 0));
+		}
+		g2.drawString("[" + itemIsBought + "]", gp.tileSize * 12 + 12, gp.tileSize * 7 + 40 + 42 - 54);
+		g2.setColor(new Color(100, 100, 100));
+		// Monsters killed amount
+		if (this.questSixComplete) {
+			g2.setColor(new Color(0, 191, 0));
+		}
+		g2.drawString("[" + gp.player.monsterKilledCount + "]", gp.tileSize * 13 - 2, gp.tileSize * 9 + 8 + 28 - 60);
+		g2.setColor(new Color(100, 100, 100));
+		if (this.questSevenComplete) {
+			g2.setColor(new Color(0, 191, 0));
+		}
+		g2.drawString("[" + gp.player.monsterKilledCount + "]", gp.tileSize * 13 - 2, gp.tileSize * 10 + 40 + 14 - 66);
+		
 		// Titles
 		g2.setColor(new Color(255, 255, 125));
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50F));
