@@ -83,9 +83,7 @@ public class AssetSetter {
 		setAsset("Dungeon_Coin", 28, 54, 37, 32, 32);
 		setAsset("Door", 29, 29, 8);
 
-		// TODO temporary placement
-//		setAsset("Portal", 30, 48, 58);
-		setAsset("Portal", 30, 45, 40, 32, 32);
+		setAsset("Portal", 30, 48, 58);
 		gp.obj[30].identification = "to_island";
 
 		setAsset("Chest", 31, 85, 13, 32, 32);
@@ -98,9 +96,7 @@ public class AssetSetter {
 		setAsset("Chest", 38, 90, 45, 32, 32);
 		setAsset("Chest", 39, 41, 7);
 
-		// TODO temporary placement
-//		setAsset("Dungeon_Portal", 40, 42, 16);
-		setAsset("Dungeon_Portal", 40, 45, 38);
+		setAsset("Dungeon_Portal", 40, 42, 16);
 
 		// Fragile Trees
 		setAsset("Tree_Fragile", 41, 53, 40);
@@ -215,16 +211,10 @@ public class AssetSetter {
 		setAsset("Key", 134, 72, 64, 32, 32);
 		setAsset("Quest_Exclamation_Mark", 135, 17, 41);
 		gp.obj[135].identification = "merchant_found";
-		
-		// TODO temp final chest
-		setAsset("Chest_Final", 136, 45, 35, 32, 32);
 
 		// NPCs
-		// TODO temp npc placements
-//		setAsset("Old_Man", 0, 21, 15);
-		setAsset("Old_Man", 0, 48, 36);
-//		setAsset("Merchant", 1, 17, 37);
-		setAsset("Merchant", 1, 48, 40);
+		setAsset("Old_Man", 0, 21, 15);
+		setAsset("Merchant", 1, 17, 37);
 		setSign("Starting_Sign", 2, 48, 39, 48, 24);
 		setSign("Secret_Island_Sign", 3, 86, 85, 52, 18);
 		setSign("Dungeon_Sign", 4, 43, 14, 48, 18);
@@ -368,13 +358,11 @@ public class AssetSetter {
 		gp.obj[34].identification = "from_boss_2";
 		setAsset("Portal", 35, 13, 89);
 		gp.obj[35].identification = "from_boss_3";
-		// TODO temporary diamond placement
-//		setAsset("Diamond", 36, 59, 21);
-//		setAsset("Diamond", 37, 19, 9, 32, 32);
-//		setAsset("Diamond", 38, 21, 86);
-		setAsset("Diamond", 36, 51, 51);
-		setAsset("Diamond", 37, 51, 50);
-		setAsset("Diamond", 38, 51, 49);
+		
+		setAsset("Diamond", 36, 59, 21);
+		setAsset("Diamond", 37, 19, 9, 32, 32);
+		setAsset("Diamond", 38, 21, 86);
+		
 		setAsset("Portal", 39, 22, 50);
 		gp.obj[39].identification = "to_final_island";
 		setAsset("Chest", 40, 89, 50);
@@ -388,19 +376,14 @@ public class AssetSetter {
 		gp.obj[47].identification = "to_dungeon_map";
 		setAsset("Portal", 48, 88, 90, 0, 32);
 		gp.obj[48].identification = "from_dungeon_map";
-		// TODO temp dungeon map placement
-//		setAsset("Dungeon_Map", 49, 83, 90, 0, 32);
-		setAsset("Dungeon_Map", 49, 48, 48, 0, 32);
+		setAsset("Dungeon_Map", 49, 83, 90, 0, 32);
 		setAsset("Quest_Exclamation_Mark", 50, 50, 53);
 		gp.obj[50].identification = "dungeon_entered";
 		
 		// NPCs
-//		setAsset("Dungeon_Merchant", 0, 69, 35, 0, 32);
-		// TODO temporary dungeon merchant placement
-		setAsset("Dungeon_Merchant", 0, 50, 48);
+		setAsset("Dungeon_Merchant", 0, 69, 35, 0, 32);
 		setSign("Dungeon_Starting_Sign", 1, 51, 48, 48, 12);
-		// TODO replace guard
-		//setAsset("Guard", 2, 34, 50);
+		setAsset("Guard", 2, 34, 50);
 
 		// Monsters
 		setAsset("Skeleton", 0, 65, 44);

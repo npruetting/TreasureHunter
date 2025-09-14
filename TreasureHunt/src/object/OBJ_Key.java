@@ -19,8 +19,8 @@ public class OBJ_Key extends Entity{
 		name = "key";
 		direction = "default";
 		down1 = setup("/objects/" + name, gp.tileSize, gp.tileSize);
-		description = "[Key]\nUsed to open doors.";
-		price = 10;
+		description = "[Key]\nUsed to open doors,\ncan be found around\nthe map.";
+		price = 20;
 		forSale = true;
 	}
 	

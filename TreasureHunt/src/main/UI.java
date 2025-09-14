@@ -515,7 +515,7 @@ public class UI {
 			x = gp.tileSize * 2 + 20;
 			y = gp.tileSize * 2 - 8;
 			if (gp.completedTextState == 0) {
-				theText = "Look at yourself lad! You did it, you found the\ntreasure! Oh how proud of you I am, you\njust did something very few have ever\naccomplished.";
+				theText = "Look at yourself lad! You did it, you found the\ntreasure! Oh how proud of you I am, you\njust did something that no one has ever\naccomplished. Soak that in!";
 				for (String line : theText.split("\n")) {
 					g2.drawString(line, x, y);
 					y += 50;
@@ -661,7 +661,7 @@ public class UI {
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 4 + 40 + 70 - 42 - 32, 32, 32);
 		g2.drawString("Enter the dungeon", gp.tileSize * 9, gp.tileSize * 6 + 8 + 56 - 48);
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 6 + 8 + 56 - 48 - 32, 32, 32);
-		g2.drawString("Buy 10 items", gp.tileSize * 9, gp.tileSize * 7 + 40 + 42 - 54);
+		g2.drawString("Buy 8 items", gp.tileSize * 9, gp.tileSize * 7 + 40 + 42 - 54);
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 7 + 40 + 42 - 54 - 32, 32, 32);
 		g2.drawString("Kill 40 monsters", gp.tileSize * 9, gp.tileSize * 9 + 8 + 28 - 60);
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 9 + 8 + 28 - 60 - 32, 32, 32);

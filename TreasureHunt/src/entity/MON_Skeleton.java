@@ -14,6 +14,7 @@ public class MON_Skeleton extends Entity {
 	public MON_Skeleton(GamePanel gp) {
 		super(gp);
 		name = "Skeleton";
+		showcaseName = "skeleton";
 		type = type_monster;
 		direction = "down";
 		speed = 2;

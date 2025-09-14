@@ -65,12 +65,6 @@ public class KeyHandler implements KeyListener {
 		if (code == KeyEvent.VK_L) {
 			gp.player.exp++;
 		}
-		// TODO temporary way to test sound
-		if (code == KeyEvent.VK_P) {
-			System.out.println("Testing sound");
-			gp.setMusicVolume(.8f);
-			gp.setSFXVolume(10);
-		}
 		if (gp.gameStarted && !gp.gameCompleted) {
 			// Dialogue state
 			if (gp.dialogueState) {

@@ -11,8 +11,8 @@ public class OBJ_Lantern_Big extends Entity{
 		name = "lantern_big";
 		direction = "default";
 		down1 = setup("/objects/" + name, gp.tileSize, gp.tileSize);
-		description = "[Big Lantern]\nHelps you see better\nin the dark.";
-		price = 12;
+		description = "[Large Lantern]\nHelps you see better\nin the dark.";
+		price = 40;
 		forSale = false;
 	}
 

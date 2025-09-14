@@ -5,7 +5,6 @@ import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
 
 /**
  * Class that implements the sound effects and background music into the game.
@@ -15,16 +14,12 @@ public class Sound {
 	private Clip clip;
 	public URL soundURL[] = new URL[33];
 	UtilityTool uTool = new UtilityTool();
-	public int volumeMusic;
-	public int volumeSFX;
 
 	/**
 	 * Constructor that sets each .wav file into the array of URLs such that each
 	 * sound file can be accessed.
 	 */
 	public Sound() {
-		volumeMusic = 100;
-		volumeSFX = 100;
 		soundURL[0] = getClass().getResource("/music/music_MainTheme.wav");
 		soundURL[1] = getClass().getResource("/sound/coin.wav");
 		soundURL[2] = getClass().getResource("/sound/powerup.wav");
@@ -80,31 +75,7 @@ public class Sound {
 	 * @param setVolume - volume to set clip that gets scaled with the utility tool
 	 */
 	public void play(float setVolume) {
-		volumeSetter(setVolume);
 		clip.start();
-	}
-
-	/**
-	 * Sets volume for a clip.
-	 * 
-	 * @param volume to set
-	 */
-	public void volumeSetter(float volume) {
-		FloatControl setVolume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-		setVolume.setValue(uTool.scaleVolume(volume));
-		
-		//FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.VOLUME);
-//        float range = control.getMinimum();
-//        float result = range * (1 - volume / 100.0f);
-//        control.setValue(result);
-		
-//		float range = volumeControl.getMaximum() - volumeControl.getMinimum();
-//		float gain = (range * volume) + volumeControl.getMinimum();
-//		System.out.println(gain);
-//		if (volumeControl != null) {
-//	        volumeControl.setValue(gain);
-//	   }
-		//volumeControl.setValue(gain);
 	}
 
 	/**

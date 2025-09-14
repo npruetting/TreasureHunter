@@ -26,38 +26,6 @@ public class UtilityTool {
 
 		return scaledImage;
 	}
-
-	/**
-	 * Scales the volume range so that volumes can be represented between 0.0 and
-	 * 100.0
-	 * 
-	 * @param volume - the volume to scale
-	 * @return scaled volume
-	 */
-	public float scaleVolume(float volume) {
-		if (volume > 90) {
-			volume = 1f;
-		} else if (volume > 80) {
-			volume = 0.9f;
-		} else if (volume > 70) {
-			volume = 0.8f;
-		} else if (volume > 60) {
-			volume = 0.7f;
-		} else if (volume > 50) {
-			volume = 0.6f;
-		} else if (volume > 40) {
-			volume = 0.5f;
-		} else if (volume > 30) {
-			volume = 0.4f;
-		} else if (volume > 20) {
-			volume = 0.3f;
-		} else if (volume > 10) {
-			volume = 0.2f;
-		} else {
-			volume = 0.1f;
-		}
-		return volume;
-	}
 	
 	/**
 	 * Changes the alpha depending on the given value.

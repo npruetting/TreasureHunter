@@ -35,10 +35,10 @@ public class OBJ_Sign extends Entity {
 			dialogues[2] = "The monsters here also love the flowers. . .\nYou should stay away from them until\nyou find a weapon.";
 			dialogues[3] = "Good luck, you'll need it,\nFind the sacred treasure. . .";
 		} else if (nameOfSign.equals("Secret_Island_Sign")) {
-			dialogues[0] = "Welcome to the secret island! It's\na lot brighter here than the other island,\nwho would figure! These chests should\nhelp you out a lot. . .";
+			dialogues[0] = "Welcome to the secret island! It's\na lot brighter here than the other island,\nwho would figure! These chests should\nhelp you out. . .";
 		} else if (nameOfSign.equals("Dungeon_Starting_Sign")) {
 			dialogues[0] = "Welcome to the dungeon traveler.\n";
-			dialogues[1] = "Your bigger light won't work down here if you\nhappened to buy one in the overworld. It's a\nlittle darker here, and a lot more gloomy. . .";
+			dialogues[1] = "Your bigger lantern won't work down here if you\nhappened to buy one in the overworld. It's a\nlittle darker here, and a lot more gloomy. . .";
 			dialogues[2] = "That map from the old man got washed away\nin the teleportation process. Maybe there's\nanother map hidden within the dungeon. . . ";
 			dialogues[3] = "Go explore and look for any signs of life,\nThey should help you. . .";
 		} else if (nameOfSign.equals("Dungeon_Sign")) {

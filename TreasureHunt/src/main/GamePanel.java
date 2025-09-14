@@ -310,25 +310,6 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	/**
-	 * Sets the volume of the music being played.
-	 * 
-	 * @param volume - volume to set
-	 */
-	public void setMusicVolume(float volume) {
-		music.volumeSetter(volume);
-	}
-
-	/**
-	 * Sets the volume of the sound effect being played.
-	 * 
-	 * @param volume - volume to set
-	 */
-	public void setSFXVolume(float volume) {
-		// se.volumeSFX = volume;
-		se.volumeSetter(volume);
-	}
-
-	/**
 	 * Stops the current music.
 	 */
 	public void stopMusic() {

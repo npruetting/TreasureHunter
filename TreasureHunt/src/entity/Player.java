@@ -105,16 +105,16 @@ public class Player extends Entity {
 		inventory.add(new OBJ_Lantern_Tiny(gp));
 		inventory.add(currentShield);
 		// TODO temp items
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Dungeon_Key(gp));
-		inventory.add(new OBJ_Sword_Normal(gp));
-		inventory.add(new OBJ_Bow(gp));
-		inventory.add(new OBJ_Axe(gp));
-
-		inventory.add(new OBJ_Iron_Gate_Key(gp));
-		inventory.add(new OBJ_Iron_Gate_Key(gp));
-		inventory.add(new OBJ_Iron_Gate_Key(gp));
-		inventory.add(new OBJ_Iron_Gate_Key(gp));
+//		inventory.add(new OBJ_Key(gp));
+//		inventory.add(new OBJ_Dungeon_Key(gp));
+//		inventory.add(new OBJ_Sword_Normal(gp));
+//		inventory.add(new OBJ_Bow(gp));
+//		inventory.add(new OBJ_Axe(gp));
+//
+//		inventory.add(new OBJ_Iron_Gate_Key(gp));
+//		inventory.add(new OBJ_Iron_Gate_Key(gp));
+//		inventory.add(new OBJ_Iron_Gate_Key(gp));
+//		inventory.add(new OBJ_Iron_Gate_Key(gp));
 	}
 
 	/**
@@ -218,10 +218,8 @@ public class Player extends Entity {
 			}
 			mapChangeTimer--;
 			if (mapChangeBufferTimer == 50) {
-				System.out.println("Buffer timer reached!");
 				switch (identificationForMapChange) {
 				case "to_dungeon_map":
-					System.out.println("Dungeon transition");
 					gp.tileM.loadMap("/maps/dungeon.txt");
 					gp.eManager.setup(550, true);
 					mapAcquired = false;
@@ -245,7 +243,6 @@ public class Player extends Entity {
 					isInDungeon = true;
 					break;
 				case "to_final_island":
-					System.out.println("Final island transition");
 					gp.tileM.loadMap("/maps/final_world.txt");
 					gp.isDark = false;
 					
@@ -266,7 +263,6 @@ public class Player extends Entity {
 					direction = "down";
 					break;
 					default:
-						System.out.println("default");
 						break;
 				}
 				mapChangeBufferReached = true;
@@ -287,7 +283,7 @@ public class Player extends Entity {
 				isFast = false;
 			}
 		}
-		if (gp.ui.itemIsBought >= 10 && !gp.ui.questFiveComplete) {
+		if (gp.ui.itemIsBought >= 8 && !gp.ui.questFiveComplete) {
 			this.questComplete(5, 50);
 		}
 
@@ -774,7 +770,7 @@ public class Player extends Entity {
 				health -= damage;
 				gp.playSE(6);
 				gp.monster[i].hitPlayerReaction();
-				gp.ui.addMessage("Damaged!");
+				gp.ui.addMessage("Damaged by a " + gp.monster[i].showcaseName + "!");
 				invincible = true;
 			}
 		}
