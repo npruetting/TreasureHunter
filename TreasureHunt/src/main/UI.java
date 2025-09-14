@@ -440,7 +440,7 @@ public class UI {
 		y = gp.screenHeight / 2 - (gp.tileSize * 3);
 		g2.drawString(text, x, y);
 
-		text = "You completed " + questsCompleted + "/8 quests!";
+		text = "You completed " + questsCompleted + "/8 quests, re-spawning " + gp.player.timesRespawned + " times!";
 		textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
 		x = gp.screenWidth / 2 - textLength / 2;
 		y = gp.tileSize * 9 + 32;
@@ -946,7 +946,7 @@ public class UI {
 
 			// Description frame
 			int dFrameX = frameX;
-			int dFrameY = frameY + frameHeight + gp.tileSize - 32;
+			int dFrameY = frameY + frameHeight + gp.tileSize + 20;
 			int dFrameWidth = frameWidth;
 			int dFrameHeight = gp.tileSize * 3;
 			// Description text
@@ -970,6 +970,15 @@ public class UI {
 				equippedMessage = false;
 			}
 		}
+		// Re-spawn frame
+		int respawnFrameX = frameX;
+		int respawnFrameY = frameY + frameHeight + 10;
+		int respawnFrameWidth = frameWidth;
+		int respawnFrameHeight = gp.tileSize * 1;
+		int respawnTextX = respawnFrameX + 20;
+		int respawnTextY = respawnFrameY + gp.tileSize - 24;
+		drawSubWindow(respawnFrameX, respawnFrameY, respawnFrameWidth, respawnFrameHeight, g2);
+		g2.drawString("Times re-spawned: " + gp.player.timesRespawned, respawnTextX, respawnTextY);
 	}
 
 	/**

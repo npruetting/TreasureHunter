@@ -246,6 +246,7 @@ public class KeyHandler implements KeyListener {
 							gp.gameEnded = false;
 							gp.player.health = 6 + gp.player.level;
 							gp.player.playerDeathBuffer = 0;
+							gp.player.timesRespawned++;
 						}
 						// Exit
 						else if (gp.menuState == 1) {

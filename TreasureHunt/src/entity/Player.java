@@ -49,6 +49,7 @@ public class Player extends Entity {
 	public int playerDeathBuffer;
 	public int treeChoppedAmount, monsterKilledCount, mapToggledCount;
 	private int healthCounter;
+	public int timesRespawned = 0;
 
 	/**
 	 * Constructor that initializes the player in the game, including its hit box

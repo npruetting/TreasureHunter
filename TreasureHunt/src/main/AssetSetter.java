@@ -211,6 +211,7 @@ public class AssetSetter {
 		setAsset("Key", 134, 72, 64, 32, 32);
 		setAsset("Quest_Exclamation_Mark", 135, 17, 41);
 		gp.obj[135].identification = "merchant_found";
+		setAsset("Chest_Final", 136, 48, 37, 32, 32);
 
 		// NPCs
 		setAsset("Old_Man", 0, 21, 15);
@@ -580,7 +581,7 @@ public class AssetSetter {
 		setAsset("Dungeon_Coin", 107, 47, 29);
 		setAsset("Coin", 108, 53, 29);
 		
-		setAsset("Chest_Final", 110, 56, 79, 32, 32);
+		setAsset("Chest_Final", 109, 56, 79, 32, 32);
 		
 		// NPCs
 		setAsset("Guard_Friendly", 0, 50, 57);
