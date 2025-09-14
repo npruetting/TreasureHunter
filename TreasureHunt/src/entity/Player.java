@@ -46,6 +46,7 @@ public class Player extends Entity {
 	private String identificationForMapChange = "";
 	private boolean mapChangeBufferReached;
 	public int playerDeathBuffer;
+	public int treeChoppedAmount, monsterKilledCount, mapToggledCount;
 
 	/**
 	 * Constructor that initializes the player in the game, including its hit box
@@ -285,6 +286,9 @@ public class Player extends Entity {
 				counter = 0;
 				isFast = false;
 			}
+		}
+		if (gp.ui.itemIsBought >= 10 && !gp.ui.questFiveComplete) {
+			this.questComplete(5, 50);
 		}
 
 		// Check if the player levels up
@@ -552,8 +556,12 @@ public class Player extends Entity {
 			case "dungeon_portal":
 				transitionDungeon();
 				break;
-			case "merchant_found_map":
-				questComplete(2, 20);
+			case "quest_exclamation_mark":
+				if (gp.obj[i].identification.equals("merchant_found")) {
+					questComplete(2, 20);
+				} else if (gp.obj[i].identification.equals("dungeon_entered")) {
+					questComplete(4, 30);
+				}
 				gp.obj[i] = null;
 				break;
 			case "sword_normal":
@@ -800,6 +808,12 @@ public class Player extends Entity {
 					exp += gp.monster[i].exp;
 					gp.monster[i].invincible = true;
 					gp.playSE(13);
+					monsterKilledCount++;
+					if (monsterKilledCount == 40 && !gp.ui.questSixComplete) {
+						questComplete(6, 40);
+					} else if (monsterKilledCount == 80 && !gp.ui.questSevenComplete) {
+						questComplete(7, 80);
+					}
 				} else {
 					generateParticle(gp.monster[i], gp.monster[i]);
 					gp.playSE(11);
@@ -821,6 +835,10 @@ public class Player extends Entity {
 				gp.obj[i].generateParticle(gp.obj[i], gp.obj[i]);
 				if (gp.obj[i].health <= 1) {
 					gp.playSE(18);
+					treeChoppedAmount++;
+					if (treeChoppedAmount == 50) {
+						questComplete(3, 50);
+					}
 					gp.obj[i] = null;
 				} else {
 					gp.playSE(17);

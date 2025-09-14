@@ -25,9 +25,9 @@ import object.OBJ_Dungeon_Portal;
 import object.OBJ_Iron_Gate;
 import object.OBJ_Iron_Scrap;
 import object.OBJ_Key;
-import object.OBJ_Merchant_Found_Map;
 import object.OBJ_Portal;
 import object.OBJ_Potion_Red;
+import object.OBJ_Quest_Exclamation_Mark;
 import object.OBJ_Sword_Normal;
 import object.OBJ_Table;
 import object.OBJ_Tree_Fragile;
@@ -99,7 +99,7 @@ public class AssetSetter {
 		setAsset("Chest", 39, 41, 7);
 
 		// TODO temporary placement
-//		setAsset("Dungeon_Portal", 40, 43, 16);
+//		setAsset("Dungeon_Portal", 40, 42, 16);
 		setAsset("Dungeon_Portal", 40, 45, 38);
 
 		// Fragile Trees
@@ -213,7 +213,8 @@ public class AssetSetter {
 		setAsset("Portal", 133, 85, 90);
 		gp.obj[133].identification = "from_island";
 		setAsset("Key", 134, 72, 64, 32, 32);
-		setAsset("Merchant_Found_Map", 135, 17, 41);
+		setAsset("Quest_Exclamation_Mark", 135, 17, 41);
+		gp.obj[135].identification = "merchant_found";
 		
 		// TODO temp final chest
 		setAsset("Chest_Final", 136, 45, 35, 32, 32);
@@ -226,6 +227,7 @@ public class AssetSetter {
 		setAsset("Merchant", 1, 48, 40);
 		setSign("Starting_Sign", 2, 48, 39, 48, 24);
 		setSign("Secret_Island_Sign", 3, 86, 85, 52, 18);
+		setSign("Dungeon_Sign", 4, 43, 14, 48, 18);
 
 		// Monsters
 		setAsset("Green_Slime", 0, 21, 13);
@@ -384,6 +386,8 @@ public class AssetSetter {
 		// TODO temp dungeon map placement
 //		setAsset("Dungeon_Map", 49, 83, 90, 0, 32);
 		setAsset("Dungeon_Map", 49, 48, 48, 0, 32);
+		setAsset("Quest_Exclamation_Mark", 50, 50, 53);
+		gp.obj[50].identification = "dungeon_entered";
 		
 		// NPCs
 //		setAsset("Dungeon_Merchant", 0, 69, 35, 0, 32);
@@ -660,8 +664,8 @@ public class AssetSetter {
 			gp.obj[arrIndex].worldX = xPos * gp.tileSize;
 			gp.obj[arrIndex].worldY = yPos * gp.tileSize;
 			break;
-		case "Merchant_Found_Map":
-			gp.obj[arrIndex] = new OBJ_Merchant_Found_Map(gp);
+		case "Quest_Exclamation_Mark":
+			gp.obj[arrIndex] = new OBJ_Quest_Exclamation_Mark(gp);
 			gp.obj[arrIndex].worldX = xPos * gp.tileSize;
 			gp.obj[arrIndex].worldY = yPos * gp.tileSize;
 			break;

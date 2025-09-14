@@ -58,6 +58,7 @@ public class UI {
 			questSixComplete, questSevenComplete, questEightComplete;
 	public int questNumberCompleted;
 	private boolean quest8Complete;
+	public int itemIsBought;
 	// UI Images
 	private BufferedImage boyRight1, boyRight2, boyDown1, chest, oldManDown1, oldManDown2, shield, coin, dungeonCoin,
 			tinyLantern, arrow, ironScrap, diamond;
@@ -653,7 +654,7 @@ public class UI {
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 4 + 40 + 70 - 42 - 32, 32, 32);
 		g2.drawString("Enter the dungeon", gp.tileSize * 9, gp.tileSize * 6 + 8 + 56 - 48);
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 6 + 8 + 56 - 48 - 32, 32, 32);
-		g2.drawString("Obtain a full inventory", gp.tileSize * 9, gp.tileSize * 7 + 40 + 42 - 54);
+		g2.drawString("Buy 10 items", gp.tileSize * 9, gp.tileSize * 7 + 40 + 42 - 54);
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 7 + 40 + 42 - 54 - 32, 32, 32);
 		g2.drawString("Kill 40 monsters", gp.tileSize * 9, gp.tileSize * 9 + 8 + 28 - 60);
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 9 + 8 + 28 - 60 - 32, 32, 32);
@@ -1110,7 +1111,7 @@ public class UI {
 			coinAmount = "30";
 			break;
 		case 5:
-			text = "Obtain a full inventory";
+			text = "Buy 10 items";
 			coinAmount = "50";
 			break;
 		case 6:
@@ -1378,6 +1379,7 @@ public class UI {
 							npc.inventory.remove(npc.inventory.get(itemIndex));
 							gp.eManager.setup(700, false);
 							gp.eManager.bigLanternEquipped = true;
+							itemIsBought++;
 						} else if (npc.inventory.get(itemIndex).name == "arrow") {
 							tradeTimer = 0;
 							gp.playSE(1);
@@ -1388,6 +1390,7 @@ public class UI {
 							gp.playSE(1);
 							gp.player.coin -= price;
 							gp.player.inventory.add(npc.inventory.get(itemIndex));
+							itemIsBought++;
 						}
 					}
 				} else {
@@ -1400,6 +1403,7 @@ public class UI {
 							gp.player.dungeonCoin -= 10;
 							gp.player.inventory.add(npc.inventory.get(itemIndex));
 							npc.inventory.remove(npc.inventory.get(itemIndex));
+							itemIsBought++;
 						}
 					} else if (isIronGateKey) {
 						if (5 > gp.player.ironScrapAmount || gp.player.inventory.size() == gp.player.maxInventorySize) {
@@ -1410,6 +1414,7 @@ public class UI {
 							gp.player.ironScrapAmount -= 5;
 							gp.player.inventory.add(npc.inventory.get(itemIndex));
 							npc.inventory.remove(npc.inventory.get(itemIndex));
+							itemIsBought++;
 						}
 					} else if (isAncientScroll) {
 						if (3 > gp.player.diamondAmount || gp.player.inventory.size() == gp.player.maxInventorySize) {
@@ -1430,6 +1435,7 @@ public class UI {
 							gp.npc[2].dialogues[0] = "Is that the. . . ancient scroll!? That's something\nmy master has been looking for for years! We\nhave to go show him now! Follow me.";
 							gp.npc[2].dialogues[1] = null;
 							gp.npc[2].dialogues[2] = null;
+							itemIsBought++;
 						}
 					}
 				}

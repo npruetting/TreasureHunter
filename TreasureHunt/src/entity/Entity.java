@@ -247,7 +247,32 @@ public class Entity {
 	 */
 	public void questComplete(int questNumber, int coinAmount) {
 		gp.questCompleteState = true;
-		gp.ui.questOneComplete = true;
+		switch (questNumber) {
+		case 1:
+			gp.ui.questOneComplete = true;
+			break;
+		case 2:
+			gp.ui.questTwoComplete = true;
+			break;
+		case 3:
+			gp.ui.questThreeComplete = true;
+			break;
+		case 4:
+			gp.ui.questFourComplete = true;
+			break;
+		case 5:
+			gp.ui.questFiveComplete = true;
+			break;
+		case 6:
+			gp.ui.questSixComplete = true;
+			break;
+		case 7:
+			gp.ui.questSevenComplete = true;
+			break;
+		case 8:
+			gp.ui.questEightComplete = true;
+			break;
+		}
 		gp.ui.questNumberCompleted = questNumber;
 		gp.ui.questsCompleted++;
 		gp.player.coin += coinAmount;

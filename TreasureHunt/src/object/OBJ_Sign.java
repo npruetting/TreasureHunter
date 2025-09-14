@@ -41,6 +41,8 @@ public class OBJ_Sign extends Entity {
 			dialogues[1] = "Your bigger light won't work down here if you\nhappened to buy one in the overworld. It's a\nlittle darker here, and a lot more gloomy. . .";
 			dialogues[2] = "That map from the old man got washed away\nin the teleportation process. Maybe there's\nanother map hidden within the dungeon. . . ";
 			dialogues[3] = "Go explore and look for any signs of life,\nThey should help you. . .";
+		} else if (nameOfSign.equals("Dungeon_Sign")) {
+			dialogues[0] = "Once you enter the dungeon, you won't be\nable to come back. . .\nExplore while you can.";
 		}
 	}
 

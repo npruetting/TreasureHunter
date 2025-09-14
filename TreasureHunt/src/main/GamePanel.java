@@ -168,7 +168,10 @@ public class GamePanel extends JPanel implements Runnable {
 	 */
 	public void toggleMap() {
 		isViewingMap = !isViewingMap;
-		
+		player.mapToggledCount++;
+		if (player.mapToggledCount == 100 && !ui.questEightComplete) {
+			player.questComplete(8, 100);
+		}
 	}
 
 	/**
@@ -289,6 +292,7 @@ public class GamePanel extends JPanel implements Runnable {
 			g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40F));
 			g2.drawString("Draw Time: " + passed, 10, 400);
 			g2.drawString("Player Health: " + player.health, 10, 500);
+			g2.drawString("Items bought for quest 5: " + ui.itemIsBought, 10, 600);
 		}
 
 		g2.dispose();
