@@ -110,10 +110,10 @@ public class Player extends Entity {
 		// TODO temp items
 //		inventory.add(new OBJ_Key(gp));
 //		inventory.add(new OBJ_Dungeon_Key(gp));
-		inventory.add(new OBJ_Sword_Normal(gp));
-		inventory.add(new OBJ_Bow(gp));
-		inventory.add(new OBJ_Axe(gp));
-		inventory.add(new OBJ_Shield_Blue(gp));
+//		inventory.add(new OBJ_Sword_Normal(gp));
+//		inventory.add(new OBJ_Bow(gp));
+//		inventory.add(new OBJ_Axe(gp));
+//		inventory.add(new OBJ_Shield_Blue(gp));
 //
 //		inventory.add(new OBJ_Iron_Gate_Key(gp));
 //		inventory.add(new OBJ_Iron_Gate_Key(gp));

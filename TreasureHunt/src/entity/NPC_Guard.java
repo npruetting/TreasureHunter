@@ -44,7 +44,7 @@ public class NPC_Guard extends Entity {
 	 */
 	public void setDialogue() {
 		dialogues[0] = "CANNOT PASS.";
-		dialogues[1] = "MY MASTER HAS TOLD TO GUARD THIS PATH.";
+		dialogues[1] = "MY MASTER HAS TOLD ME TO GUARD THIS PATH.";
 		dialogues[2] = "I WILL NOT MOVE UNDER ANY CONDITION. . .";
 	}
 

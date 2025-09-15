@@ -971,6 +971,7 @@ public class UI {
 			}
 		}
 		// Re-spawn frame
+		if (!gp.tradeState) {
 		int respawnFrameX = frameX;
 		int respawnFrameY = frameY + frameHeight + 10;
 		int respawnFrameWidth = frameWidth;
@@ -979,6 +980,7 @@ public class UI {
 		int respawnTextY = respawnFrameY + gp.tileSize - 24;
 		drawSubWindow(respawnFrameX, respawnFrameY, respawnFrameWidth, respawnFrameHeight, g2);
 		g2.drawString("Times re-spawned: " + gp.player.timesRespawned, respawnTextX, respawnTextY);
+		}
 	}
 
 	/**
