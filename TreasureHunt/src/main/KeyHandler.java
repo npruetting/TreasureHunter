@@ -51,7 +51,7 @@ public class KeyHandler implements KeyListener {
 			gp.player.arrowAmount += 100;
 			gp.player.health += 100;
 			gp.player.speed += 4;
-			gp.player.ironScrapAmount += 15;
+			gp.player.ironScrapAmount += 16;
 		}
 		// TODO temp way to lose health
 		if (code == KeyEvent.VK_H) {

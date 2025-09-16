@@ -112,7 +112,7 @@ public class Player extends Entity {
 //		inventory.add(new OBJ_Dungeon_Key(gp));
 //		inventory.add(new OBJ_Sword_Normal(gp));
 //		inventory.add(new OBJ_Bow(gp));
-//		inventory.add(new OBJ_Axe(gp));
+		inventory.add(new OBJ_Axe(gp));
 //		inventory.add(new OBJ_Shield_Blue(gp));
 //
 //		inventory.add(new OBJ_Iron_Gate_Key(gp));
@@ -883,20 +883,20 @@ public class Player extends Entity {
 				nextLevelExp = 30;
 				break;
 			case 2:
-				dexterity++;
-				nextLevelExp = 60;
+				coin += 20;
+				nextLevelExp = 70;
 				break;
 			case 3:
 				coin += 30;
-				nextLevelExp = 100;
+				nextLevelExp = 120;
 				break;
 			case 4:
-				strength++;
-				arrowDamageAmount++;
-				nextLevelExp = 150;
+				dexterity++;
+				nextLevelExp = 180;
 				break;
 			case 5:
-				coin += 50;
+				strength++;
+				arrowDamageAmount++;
 				nextLevelExp = 10000;
 				break;
 			}

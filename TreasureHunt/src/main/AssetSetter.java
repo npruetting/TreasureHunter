@@ -96,7 +96,8 @@ public class AssetSetter {
 		setAsset("Chest", 38, 90, 45, 32, 32);
 		setAsset("Chest", 39, 41, 7);
 
-		setAsset("Dungeon_Portal", 40, 42, 16);
+		//setAsset("Dungeon_Portal", 40, 42, 16);
+		setAsset("Dungeon_Portal", 40, 48, 36);
 
 		// Fragile Trees
 		setAsset("Tree_Fragile", 41, 53, 40);
@@ -379,6 +380,7 @@ public class AssetSetter {
 		setAsset("Dungeon_Map", 49, 83, 90, 0, 32);
 		setAsset("Quest_Exclamation_Mark", 50, 50, 53);
 		gp.obj[50].identification = "dungeon_entered";
+		setAsset("Iron_Scrap", 51, 77, 62);
 		
 		// NPCs
 		setAsset("Dungeon_Merchant", 0, 69, 35, 0, 32);
@@ -450,6 +452,22 @@ public class AssetSetter {
 		setAsset("Skeleton_Purple", 53, 16, 91);
 		setAsset("Skeleton_Purple", 54, 11, 85);
 		setAsset("Skeleton_Purple", 55, 31, 85);
+		
+		setAsset("Skeleton_Purple", 56, 17, 16);
+		setAsset("Skeleton_Purple", 57, 19, 16);
+		setAsset("Skeleton_Purple", 58, 21, 16);
+		setAsset("Skeleton_Purple", 59, 23, 16);
+		setAsset("Skeleton_Purple", 60, 18, 18);
+		setAsset("Skeleton_Purple", 61, 19, 18);
+		setAsset("Skeleton_Purple", 62, 20, 18);
+		setAsset("Skeleton_Purple", 63, 21, 18);
+		
+		setAsset("Skeleton_Purple", 64, 10, 90);
+		setAsset("Skeleton_Purple", 65, 9, 89);
+		setAsset("Skeleton_Purple", 66, 32, 90);
+		setAsset("Skeleton_Purple", 67, 33, 89);
+		setAsset("Skeleton_Purple", 68, 18, 86);
+		setAsset("Skeleton_Purple", 69, 24, 86);
 	}
 	
 	/**
@@ -580,7 +598,7 @@ public class AssetSetter {
 		setAsset("Dungeon_Coin", 107, 47, 29);
 		setAsset("Coin", 108, 53, 29);
 		
-		setAsset("Chest_Final", 109, 56, 79, 32, 32);
+		setAsset("Chest_Final", 110, 56, 79, 32, 32);
 		
 		// NPCs
 		setAsset("Guard_Friendly", 0, 50, 57);

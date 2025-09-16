@@ -463,9 +463,10 @@ public class Entity {
 	}
 
 	private void openIronGateUp() {
+		System.out.println("Called up method");
 		gp.player.ironGateCounter++;
 		if (gp.player.ironGateCounter < 65) {
-			gp.obj[gp.player.doorIndex].worldY -= 1;
+			gp.obj[gp.player.doorIndex].worldY--;
 		} else {
 			gp.player.openingIronGateUp = false;
 			gp.player.ironGateCounter = 0;
@@ -473,9 +474,10 @@ public class Entity {
 	}
 
 	private void openIronGateLeft() {
+		System.out.println("Called left method");
 		gp.player.ironGateCounter++;
 		if (gp.player.ironGateCounter < 65) {
-			gp.obj[gp.player.doorIndex].worldX -= 1;
+			gp.obj[gp.player.doorIndex].worldX--;
 		} else {
 			gp.player.openingIronGateLeft = false;
 			gp.player.ironGateCounter = 0;

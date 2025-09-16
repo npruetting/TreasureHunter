@@ -698,7 +698,7 @@ public class UI {
 			g2.setColor(new Color(0, 191, 0));
 		}
 		g2.drawString("[" + gp.player.monsterKilledCount + "]", gp.tileSize * 13 - 2, gp.tileSize * 10 + 40 + 14 - 66);
-		
+
 		// Titles
 		g2.setColor(new Color(255, 255, 125));
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50F));
@@ -827,7 +827,7 @@ public class UI {
 		if (gp.player.nextLevelExp != 10000) {
 			g2.drawString(gp.player.nextLevelExp + "", gp.tileSize * 5, gp.tileSize * 2 + 350);
 		} else {
-			g2.drawString("MAX", gp.tileSize * 5 - 32, gp.tileSize * 2 + 350);
+			g2.drawString("MAX", gp.tileSize * 5 - 26, gp.tileSize * 2 + 350);
 		}
 		// Currency
 		g2.drawImage(coin, gp.tileSize * 5, gp.tileSize + 484 - gp.tileSize, null);
@@ -945,10 +945,21 @@ public class UI {
 			g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
 
 			// Description frame
-			int dFrameX = frameX;
-			int dFrameY = frameY + frameHeight + gp.tileSize + 20;
-			int dFrameWidth = frameWidth;
-			int dFrameHeight = gp.tileSize * 3;
+			int dFrameX;
+			int dFrameY;
+			int dFrameWidth;
+			int dFrameHeight;
+			if (!gp.tradeState && entity == gp.player) {
+				dFrameX = frameX;
+				dFrameY = frameY + frameHeight + gp.tileSize + 20;
+				dFrameWidth = frameWidth;
+				dFrameHeight = gp.tileSize * 3;
+			} else {
+				dFrameX = frameX;
+				dFrameY = frameY + frameHeight + 12;
+				dFrameWidth = frameWidth;
+				dFrameHeight = gp.tileSize * 3;
+			}
 			// Description text
 			int textX = dFrameX + 20;
 			int textY = dFrameY + gp.tileSize - 24;
@@ -972,14 +983,15 @@ public class UI {
 		}
 		// Re-spawn frame
 		if (!gp.tradeState) {
-		int respawnFrameX = frameX;
-		int respawnFrameY = frameY + frameHeight + 10;
-		int respawnFrameWidth = frameWidth;
-		int respawnFrameHeight = gp.tileSize * 1;
-		int respawnTextX = respawnFrameX + 20;
-		int respawnTextY = respawnFrameY + gp.tileSize - 24;
-		drawSubWindow(respawnFrameX, respawnFrameY, respawnFrameWidth, respawnFrameHeight, g2);
-		g2.drawString("Times re-spawned: " + gp.player.timesRespawned, respawnTextX, respawnTextY);
+			int respawnFrameX = frameX;
+			int respawnFrameY = frameY + frameHeight + 10;
+			int respawnFrameWidth = frameWidth;
+			int respawnFrameHeight = gp.tileSize * 1;
+			int respawnTextX = respawnFrameX + 20;
+			int respawnTextY = respawnFrameY + gp.tileSize - 24;
+			drawSubWindow(respawnFrameX, respawnFrameY, respawnFrameWidth, respawnFrameHeight, g2);
+			g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 28F));
+			g2.drawString("Times re-spawned: " + gp.player.timesRespawned, respawnTextX, respawnTextY);
 		}
 	}
 
@@ -992,7 +1004,7 @@ public class UI {
 		int frameY;
 		int frameWidth;
 		int frameHeight;
-		if (gp.player.health <= 10) {
+		if (gp.player.level == 0) {
 			frameX = gp.tileSize * 6 + 17;
 			frameY = gp.tileSize + 12;
 			frameWidth = gp.tileSize * 4 - 33;
@@ -1119,16 +1131,16 @@ public class UI {
 			g2.drawString("Strength + 1", x, y + 40 + gp.tileSize);
 			break;
 		case 2:
-			g2.drawString("Dexterity + 1", x, y + 40 + gp.tileSize);
+			g2.drawString("+ 20 coins!", x, y + 40 + gp.tileSize);
 			break;
 		case 3:
 			g2.drawString("+ 30 coins!", x, y + 40 + gp.tileSize);
 			break;
 		case 4:
-			g2.drawString("Strength + 1", x, y + 40 + gp.tileSize);
+			g2.drawString("Dexterity + 1", x, y + 40 + gp.tileSize);
 			break;
 		case 5:
-			g2.drawString("+ 50 coins!", x, y + 40 + gp.tileSize);
+			g2.drawString("Strength + 1", x, y + 40 + gp.tileSize);
 			break;
 		}
 	}
@@ -1412,12 +1424,12 @@ public class UI {
 			else if (price == -2) {
 				isIronGateKey = true;
 				g2.drawImage(ironScrap, x + gp.tileSize + 40, y + 7, null);
-				if (gp.player.ironScrapAmount >= 5 && gp.player.inventory.size() != gp.player.maxInventorySize) {
+				if (gp.player.ironScrapAmount >= 4 && gp.player.inventory.size() != gp.player.maxInventorySize) {
 					g2.setColor(Color.green);
 				} else {
 					g2.setColor(Color.red);
 				}
-				g2.drawString("Price: 5", x + 24, y + 42);
+				g2.drawString("Price: 4", x + 24, y + 42);
 			}
 			// Ancient scroll
 			else if (price == -3) {
@@ -1451,7 +1463,7 @@ public class UI {
 							tradeTimer = 0;
 							gp.playSE(1);
 							gp.player.coin -= price;
-							gp.player.arrowAmount += 15;
+							gp.player.arrowAmount += 10;
 						} else {
 							tradeTimer = 0;
 							gp.playSE(1);
@@ -1473,12 +1485,12 @@ public class UI {
 							itemIsBought++;
 						}
 					} else if (isIronGateKey) {
-						if (5 > gp.player.ironScrapAmount || gp.player.inventory.size() == gp.player.maxInventorySize) {
+						if (4 > gp.player.ironScrapAmount || gp.player.inventory.size() == gp.player.maxInventorySize) {
 							canDrawTradeText = true;
 						} else {
 							tradeTimer = 0;
 							gp.playSE(1);
-							gp.player.ironScrapAmount -= 5;
+							gp.player.ironScrapAmount -= 4;
 							gp.player.inventory.add(npc.inventory.get(itemIndex));
 							npc.inventory.remove(npc.inventory.get(itemIndex));
 							itemIsBought++;
