@@ -9,14 +9,9 @@ import java.util.Random;
 import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
-import object.OBJ_Axe;
-import object.OBJ_Bow;
 import object.OBJ_Diamond;
-import object.OBJ_Dungeon_Key;
-import object.OBJ_Iron_Gate_Key;
 import object.OBJ_Key;
 import object.OBJ_Lantern_Tiny;
-import object.OBJ_Shield_Blue;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
 import object.PROJ_Arrow;
@@ -107,18 +102,6 @@ public class Player extends Entity {
 	public void setDefaultInventoryItems() {
 		inventory.add(new OBJ_Lantern_Tiny(gp));
 		inventory.add(currentShield);
-		// TODO temp items
-//		inventory.add(new OBJ_Key(gp));
-//		inventory.add(new OBJ_Dungeon_Key(gp));
-//		inventory.add(new OBJ_Sword_Normal(gp));
-//		inventory.add(new OBJ_Bow(gp));
-		inventory.add(new OBJ_Axe(gp));
-//		inventory.add(new OBJ_Shield_Blue(gp));
-//
-//		inventory.add(new OBJ_Iron_Gate_Key(gp));
-//		inventory.add(new OBJ_Iron_Gate_Key(gp));
-//		inventory.add(new OBJ_Iron_Gate_Key(gp));
-//		inventory.add(new OBJ_Iron_Gate_Key(gp));
 	}
 
 	/**
@@ -210,6 +193,13 @@ public class Player extends Entity {
 		if (healthCounter > 0 && health == maxHealth) {
 			healthCounter = 0;
 		}
+		// Iron gate opening animation
+		if (openingIronGateUp) {
+			openIronGateUp();
+		}
+		if (openingIronGateLeft) {
+			openIronGateLeft();
+		}
 		// Player invincible
 		if (invincible) {
 			invincibleCounter++;
@@ -261,7 +251,7 @@ public class Player extends Entity {
 				case "to_final_island":
 					gp.tileM.loadMap("/maps/final_world.txt");
 					gp.isDark = false;
-					
+
 					// Clears all assets on map when it is loaded
 					for (int x = 0; x < gp.obj.length; x++) {
 						gp.obj[x] = null;
@@ -278,8 +268,8 @@ public class Player extends Entity {
 					worldY = 50 * gp.tileSize;
 					direction = "down";
 					break;
-					default:
-						break;
+				default:
+					break;
 				}
 				mapChangeBufferReached = true;
 				mapChangeBufferTimer = 0;
@@ -299,7 +289,7 @@ public class Player extends Entity {
 				isFast = false;
 			}
 		}
-		if (gp.ui.itemIsBought >= 8 && !gp.ui.questFiveComplete) {
+		if (gp.ui.itemIsBought >= 15 && !gp.ui.questFiveComplete) {
 			this.questComplete(5, 50);
 		}
 
@@ -389,6 +379,32 @@ public class Player extends Entity {
 			} else {
 				direction = "default";
 			}
+		}
+	}
+
+	/*
+	 * Private helper that gets called when an iron gate is being opened upwards.
+	 */
+	private void openIronGateUp() {
+		ironGateCounter++;
+		if (ironGateCounter < 65) {
+			gp.obj[doorIndex].worldY--;
+		} else {
+			openingIronGateUp = false;
+			ironGateCounter = 0;
+		}
+	}
+
+	/*
+	 * Private helper that gets called when an iron gate is being opened leftwards.
+	 */
+	private void openIronGateLeft() {
+		ironGateCounter++;
+		if (ironGateCounter < 65) {
+			gp.obj[doorIndex].worldX--;
+		} else {
+			openingIronGateLeft = false;
+			ironGateCounter = 0;
 		}
 	}
 
@@ -786,7 +802,7 @@ public class Player extends Entity {
 				health -= damage;
 				gp.playSE(6);
 				gp.monster[i].hitPlayerReaction();
-				gp.ui.addMessage("Damaged by a " + gp.monster[i].showcaseName + "!");
+				gp.ui.addMessage("Damaged by " + gp.monster[i].showcaseName + "!");
 				invincible = true;
 				healthCounter = 0;
 			}
@@ -816,7 +832,7 @@ public class Player extends Entity {
 				if (gp.monster[i].health <= 0) {
 					generateParticle(gp.monster[i], gp.monster[i]);
 					gp.monster[i].dying = true;
-					gp.ui.addMessage("Killed the " + gp.monster[i].name + "!");
+					gp.ui.addMessage("Killed the " + gp.monster[i].showcaseName + "!");
 					gp.ui.addMessage("Exp + " + gp.monster[i].exp);
 					exp += gp.monster[i].exp;
 					gp.monster[i].invincible = true;
@@ -849,7 +865,7 @@ public class Player extends Entity {
 				if (gp.obj[i].health <= 1) {
 					gp.playSE(18);
 					treeChoppedAmount++;
-					if (treeChoppedAmount == 50) {
+					if (treeChoppedAmount == 67) {
 						questComplete(3, 50);
 					}
 					gp.obj[i] = null;
@@ -880,19 +896,19 @@ public class Player extends Entity {
 			case 1:
 				strength++;
 				arrowDamageAmount++;
-				nextLevelExp = 30;
+				nextLevelExp = 40;
 				break;
 			case 2:
 				coin += 20;
-				nextLevelExp = 70;
+				nextLevelExp = 80;
 				break;
 			case 3:
 				coin += 30;
-				nextLevelExp = 120;
+				nextLevelExp = 130;
 				break;
 			case 4:
 				dexterity++;
-				nextLevelExp = 180;
+				nextLevelExp = 200;
 				break;
 			case 5:
 				strength++;

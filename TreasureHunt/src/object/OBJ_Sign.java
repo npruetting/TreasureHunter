@@ -43,6 +43,8 @@ public class OBJ_Sign extends Entity {
 			dialogues[3] = "Go explore and look for any signs of life,\nThey should help you. . .";
 		} else if (nameOfSign.equals("Dungeon_Sign")) {
 			dialogues[0] = "Once you enter the dungeon, you won't be\nable to come back. . .\nExplore while you can.";
+		} else if (nameOfSign.equals("Quest_8_Hint_Sign")) {
+			dialogues[0] = "Quest 8: Use your map to\nyour advantage. . .";
 		}
 	}
 

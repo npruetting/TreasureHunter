@@ -36,35 +36,11 @@ public class KeyHandler implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		int code = e.getKeyCode();
 
-		// TODO temporary way to decrease player speed
-		if (code == KeyEvent.VK_J) {
-			gp.player.speed--;
-		}
-		// TODO temporary way to turn on and off lighting
-		if (code == KeyEvent.VK_Y) {
-			gp.isDark = !gp.isDark;
-		}
-		// TODO temporary way to give player many buffs for developing purposes
-		if (code == KeyEvent.VK_G) {
-			gp.player.coin += 100;
-			gp.player.dungeonCoin += 100;
-			gp.player.arrowAmount += 100;
-			gp.player.health += 100;
-			gp.player.speed += 4;
-			gp.player.ironScrapAmount += 16;
-		}
-		// TODO temp way to lose health
-		if (code == KeyEvent.VK_H) {
-			gp.player.health--;
-		}
-		// TODO temporary way to debug draw time
+		// Shift to debug draw time and show hit-boxes
 		if (code == KeyEvent.VK_SHIFT) {
 			toggleDebug = !toggleDebug;
 		}
-		// TODO temporary way to increase player exp
-		if (code == KeyEvent.VK_L) {
-			gp.player.exp++;
-		}
+
 		if (gp.gameStarted && !gp.gameCompleted) {
 			// Dialogue state
 			if (gp.dialogueState) {

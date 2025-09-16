@@ -55,7 +55,6 @@ public class AssetSetter {
 		// Objects
 		setAsset("Door", 0, 40, 82);
 		setAsset("Door", 1, 19, 63);
-		//setAsset("Door", 2, 17, 41);
 		setAsset("Door", 3, 52, 16);
 		setAsset("Door", 4, 60, 7);
 		setAsset("Door", 5, 85, 16);
@@ -96,8 +95,8 @@ public class AssetSetter {
 		setAsset("Chest", 38, 90, 45, 32, 32);
 		setAsset("Chest", 39, 41, 7);
 
-		//setAsset("Dungeon_Portal", 40, 42, 16);
-		setAsset("Dungeon_Portal", 40, 48, 36);
+//		setAsset("Dungeon_Portal", 40, 42, 16);
+		setAsset("Dungeon_Portal", 40, 48, 37);
 
 		// Fragile Trees
 		setAsset("Tree_Fragile", 41, 53, 40);
@@ -345,8 +344,7 @@ public class AssetSetter {
 		setAsset("Dungeon_Chest", 25, 50, 76);
 		setAsset("Dungeon_Chest", 26, 36, 65);
 		setAsset("Dungeon_Chest", 27, 48, 32);
-		setAsset("Dungeon_Chest", 28, 89, 47);
-		setAsset("Dungeon_Chest", 29, 89, 53);
+		setAsset("Dungeon_Chest", 28, 89, 48);
 		setAsset("Portal", 30, 57, 37, 0, 32);
 		gp.obj[30].identification = "to_boss_1";
 		setAsset("Portal", 31, 50, 37, 0, 32);
@@ -366,7 +364,7 @@ public class AssetSetter {
 		
 		setAsset("Portal", 39, 22, 50);
 		gp.obj[39].identification = "to_final_island";
-		setAsset("Chest", 40, 89, 50);
+		setAsset("Chest", 40, 89, 52);
 		setAsset("Chest", 41, 69, 34);
 		setAsset("Chest", 42, 21, 91);
 		setAsset("Chest", 43, 10, 16, 32, 32);
@@ -386,6 +384,7 @@ public class AssetSetter {
 		setAsset("Dungeon_Merchant", 0, 69, 35, 0, 32);
 		setSign("Dungeon_Starting_Sign", 1, 51, 48, 48, 12);
 		setAsset("Guard", 2, 34, 50);
+		setSign("Quest_8_Hint_Sign", 3, 73, 79, 0, 0);
 
 		// Monsters
 		setAsset("Skeleton", 0, 65, 44);
@@ -462,12 +461,14 @@ public class AssetSetter {
 		setAsset("Skeleton_Purple", 62, 20, 18);
 		setAsset("Skeleton_Purple", 63, 21, 18);
 		
-		setAsset("Skeleton_Purple", 64, 10, 90);
+		setAsset("Skeleton_Purple", 64, 12, 91);
 		setAsset("Skeleton_Purple", 65, 9, 89);
-		setAsset("Skeleton_Purple", 66, 32, 90);
-		setAsset("Skeleton_Purple", 67, 33, 89);
+		setAsset("Skeleton_Purple", 66, 30, 91);
+		setAsset("Skeleton_Purple", 67, 29, 91);
 		setAsset("Skeleton_Purple", 68, 18, 86);
 		setAsset("Skeleton_Purple", 69, 24, 86);
+		
+		setAsset("Skeleton", 70, 79, 51);
 	}
 	
 	/**

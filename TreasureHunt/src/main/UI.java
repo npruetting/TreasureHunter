@@ -657,11 +657,11 @@ public class UI {
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize + 40 + 98 - 30 - 32, 32, 32);
 		g2.drawString("Find the merchant", gp.tileSize * 9, gp.tileSize * 3 + 8 + 84 - 36);
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 3 + 8 + 84 - 36 - 32, 32, 32);
-		g2.drawString("Chop down 50 trees", gp.tileSize * 9, gp.tileSize * 4 + 40 + 70 - 42);
+		g2.drawString("Chop down 67 trees", gp.tileSize * 9, gp.tileSize * 4 + 40 + 70 - 42);
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 4 + 40 + 70 - 42 - 32, 32, 32);
 		g2.drawString("Enter the dungeon", gp.tileSize * 9, gp.tileSize * 6 + 8 + 56 - 48);
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 6 + 8 + 56 - 48 - 32, 32, 32);
-		g2.drawString("Buy 8 items", gp.tileSize * 9, gp.tileSize * 7 + 40 + 42 - 54);
+		g2.drawString("Buy 15 items", gp.tileSize * 9, gp.tileSize * 7 + 40 + 42 - 54);
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 7 + 40 + 42 - 54 - 32, 32, 32);
 		g2.drawString("Kill 40 monsters", gp.tileSize * 9, gp.tileSize * 9 + 8 + 28 - 60);
 		g2.drawRect(gp.tileSize * 8 + 20, gp.tileSize * 9 + 8 + 28 - 60 - 32, 32, 32);
@@ -1178,7 +1178,7 @@ public class UI {
 			coinAmount = "20";
 			break;
 		case 3:
-			text = "Chop down 50 trees";
+			text = "Chop down 67 trees";
 			coinAmount = "50";
 			break;
 		case 4:
@@ -1186,7 +1186,7 @@ public class UI {
 			coinAmount = "30";
 			break;
 		case 5:
-			text = "Buy 10 items";
+			text = "Buy 15 items";
 			coinAmount = "50";
 			break;
 		case 6:

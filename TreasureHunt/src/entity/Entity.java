@@ -381,13 +381,7 @@ public class Entity {
 		if (attacking) {
 			attacking();
 		}
-		// Iron gate opening animation
-		if (gp.player.openingIronGateUp) {
-			openIronGateUp();
-		}
-		if (gp.player.openingIronGateLeft) {
-			openIronGateLeft();
-		}
+		// If ancient scroll is bought
 		if (gp.player.ancientScrollBought) {
 			if (gp.npc[2].worldX == 22 * gp.tileSize + 48) {
 				gp.npc[2] = null;
@@ -459,28 +453,6 @@ public class Entity {
 			gp.player.health -= damage;
 			gp.playSE(6);
 			gp.player.invincible = true;
-		}
-	}
-
-	private void openIronGateUp() {
-		System.out.println("Called up method");
-		gp.player.ironGateCounter++;
-		if (gp.player.ironGateCounter < 65) {
-			gp.obj[gp.player.doorIndex].worldY--;
-		} else {
-			gp.player.openingIronGateUp = false;
-			gp.player.ironGateCounter = 0;
-		}
-	}
-
-	private void openIronGateLeft() {
-		System.out.println("Called left method");
-		gp.player.ironGateCounter++;
-		if (gp.player.ironGateCounter < 65) {
-			gp.obj[gp.player.doorIndex].worldX--;
-		} else {
-			gp.player.openingIronGateLeft = false;
-			gp.player.ironGateCounter = 0;
 		}
 	}
 

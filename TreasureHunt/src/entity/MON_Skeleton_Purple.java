@@ -18,10 +18,10 @@ public class MON_Skeleton_Purple extends Entity {
 		speed = 2;
 		maxHealth = 6;
 		health = maxHealth;
-		attack = 6;
+		attack = 7;
 		defense = 0;
 		exp = 6;
-		projectile = (Projectile) new PROJ_Arrow_Purple(gp, 6);
+		projectile = (Projectile) new PROJ_Arrow_Purple(gp, 7);
 
 		solidArea.x = 4;
 		solidArea.y = 4;

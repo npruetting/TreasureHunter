@@ -35,7 +35,7 @@ public class Projectile extends Entity{
 				gp.ui.addMessage("Damaged from arrow!");
 				alive = false;
 				// Player gets slowed by purple arrow
-				if (name.equals("purple_arrow") && !hitByPurpleArrow) {
+				if (name.equals("purple_arrow") && !gp.player.hitByPurpleArrow) {
 					gp.ui.addMessage("Slowed!");
 					gp.player.hitByPurpleArrow = true;
 					gp.player.speed -= 2;

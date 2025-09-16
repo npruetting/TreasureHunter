@@ -288,11 +288,9 @@ public class GamePanel extends JPanel implements Runnable {
 		if (keyH.toggleDebug) {
 			long drawEnd = System.nanoTime();
 			long passed = drawEnd - drawStart;
-			g2.setColor(Color.white);
-			g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40F));
-			g2.drawString("Draw Time: " + passed, 10, 400);
-			g2.drawString("Player Health: " + player.health, 10, 500);
-			g2.drawString("Items bought for quest 5: " + ui.itemIsBought, 10, 600);
+			g2.setColor(new Color(255, 255, 255, 200));
+			g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 20F));
+			g2.drawString("Draw Time: " + passed, 10, tileSize * 12 - 10);
 		}
 
 		g2.dispose();
