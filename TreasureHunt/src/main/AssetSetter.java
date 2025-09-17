@@ -95,8 +95,7 @@ public class AssetSetter {
 		setAsset("Chest", 38, 90, 45, 32, 32);
 		setAsset("Chest", 39, 41, 7);
 
-//		setAsset("Dungeon_Portal", 40, 42, 16);
-		setAsset("Dungeon_Portal", 40, 48, 37);
+		setAsset("Dungeon_Portal", 40, 42, 16);
 
 		// Fragile Trees
 		setAsset("Tree_Fragile", 41, 53, 40);
