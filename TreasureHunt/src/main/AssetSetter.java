@@ -468,6 +468,24 @@ public class AssetSetter {
 		setAsset("Skeleton_Purple", 69, 24, 86);
 		
 		setAsset("Skeleton", 70, 79, 51);
+		
+		setAsset("Skeleton_Purple", 71, 81, 21);
+		setAsset("Skeleton_Purple", 72, 79, 14);
+		setAsset("Skeleton_Purple", 73, 66, 16);
+		setAsset("Skeleton_Purple", 74, 67, 13);
+		setAsset("Skeleton_Purple", 75, 82, 10);
+		setAsset("Skeleton_Purple", 76, 61, 19);
+		setAsset("Skeleton_Purple", 77, 61, 12);
+		setAsset("Skeleton_Purple", 78, 84, 16);
+		
+		setAsset("Skeleton_Purple", 79, 14, 91);
+		setAsset("Skeleton_Purple", 80, 15, 91);
+		setAsset("Skeleton_Purple", 81, 27, 91);
+		setAsset("Skeleton_Purple", 82, 28, 91);
+		setAsset("Skeleton_Purple", 83, 19, 86);
+		setAsset("Skeleton_Purple", 84, 23, 86);
+		setAsset("Skeleton_Purple", 85, 19, 85);
+		setAsset("Skeleton_Purple", 86, 23, 85);
 	}
 	
 	/**

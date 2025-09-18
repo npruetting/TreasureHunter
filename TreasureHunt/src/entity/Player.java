@@ -735,6 +735,7 @@ public class Player extends Entity {
 			mapChangeTimer = 90;
 			alphaValue = 255;
 			gp.playSE(5);
+			mapAcquired = false;
 			identificationForMapChange = "to_final_island";
 			break;
 		case "to_finale":

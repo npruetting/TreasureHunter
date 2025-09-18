@@ -20,7 +20,7 @@ public class OBJ_Boots extends Entity{
 		direction = "default";
 		down1 = setup("/objects/" + name, gp.tileSize, gp.tileSize);
 		description = "[Boots]\nGives a temporary\nspeed boost.";
-		price = 10;
+		price = 20;
 		forSale = true;
 	}
 	
@@ -34,7 +34,9 @@ public class OBJ_Boots extends Entity{
 		gp.dialogueState = true;
 		gp.isViewingStatus = false;
 		gp.ui.currentDialogue = "Speed boost for 30 seconds!";
-		gp.player.speed += 2;
+		if (gp.player.speed < 8) {
+			gp.player.speed += 2;
+		}
 		// Used to track how long player is sped up
 		gp.player.isFast = true;
 		gp.player.counter = 0;
